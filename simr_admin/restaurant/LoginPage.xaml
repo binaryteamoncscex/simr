@@ -1,0 +1,156 @@
+<ContentPage
+    x:Class="restaurant.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *, Auto" ColumnDefinitions="*" Padding="0">
+
+        <Image
+            Grid.Row="0"
+            Source="https://i.ibb.co/N6tPzSZL/Artboard-1-2.png"
+            HeightRequest="200"
+            Aspect="AspectFit"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="0,20,0,20" />
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="0"
+            Spacing="5"
+            HorizontalOptions="Center">
+            <Label
+                Text="Welcome!"
+                FontSize="Title"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+            <Label
+                Text="Sign in to continue!"
+                FontSize="Subtitle"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="2"
+            Padding="0,20,0,0"
+            Spacing="15"
+            HorizontalOptions="FillAndExpand">
+
+            <Grid ColumnDefinitions="Auto,*" Margin="10,0">
+                <Border
+                    BackgroundColor="LightBlue"
+                    Stroke="LightBlue"
+                    Padding="0"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="25" />
+                    </Border.StrokeShape>
+                    <Image
+                        Source="user.png"
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        WidthRequest="30"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
+                <Entry
+                    Grid.Column="1"
+                    Text="{Binding UserName}"
+                    Placeholder="Username"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand" />
+            </Grid>
+
+            <Grid ColumnDefinitions="Auto,*" Margin="10,0">
+                <Border
+                    BackgroundColor="LightBlue"
+                    Stroke="LightBlue"
+                    Padding="0"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="25" />
+                    </Border.StrokeShape>
+                    <Image
+                        Source="passkey.png"
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        WidthRequest="30"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
+                <Entry
+                    Grid.Column="1"
+                    Text="{Binding UserPassword}"
+                    Placeholder="Password"
+                    IsPassword="True"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="3"
+            Padding="0,10,0,0"
+            Spacing="10"
+            VerticalOptions="StartAndExpand">
+
+            <HorizontalStackLayout HorizontalOptions="Start" Margin="10,0,0,0">
+                <CheckBox
+                    IsChecked="{Binding RememberMe}"
+                    Color="DeepSkyBlue" />
+                <Label Text="Remember me?" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label
+                Text="Forgot password?"
+                TextColor="DeepSkyBlue"
+                FontAttributes="Bold"
+                HorizontalOptions="End"
+                Margin="0,0,10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotBtn}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="4"
+            Padding="0,20,0,20"
+            Spacing="15"
+            VerticalOptions="End">
+            <Button
+                Text="Sign In"
+                BackgroundColor="DeepSkyBlue"
+                TextColor="White"
+                FontAttributes="Bold"
+                Command="{Binding LoginBtn}"
+                HeightRequest="50"
+                CornerRadius="25"
+                Margin="10,0" />
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label Text="New User?" TextColor="Gray" />
+                <Label
+                    Text=" Sign Up"
+                    TextColor="DeepSkyBlue"
+                    FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RegisterBtn}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

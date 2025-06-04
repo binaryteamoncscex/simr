@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.MyAccount"
+             Title="My Account">
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <Label Text="{Binding Email}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+
+            <Entry Text="{Binding YourName, Mode=TwoWay}" Placeholder="Your Name" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="Restaurant Name" />
+
+            <Picker Title="Select Your Local Timezone"
+            TitleColor="LightGray"
+            ItemsSource="{Binding Timezones}"
+            SelectedItem="{Binding SelectedTimezone, Mode=TwoWay}" />
+            <Picker Title="Select Currency"
+            TitleColor="LightGray"
+            ItemsSource="{Binding Currencies}"
+            SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}" />
+            <Picker Title="Select Temperature Unit"
+            TitleColor="LightGray"
+            ItemsSource="{Binding TemperatureUnits}"
+            SelectedItem="{Binding SelectedTemperatureUnit, Mode=TwoWay}" />
+            <Entry Text="{Binding UpdateHour, Mode=TwoWay}" Placeholder="Daily Inventory Update Hour" Keyboard="Numeric" />
+            <Entry Text="{Binding TempMin, Mode=TwoWay}" Placeholder="Min Temperature °C" Keyboard="Numeric" />
+            <Entry Text="{Binding TempMax, Mode=TwoWay}" Placeholder="Max Temperature °C" Keyboard="Numeric" />
+            <Entry Text="{Binding UmdMin, Mode=TwoWay}" Placeholder="Min Humidity %" Keyboard="Numeric" />
+            <Entry Text="{Binding UmdMax, Mode=TwoWay}" Placeholder="Max Humidity %" Keyboard="Numeric" />
+            <Picker Title="Do you have a Drive-thru?"
+            TitleColor="LightGray"
+            ItemsSource="{Binding DriveThruOptions}"
+            SelectedItem="{Binding SelectedDriveThru, Mode=TwoWay}" />
+            <Button Text="Update Account Info" BackgroundColor="LightSkyBlue"
+            CornerRadius="20" Command="{Binding UpdateAccountCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

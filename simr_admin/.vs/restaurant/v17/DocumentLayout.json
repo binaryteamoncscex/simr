@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\viewmodels\\myacccowaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\viewmodels\\myacccowaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\viewmodels\\ingrcommandsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\viewmodels\\ingrcommandsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\myacccowa.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\myacccowa.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\viewmodels\\waiterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\viewmodels\\waiterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\viewmodels\\cookviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\viewmodels\\cookviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\cook.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\cook.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|d:\\scoala\\24-25\\info\\cex gl\\robotica\\simr_admin\\restaurant\\waiter.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A4395C23-DFEB-4662-966C-A0237122009A}|restaurant\\restaurant.csproj|solutionrelative:restaurant\\waiter.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IngrCommandsViewModel.cs",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\IngrCommandsViewModel.cs",
+              "RelativeDocumentMoniker": "restaurant\\ViewModels\\IngrCommandsViewModel.cs",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\IngrCommandsViewModel.cs",
+              "RelativeToolTip": "restaurant\\ViewModels\\IngrCommandsViewModel.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAowHIAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:51:59.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyAccCoWa.xaml",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\MyAccCoWa.xaml",
+              "RelativeDocumentMoniker": "restaurant\\MyAccCoWa.xaml",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\MyAccCoWa.xaml",
+              "RelativeToolTip": "restaurant\\MyAccCoWa.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-03T07:17:10.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MyAccCoWaViewModel.cs",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\MyAccCoWaViewModel.cs",
+              "RelativeDocumentMoniker": "restaurant\\ViewModels\\MyAccCoWaViewModel.cs",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\MyAccCoWaViewModel.cs",
+              "RelativeToolTip": "restaurant\\ViewModels\\MyAccCoWaViewModel.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAmwFkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:16:02.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WaiterViewModel.cs",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\WaiterViewModel.cs",
+              "RelativeDocumentMoniker": "restaurant\\ViewModels\\WaiterViewModel.cs",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\WaiterViewModel.cs",
+              "RelativeToolTip": "restaurant\\ViewModels\\WaiterViewModel.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAkwDcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:12:05.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CookViewModel.cs",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\CookViewModel.cs",
+              "RelativeDocumentMoniker": "restaurant\\ViewModels\\CookViewModel.cs",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\ViewModels\\CookViewModel.cs",
+              "RelativeToolTip": "restaurant\\ViewModels\\CookViewModel.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAcwCcAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:10:58.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Cook.xaml",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\Cook.xaml",
+              "RelativeDocumentMoniker": "restaurant\\Cook.xaml",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\Cook.xaml",
+              "RelativeToolTip": "restaurant\\Cook.xaml",
+              "ViewState": "AgIAADQAAAAAAAAAAADwv04AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-03T07:04:25.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Waiter.xaml",
+              "DocumentMoniker": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\Waiter.xaml",
+              "RelativeDocumentMoniker": "restaurant\\Waiter.xaml",
+              "ToolTip": "D:\\Scoala\\24-25\\Info\\CEX GL\\Robotica\\simr_admin\\restaurant\\Waiter.xaml",
+              "RelativeToolTip": "restaurant\\Waiter.xaml",
+              "ViewState": "AgIAAJgAAAAAAAAAAADwv7gAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-03T07:04:21.174Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

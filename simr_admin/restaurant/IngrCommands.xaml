@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.IngrCommands"
+             Title="Pending ingredient orders"
+             x:Name="page">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <CollectionView ItemsSource="{Binding Orders}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Delivered" BackgroundColor="LightSkyBlue"
+                                               Command="{Binding Source={x:Reference page}, Path=BindingContext.MarkAsDeliveredCommand}"
+                                               CommandParameter="{Binding}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Frame Padding="10" Margin="5" BorderColor="Black">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding IDS}" FontSize="18" FontAttributes="Bold"/>
+                                    <Label Text="Ingredients:" FontSize="16"/>
+                                    <Label Text="{Binding FormattedIngredients}" FontSize="16" LineBreakMode="WordWrap"/>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Price: " FontSize="16"/>
+                                        <Label Text="{Binding Price}" FontSize="16"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </RefreshView>
+</ContentPage>

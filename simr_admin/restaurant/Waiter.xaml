@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="restaurant.Waiter"
+             x:Name="page"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.BackButtonTitle="">
+
+    <ContentPage.Resources>
+        <Style x:Key="ArrowLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Rotation" Value="0" />
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" Padding="10">
+        <RefreshView Grid.Row="0" IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+            <ScrollView>
+                <VerticalStackLayout>
+
+                    <Label Text="{Binding WelcomeMessage}"
+                           FontSize="24"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="0,10"/>
+
+                    <toolkit:Expander IsExpanded="False" x:Name="CookedExpander">
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="*,Auto" Padding="0,5">
+                                <Label Text="{Binding CookedOrdersTitle}" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" />
+                                <Label Text="⌄" Style="{StaticResource ArrowLabelStyle}" VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference CookedExpander}, Path=IsExpanded}" Value="True">
+                                            <Setter Property="Rotation" Value="180" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </toolkit:Expander.Header>
+
+                        <CollectionView ItemsSource="{Binding CookedOrders}">
+                            <CollectionView.EmptyView>
+                                <Label Text="No cooked orders available."
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontSize="18"
+                                       Margin="10"/>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <SwipeView>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems Mode="Reveal">
+                                                <SwipeItemView
+                                                    Command="{Binding Source={x:Reference page}, Path=BindingContext.MarkAsFinishedCommand}"
+                                                    CommandParameter="{Binding id}">
+                                                    <SwipeItemView.Content>
+                                                        <Grid BackgroundColor="LightSkyBlue" WidthRequest="160" HeightRequest="100">
+                                                            <Label Text="Delivered and payed"
+                                                                   TextColor="White"
+                                                                   FontSize="14"
+                                                                   VerticalOptions="Center"
+                                                                   HorizontalOptions="Center"
+                                                                   HorizontalTextAlignment="Center" />
+                                                        </Grid>
+                                                    </SwipeItemView.Content>
+                                                </SwipeItemView>
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
+
+                                        <Frame Padding="10" Margin="5" BorderColor="Black">
+                                            <VerticalStackLayout>
+                                                <Label Text="{Binding ids}" FontSize="16" FontAttributes="Bold"/>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Table: " FontSize="14"/>
+                                                    <Label Text="{Binding table}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                                <Label Text="{Binding DisplayItems}" FontSize="14"/>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Price: " FontSize="14"/>
+                                                    <Label Text="{Binding price}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Payment method: " FontSize="14"/>
+                                                    <Label Text="{Binding payment}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Observations: " FontSize="14"/>
+                                                    <Label Text="{Binding observations}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </toolkit:Expander>
+
+                    <toolkit:Expander IsExpanded="False" x:Name="CanceledExpander" Margin="0,20,0,0">
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="*,Auto" Padding="0,5">
+                                <Label Text="{Binding CanceledWithFeeOrdersTitle}" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" />
+                                <Label Text="⌄" Style="{StaticResource ArrowLabelStyle}" VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference CanceledExpander}, Path=IsExpanded}" Value="True">
+                                            <Setter Property="Rotation" Value="180" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </toolkit:Expander.Header>
+
+                        <CollectionView ItemsSource="{Binding CanceledWithFeeOrders}">
+                            <CollectionView.EmptyView>
+                                <Label Text="No canceled with fee orders available."
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontSize="18"
+                                       Margin="10"/>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <SwipeView>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems Mode="Reveal">
+                                                <SwipeItem Text="Delete and pay" BackgroundColor="LightSkyBlue"
+                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteCanceledOrderCommand}"
+                                                           CommandParameter="{Binding id}"/>
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
+
+                                        <Frame Padding="10" Margin="5" BorderColor="Black" BackgroundColor="White">
+                                            <VerticalStackLayout>
+                                                <Label Text="{Binding ids}" FontSize="16" FontAttributes="Bold"/>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Table: " FontSize="14"/>
+                                                    <Label Text="{Binding table}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Fee: " FontSize="14"/>
+                                                    <Label Text="{Binding price}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="Payment method: " FontSize="14"/>
+                                                    <Label Text="{Binding payment}" FontSize="14"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </toolkit:Expander>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+            <Label Grid.Column="0" Text="My Account"
+                   TextColor="DeepSkyBlue" FontAttributes="Bold"
+                   HorizontalOptions="Start" VerticalOptions="End"
+                   Padding="10" Margin="10">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding MyAccountCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="1" Text="Sign Out"
+                   TextColor="DeepSkyBlue" FontAttributes="Bold"
+                   HorizontalOptions="End" VerticalOptions="End"
+                   Padding="10" Margin="10">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignOutBtn}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </Grid>
+</ContentPage>

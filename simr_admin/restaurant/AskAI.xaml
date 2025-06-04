@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.AskAI"
+             Title="Ask AI"
+             x:DataType="local:AskAIViewModel"
+             xmlns:local="clr-namespace:restaurant.ViewModels">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            <Label Text="Ask the AI about your restaurant statistics:"
+                   FontSize="Medium"
+                   FontAttributes="Bold" />
+
+            <Editor Placeholder="Enter your question here (e.g., 'What is our average customer spending?')"
+                    Text="{Binding UserPrompt}"
+                    AutoSize="TextChanges"
+                    HeightRequest="100"
+                    VerticalOptions="FillAndExpand"
+                    Margin="0,10,0,0" />
+
+            <Button Text="Ask AI"
+                    BackgroundColor="LightSkyBlue"
+                    Command="{Binding AskCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                    Margin="0,10,0,0" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="Blue" />
+
+            <Label Text="AI's Response:"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,0" />
+
+            <Label Text="{Binding AiResponse}"
+                   FontSize="Small"
+                   TextColor="Green"
+                   LineBreakMode="WordWrap"
+                   Margin="0,5,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+</ContentPage>

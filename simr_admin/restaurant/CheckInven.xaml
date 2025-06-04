@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.CheckInven"
+             Title="Check Inventory"
+             BackgroundColor="White">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView>
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="Inventory" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                <CollectionView ItemsSource="{Binding Ingredients}"
+                                SelectionMode="None"
+                                BackgroundColor="Transparent">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10" Margin="5"
+                                    StrokeShape="RoundRectangle 10" Stroke="LightGray" Background="White">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                </Border.Shadow>
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding name}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           Grid.Row="0" Grid.Column="0"/>
+                                    <Label x:Name="DaysLabel"
+                                           Text="{Binding DaysLeft, StringFormat='Exp. in {0} days'}"
+                                           FontSize="14"
+                                           TextColor="DarkGreen"
+                                           Grid.Row="1" Grid.Column="0">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding DaysLeft}" Value="2">
+                                                <Setter Property="TextColor" Value="Red"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding DaysLeft}" Value="1">
+                                                <Setter Property="TextColor" Value="Red"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding DaysLeft}" Value="0">
+                                                <Setter Property="TextColor" Value="Red"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <HorizontalStackLayout Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End">
+                                        <Label Text="{Binding quantity}"
+                                               FontSize="18"
+                                               TextColor="DarkGray"/>
+                                        <Label Text="{Binding unit}"
+                                               FontSize="18"
+                                               TextColor="DarkGray"
+                                               Margin="5,0,0,0"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="{Binding Temperature}"
+                       FontSize="16"
+                       TextColor="DarkBlue"
+                       HorizontalOptions="Center" />
+
+                <Label Text="{Binding Humidity}"
+                       FontSize="16"
+                       TextColor="DarkBlue"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

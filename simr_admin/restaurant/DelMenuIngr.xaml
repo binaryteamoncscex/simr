@@ -1,0 +1,48 @@
+<ContentPage
+    x:Class="restaurant.DelMenuIngr"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:restaurant.ViewModels"
+    x:Name="ThisPage"
+    Title="Delete Menu Ingredient">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <VerticalStackLayout Padding="10">
+            <Label
+                HorizontalOptions="Center"
+                FontSize="20"
+                Text="Select an ingredient to delete:" />
+
+            <CollectionView ItemsSource="{Binding Ingredients}" SelectionMode="Single">
+
+                <CollectionView.EmptyView>
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Text="No ingredients found." />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem
+                                        BackgroundColor="LightSkyBlue"
+                                        Command="{Binding Path=BindingContext.DeleteIngredientCommand, Source={x:Reference ThisPage}}"
+                                        CommandParameter="{Binding Key}"
+                                        Text="Delete" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="10">
+                                <Label
+                                    FontSize="18"
+                                    Text="{Binding Value.name}" />
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </RefreshView>
+</ContentPage>

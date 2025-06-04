@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="restaurant.CookOrders"
+             x:Name="page"
+             Title="Food orders">
+
+    <ContentPage.Resources>
+        <Style x:Key="ArrowLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Rotation" Value="0" />
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+    </ContentPage.Resources>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+
+                <toolkit:Expander IsExpanded="False" x:Name="PlacedExpander">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="*,Auto" Padding="0,5">
+                            <Label Text="{Binding PlacedOrdersTitle}" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" />
+                            <Label Text="⌄" Style="{StaticResource ArrowLabelStyle}" VerticalOptions="Center" x:Name="Arrow1">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference PlacedExpander}, Path=IsExpanded}" Value="True">
+                                        <Setter Property="Rotation" Value="180" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+                    </toolkit:Expander.Header>
+
+                    <CollectionView ItemsSource="{Binding PlacedOrders}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Reveal">
+                                            <SwipeItem Text="Pending" BackgroundColor="LightSkyBlue"
+                                                       Command="{Binding Source={x:Reference page}, Path=BindingContext.MarkAsPendingCommand}"
+                                                       CommandParameter="{Binding}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Frame Padding="10" Margin="5" BorderColor="Black">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding ids}" FontSize="16" FontAttributes="Bold"/>
+                                            <HorizontalStackLayout>
+                                                <Label Text="Table: " FontSize="14"/>
+                                                <Label Text="{Binding table}" FontSize="14"/>
+                                            </HorizontalStackLayout>
+                                            <Label Text="{Binding DisplayItems}" FontSize="14"/>
+                                            <HorizontalStackLayout>
+                                                <Label Text="Observations: " FontSize="14"/>
+                                                <Label Text="{Binding observations}" FontSize="14"/>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </toolkit:Expander>
+
+                <toolkit:Expander IsExpanded="False" x:Name="PendingExpander" Margin="0,20,0,0">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="*,Auto" Padding="0,5">
+                            <Label Text="{Binding PendingOrdersTitle}" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" />
+                            <Label Text="⌄" Style="{StaticResource ArrowLabelStyle}" VerticalOptions="Center" x:Name="Arrow2">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference PendingExpander}, Path=IsExpanded}" Value="True">
+                                        <Setter Property="Rotation" Value="180" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+                    </toolkit:Expander.Header>
+
+                    <CollectionView ItemsSource="{Binding PendingOrders}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Reveal">
+                                            <SwipeItem Text="Cooked" BackgroundColor="LightSkyBlue"
+                                                       Command="{Binding Source={x:Reference page}, Path=BindingContext.MarkAsCookedCommand}"
+                                                       CommandParameter="{Binding}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Frame Padding="10" Margin="5" BorderColor="Black">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding ids}" FontSize="16" FontAttributes="Bold"/>
+                                            <HorizontalStackLayout>
+                                                <Label Text="Table: " FontSize="14"/>
+                                                <Label Text="{Binding table}" FontSize="14"/>
+                                            </HorizontalStackLayout>
+                                            <Label Text="{Binding DisplayItems}" FontSize="14"/>
+                                            <HorizontalStackLayout>
+                                                <Label Text="Observations: " FontSize="14"/>
+                                                <Label Text="{Binding observations}" FontSize="14"/>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </toolkit:Expander>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

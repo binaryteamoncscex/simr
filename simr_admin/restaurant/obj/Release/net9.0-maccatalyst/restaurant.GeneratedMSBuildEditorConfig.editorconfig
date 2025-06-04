@@ -1,0 +1,174 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
+build_property.TargetFramework = net9.0-maccatalyst
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = restaurant
+build_property.ProjectDir = D:\Scoala\24-25\Info\CEX GL\Robotica\oncs\restaurant\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/AddEmploy.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.AddEmploy.xaml
+build_metadata.AdditionalFiles.TargetPath = AddEmploy.xaml
+build_metadata.AdditionalFiles.RelativePath = AddEmploy.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/AddMenuIngr.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.AddMenuIngr.xaml
+build_metadata.AdditionalFiles.TargetPath = AddMenuIngr.xaml
+build_metadata.AdditionalFiles.RelativePath = AddMenuIngr.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/AddMenuItem.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.AddMenuItem.xaml
+build_metadata.AdditionalFiles.TargetPath = AddMenuItem.xaml
+build_metadata.AdditionalFiles.RelativePath = AddMenuItem.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/AddTable.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.AddTable.xaml
+build_metadata.AdditionalFiles.TargetPath = AddTable.xaml
+build_metadata.AdditionalFiles.RelativePath = AddTable.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/ApproveOrders.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ApproveOrders.xaml
+build_metadata.AdditionalFiles.TargetPath = ApproveOrders.xaml
+build_metadata.AdditionalFiles.RelativePath = ApproveOrders.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/CheckInven.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.CheckInven.xaml
+build_metadata.AdditionalFiles.TargetPath = CheckInven.xaml
+build_metadata.AdditionalFiles.RelativePath = CheckInven.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Cook.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Cook.xaml
+build_metadata.AdditionalFiles.TargetPath = Cook.xaml
+build_metadata.AdditionalFiles.RelativePath = Cook.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/CookMenu.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.CookMenu.xaml
+build_metadata.AdditionalFiles.TargetPath = CookMenu.xaml
+build_metadata.AdditionalFiles.RelativePath = CookMenu.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/CookOrders.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.CookOrders.xaml
+build_metadata.AdditionalFiles.TargetPath = CookOrders.xaml
+build_metadata.AdditionalFiles.RelativePath = CookOrders.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Dashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Dashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = Dashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = Dashboard.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/DeleteEmploy.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.DeleteEmploy.xaml
+build_metadata.AdditionalFiles.TargetPath = DeleteEmploy.xaml
+build_metadata.AdditionalFiles.RelativePath = DeleteEmploy.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/DeleteTable.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.DeleteTable.xaml
+build_metadata.AdditionalFiles.TargetPath = DeleteTable.xaml
+build_metadata.AdditionalFiles.RelativePath = DeleteTable.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/DelMenuIngr.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.DelMenuIngr.xaml
+build_metadata.AdditionalFiles.TargetPath = DelMenuIngr.xaml
+build_metadata.AdditionalFiles.RelativePath = DelMenuIngr.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/DelMenuItem.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.DelMenuItem.xaml
+build_metadata.AdditionalFiles.TargetPath = DelMenuItem.xaml
+build_metadata.AdditionalFiles.RelativePath = DelMenuItem.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/ForgotPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ForgotPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ForgotPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ForgotPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/IngrCommands.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.IngrCommands.xaml
+build_metadata.AdditionalFiles.TargetPath = IngrCommands.xaml
+build_metadata.AdditionalFiles.RelativePath = IngrCommands.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisterPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Setup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Setup.xaml
+build_metadata.AdditionalFiles.TargetPath = Setup.xaml
+build_metadata.AdditionalFiles.RelativePath = Setup.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Statistics.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Statistics.xaml
+build_metadata.AdditionalFiles.TargetPath = Statistics.xaml
+build_metadata.AdditionalFiles.RelativePath = Statistics.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/oncs/restaurant/Waiter.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Waiter.xaml
+build_metadata.AdditionalFiles.TargetPath = Waiter.xaml
+build_metadata.AdditionalFiles.RelativePath = Waiter.xaml

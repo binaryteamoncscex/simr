@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="restaurant.RegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0,30,30"
+            Spacing="20"
+            VerticalOptions="Start"
+            HorizontalOptions="Fill">
+
+            <!-- Imagine pusă sus fără spațiu degeaba -->
+            <Image
+                Source="https://i.ibb.co/N6tPzSZL/Artboard-1-2.png"
+                Aspect="AspectFit"
+                HeightRequest="160"
+                HorizontalOptions="Fill" />
+
+            <Label
+                Text="Registration"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="Black" />
+
+            <Label
+                Text="Register With Email"
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="Black" />
+
+            <!-- Entry-urile ocupă toată lățimea -->
+            <Entry
+                Placeholder="Your Name"
+                Text="{Binding Name}"
+                FontSize="16"
+                HorizontalOptions="Fill" />
+
+            <Entry
+                Placeholder="Email"
+                Text="{Binding Email}"
+                FontSize="16"
+                Keyboard="Email"
+                HorizontalOptions="Fill" />
+
+            <Entry
+                Placeholder="Password"
+                Text="{Binding Password}"
+                IsPassword="True"
+                FontSize="16"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Register"
+                TextColor="White"
+                BackgroundColor="DeepSkyBlue"
+                FontSize="18"
+                CornerRadius="30"
+                HeightRequest="50"
+                HorizontalOptions="Fill"
+                Command="{Binding RegisterUser}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

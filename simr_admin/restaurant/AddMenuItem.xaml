@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.AddMenuItem"
+             Title="Add Menu Item">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Name" />
+            <Entry Text="{Binding Name}" Placeholder="Enter the name of the dish" />
+
+            <Label Text="Price" />
+            <Entry Text="{Binding Price}" Placeholder="Enter the price" Keyboard="Numeric" />
+
+            <Label Text="Photo Link" />
+            <Entry Text="{Binding Photo}" Placeholder="Enter the photo link" />
+
+            <Label Text="Category" />
+            <Picker ItemsSource="{Binding Categories}" 
+                    SelectedItem="{Binding SelectedCategory}" 
+                    Title="Select a category" />
+
+            <Label Text="Allergens Info" />
+            <Entry Text="{Binding Allergens}" Placeholder="E.g.: Contains nuts, dairy..." />
+
+            <Label Text="Nutritional Info" />
+            <Entry Text="{Binding NutritionalInfo}" Placeholder="E.g.: 250 kcal per serving..." />
+
+            <Label Text="Select Ingredients" />
+            <CollectionView ItemsSource="{Binding IngredientsList}"
+                            SelectionMode="Multiple"
+                            SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="1" Stroke="Black" Padding="10" Margin="5">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Text="{Binding name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding unit}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Quantities (in the same order as selected ingredients)" />
+            <Entry Text="{Binding Quantities}" Placeholder="E.g.: '0.5 0.5'" />
+
+            <Button Text="Add Menu Item" 
+                    Command="{Binding AddMenuItemCommand}" 
+                    BackgroundColor="LightSkyBlue"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

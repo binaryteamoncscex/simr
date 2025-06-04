@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.AddTable"
+             Title="Add Tables">
+    <VerticalStackLayout Spacing="10" Padding="20" HorizontalOptions="Center">
+
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+            <Label Text="No. of tables:" VerticalOptions="Center"/>
+            <Entry Text="{Binding TableCount, Mode=TwoWay}" WidthRequest="50" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+        </HorizontalStackLayout>
+
+        <Button Text="Add Tables" BackgroundColor="LightSkyBlue" WidthRequest="150" Command="{Binding AddTables_Click}"/>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,510 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.Dashboard"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <Grid BackgroundColor="White" RowDefinitions="Auto,*">
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30,0" Spacing="10">
+                <Label Text="{Binding RestaurantName, StringFormat='Welcome, {0}'}"
+                       FontSize="24"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Padding="0,0,0,20" />
+                <Grid x:Name="AdaptiveLayoutContainer">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="OrientationStates">
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="800" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter TargetName="LandscapeButtonsGrid" Property="IsVisible" Value="True" />
+                                    <Setter TargetName="PortraitButtonsStack" Property="IsVisible" Value="False" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+
+                    <Grid x:Name="LandscapeButtonsGrid"
+                          IsVisible="False"
+                          ColumnSpacing="10" RowSpacing="10"
+                          ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+                        <ContentView Grid.Row="0" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/v65f4Qy1/Untitled43-20250315184559-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add tables" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddTableBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="0" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/B5GjDvFJ/Untitled43-20250316110841-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete tables" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelTableBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="1" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/5gy7661D/Artboard-1-4.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add employees" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddEmployBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="1" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/WN52hySh/Artboard-1-8.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete employees" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelEmployBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="2" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/rG08GXkh/Captur-de-ecran-2025-05-14-121005-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add ingredient providers" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddIngrProvBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="2" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/spHDzXwg/Captur-de-ecran-2025-05-14-121010-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete ingredient providers" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelIngrProvBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="3" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/0V8gQXTK/Artboard-1-17.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add menu ingredient" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuIngrBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="3" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/DP7Lrcjq/Artboard-1-15.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete menu ingredient" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuIngrBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="4" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/9H03RdSQ/Chat-GPT-Image-21-mai-2025-18-05-08-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add menu categories" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuCatBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="4" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/1t6wNzf3/Chat-GPT-Image-21-mai-2025-18-07-32-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete menu categories" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuCatBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="5" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/v4V7QpVH/Artboard-1-18.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add menu item" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuItemBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="5" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/3mbmcdF2/Artboard-1-16.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete menu item" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuItemBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="6" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/PZD2jvN8/statistics-illustration-on-a-transparent-background-premium-quality-symbols-line-flat-color-icon-for.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" View statistics" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding StatisticsBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+                        <ContentView Grid.Row="6" Grid.Column="1">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/Fq6yp83P/Artboard-1-5.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Check inventory" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CheckInvenBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView Grid.Row="7" Grid.Column="0">
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://cdn.creazilla.com/cliparts/20285/blue-shopping-basket-clipart-xl.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Pending ingredients orders" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="50,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IngrCommands}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                    </Grid>
+
+                    <VerticalStackLayout x:Name="PortraitButtonsStack"
+                                         IsVisible="True"
+                                         Spacing="10">
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/v65f4Qy1/Untitled43-20250315184559-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add tables" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddTableBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/B5GjDvFJ/Untitled43-20250316110841-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete tables" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelTableBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/5gy7661D/Artboard-1-4.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add employees" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddEmployBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/WN52hySh/Artboard-1-8.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete employees" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelEmployBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/rG08GXkh/Captur-de-ecran-2025-05-14-121005-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add ingredient providers" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddIngrProvBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/spHDzXwg/Captur-de-ecran-2025-05-14-121010-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete ingredient providers" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelIngrProvBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/0V8gQXTK/Artboard-1-17.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add menu ingredient" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuIngrBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/DP7Lrcjq/Artboard-1-15.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete menu ingredient" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuIngrBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/9H03RdSQ/Chat-GPT-Image-21-mai-2025-18-05-08-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Add menu categories" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuCatBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/1t6wNzf3/Chat-GPT-Image-21-mai-2025-18-07-32-removebg-preview.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" Delete menu categories" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuCatBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/v4V7QpVH/Artboard-1-18.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Add menu item" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddMenuItemBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/3mbmcdF2/Artboard-1-16.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Delete menu item" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DelMenuItemBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source ="https://i.ibb.co/PZD2jvN8/statistics-illustration-on-a-transparent-background-premium-quality-symbols-line-flat-color-icon-for.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text=" View statistics" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding StatisticsBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://i.ibb.co/Fq6yp83P/Artboard-1-5.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Check inventory" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="40,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CheckInvenBtn}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                        <ContentView>
+                            <Border Background="LightSkyBlue" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Image Source="https://cdn.creazilla.com/cliparts/20285/blue-shopping-basket-clipart-xl.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="Pending ingredients orders" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Margin="50,0,0,0" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IngrCommands}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </ContentView>
+
+                    </VerticalStackLayout>
+                </Grid>
+                <Grid ColumnDefinitions="*,*" Padding="10" Margin="10">
+                    <Label Text="My account"
+                           TextColor="DeepSkyBlue"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyAccountBtn}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Sign Out"
+                           TextColor="DeepSkyBlue"
+                           FontAttributes="Bold"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           Grid.Column="1">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SignOutBtn}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

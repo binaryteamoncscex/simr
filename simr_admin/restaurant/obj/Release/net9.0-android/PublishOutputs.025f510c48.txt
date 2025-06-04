@@ -1,0 +1,4 @@
+D:\Scoala\24-25\Info\CEX GL\ONCS\restaurant\restaurant\bin\Release\net9.0-android\publish\com.companyname.restaurant-Signed.aab
+D:\Scoala\24-25\Info\CEX GL\ONCS\restaurant\restaurant\bin\Release\net9.0-android\publish\com.companyname.restaurant.aab
+D:\Scoala\24-25\Info\CEX GL\ONCS\restaurant\restaurant\bin\Release\net9.0-android\publish\com.companyname.restaurant-Signed.apk
+D:\Scoala\24-25\Info\CEX GL\ONCS\restaurant\restaurant\bin\Release\net9.0-android\publish\_Microsoft.Android.Resource.Designer.dll

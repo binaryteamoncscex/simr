@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.AddMenuIngr"
+             Title="Add Menu Ingredient">
+
+    <VerticalStackLayout Padding="20">
+        <Entry Text="{Binding Name}" Placeholder="Ingredient Name"/>
+        <Entry Text="{Binding Unit}" Placeholder="Measurement Unit"/>
+        <Entry Text="{Binding RestockThreshold}" Placeholder="Restock Threshold" Keyboard="Numeric"/>
+        <Entry Text="{Binding SupplyQuantity}" Placeholder="Supply Quantity" Keyboard="Numeric"/>
+        <Entry Text="{Binding Days}" Placeholder="Validity Period" Keyboard="Numeric"/>
+        <Entry Text="{Binding Price}" Placeholder="Price per Unit" Keyboard="Numeric"/>
+        <Picker Title="Select Provider"
+                ItemsSource="{Binding ProviderKeys}"
+                SelectedItem="{Binding SelectedProvider}" />
+
+        <Button Text="Add Ingredient"
+                BackgroundColor="LightSkyBlue"
+                Command="{Binding AddIngredientCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.ForgotPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Start"
+            HorizontalOptions="FillAndExpand">
+
+            <Image
+                Source="https://i.ibb.co/N6tPzSZL/Artboard-1-2.png"
+                Aspect="AspectFit"
+                HeightRequest="160"
+                HorizontalOptions="Fill" />
+
+            <Label
+                Text="Recover your password here"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="Black" />
+
+            <Entry
+                Placeholder="Email"
+                Text="{Binding Email}"
+                Keyboard="Email"
+                FontSize="16"
+                HorizontalOptions="FillAndExpand" />
+
+            <Button
+                Text="Recover your password"
+                TextColor="White"
+                BackgroundColor="DeepSkyBlue"
+                FontSize="18"
+                CornerRadius="20"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding RecoverPass}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

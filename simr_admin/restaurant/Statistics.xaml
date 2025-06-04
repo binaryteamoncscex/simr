@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.Statistics"
+             Title="Statistics"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui">
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <Label Text="Most ordered ingredients" FontSize="Title" />
+                <microcharts:ChartView Chart="{Binding MostOrderedIngredientsChart}" HeightRequest="300" />
+
+                <Label Text="Most ordered menu items" FontSize="Title" />
+                <microcharts:ChartView Chart="{Binding MostOrderedDishesChart}" HeightRequest="300" />
+                <Button Text="Ask AI" BackgroundColor="LightSkyBlue" Command="{Binding AskAICommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

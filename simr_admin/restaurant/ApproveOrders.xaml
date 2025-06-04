@@ -1,0 +1,123 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:restaurant.ViewModels"
+             x:Class="restaurant.ApproveOrders"
+             x:Name="page">
+
+    <ContentPage.BindingContext>
+        <vm:ApproveOrdersViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Label Text="Approve Ingredient Orders"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" />
+
+            <CollectionView ItemsSource="{Binding Orders}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <SwipeView IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false}">
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Reveal">
+                                        <SwipeItem Text="Approved" BackgroundColor="Green"
+                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.ApproveOrderCommand}"
+                                                   CommandParameter="{Binding Id}" />
+                                        <SwipeItem Text="Disapproved" BackgroundColor="Red"
+                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.DisapproveOrderCommand}"
+                                                   CommandParameter="{Binding Id}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Frame
+                                    Padding="15"
+                                    Margin="0,5"
+                                    BorderColor="#DDD"
+                                    BackgroundColor="#FAFAFA"
+                                    CornerRadius="12"
+                                    HasShadow="True"
+                                    IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false}">
+
+                                    <VerticalStackLayout Spacing="6">
+
+                                        <Label Text="{Binding IDS}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="Black" />
+
+                                        <Label Text="Ingredients:"
+                                               FontSize="16"
+                                               TextColor="Gray" />
+
+                                        <Label Text="{Binding FormattedIngredients}"
+                                               FontSize="16"
+                                               LineBreakMode="WordWrap"
+                                               TextColor="Black" />
+
+                                        <HorizontalStackLayout Spacing="4">
+                                            <Label Text="Price:"
+                                                   FontSize="16"
+                                                   TextColor="Gray" />
+                                            <Label Text="{Binding Price}"
+                                                   FontSize="16"
+                                                   TextColor="Black" />
+                                        </HorizontalStackLayout>
+
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </SwipeView>
+
+                            <Frame                             
+                                Padding="15"
+                                Margin="0,5"
+                                BorderColor="#DDD"
+                                BackgroundColor="#FAFAFA"
+                                CornerRadius="12"
+                                HasShadow="True"
+                                IsVisible="{OnPlatform Android=false, iOS=false, WinUI=true}">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding IDS}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="Black" />
+
+                                    <Label Text="Ingredients:"
+                                           FontSize="16"
+                                           TextColor="Gray" />
+
+                                    <Label Text="{Binding FormattedIngredients}"
+                                           FontSize="16"
+                                           LineBreakMode="WordWrap"
+                                           TextColor="Black" />
+
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Label Text="Price:"
+                                               FontSize="16"
+                                               TextColor="Gray" />
+                                        <Label Text="{Binding Price}"
+                                               FontSize="16"
+                                               TextColor="Black" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Margin="0,10,0,0" Spacing="10">
+                                        <Button Text="Approve"
+                                                BackgroundColor="Green"
+                                                TextColor="White"
+                                                Command="{Binding Source={x:Reference page}, Path=BindingContext.ApproveOrderCommand}"
+                                                CommandParameter="{Binding Id}" />
+                                        <Button Text="Disapprove"
+                                                BackgroundColor="Red"
+                                                TextColor="White"
+                                                Command="{Binding Source={x:Reference page}, Path=BindingContext.DisapproveOrderCommand}"
+                                                CommandParameter="{Binding Id}" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

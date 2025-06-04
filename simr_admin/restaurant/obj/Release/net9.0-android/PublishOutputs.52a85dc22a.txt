@@ -1,0 +1,6 @@
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\com.companyname.restaurant-Signed.aab
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\com.companyname.restaurant.aab
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\com.simrar.admin-Signed.aab
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\com.simrar.admin.aab
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\com.simrar.admin-Signed.apk
+D:\Scoala\24-25\Info\CEX GL\Robotica\cnst + infoeducatia\restaurant\bin\Release\net9.0-android\publish\_Microsoft.Android.Resource.Designer.dll

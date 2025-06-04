@@ -1,0 +1,75 @@
+@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\fragment_backstack.xml
+@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\navigationlayout.xml
+adaptive-icon;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+adaptive-icon;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\enterfromleft.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\exittoleft.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_enter_anim.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_exit_anim.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_enter_anim.xml
+alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_exit_anim.xml
+androidx.coordinatorlayout.widget.CoordinatorLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\layout\shellcontent.xml
+androidx.coordinatorlayout.widget.CoordinatorLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\navigationlayout.xml
+androidx.drawerlayout.widget.DrawerLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\drawer_layout.xml
+androidx.fragment.app.FragmentContainerView;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\fragment_backstack.xml
+androidx.fragment.app.FragmentContainerView;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\navigationlayout.xml
+attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\attr.xml
+attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\171\jl\res\values\attrs.xml
+background;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+background;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
+cache-path;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\170\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
+color;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\colors.xml
+color;obj\Release\net9.0-android\res\values\colors.xml
+com.google.android.material.appbar.AppBarLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\layout\flyoutcontent.xml
+com.google.android.material.appbar.AppBarLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\layout\shellcontent.xml
+com.google.android.material.appbar.AppBarLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\layout\navigationlayout.xml
+declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\attr.xml
+declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\171\jl\res\values\attrs.xml
+external-cache-path;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\170\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
+external-path;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\170\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
+foreground;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+foreground;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\168\jl\res\values\values.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\drawable\maui_splash.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values-v35\styles.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\styles.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\174\jl\res\values\values.xml
+layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\drawable\maui_splash_image.xml
+layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\drawable\maui_splash.xml
+microsoft.maui.controls.platform.compatibility.ShellFlyoutLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\layout\flyoutcontent.xml
+monochrome;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+monochrome;obj\Release\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
+paths;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\170\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\values\strings.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\168\jl\res\values\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values-v35\styles.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\attr.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\colors.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\styles.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\171\jl\res\values\attrs.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\174\jl\res\values\values.xml
+resources;obj\Release\net9.0-android\res\values\colors.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\enterfromleft.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\enterfromright.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\exittoleft.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\exittoright.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_enter_anim.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_exit_anim.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_enter_anim.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_exit_anim.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_modal_default_enter_anim.xml
+set;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_modal_default_exit_anim.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\values\strings.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\168\jl\res\values\values.xml
+style;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values-v35\styles.xml
+style;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\values\styles.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\enterfromleft.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\enterfromright.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\exittoleft.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\167\jl\res\anim\exittoright.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_enter_anim.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_exit_anim.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_enter_anim.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_default_pop_exit_anim.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_modal_default_enter_anim.xml
+translate;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Release\net9.0-android\lp\169\jl\res\anim\nav_modal_default_exit_anim.xml
