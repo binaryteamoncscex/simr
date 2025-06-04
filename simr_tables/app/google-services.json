@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "33123364251",
+    "firebase_url": "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "restaurant-3e115",
+    "storage_bucket": "restaurant-3e115.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33123364251:android:8c350e58d0c12c641d053e",
+        "android_client_info": {
+          "package_name": "com.example.aplicatie001"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb7EhJOqTXk3X6QRjqXZXp57UuXLoKl8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33123364251:android:46374d9cbe9d3e7d1d053e",
+        "android_client_info": {
+          "package_name": "com.example.apptable"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb7EhJOqTXk3X6QRjqXZXp57UuXLoKl8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33123364251:android:8b6eae6801082cc51d053e",
+        "android_client_info": {
+          "package_name": "com.example.tableappfinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb7EhJOqTXk3X6QRjqXZXp57UuXLoKl8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
