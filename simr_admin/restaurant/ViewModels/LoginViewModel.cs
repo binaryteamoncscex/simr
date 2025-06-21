@@ -43,10 +43,9 @@ namespace restaurant.ViewModels
         }
         public bool RememberMe
         {
-            get => rememberMe;
+            get => true;
             set
             {
-                rememberMe = value;
                 RaisePropertyChanged("RememberMe");
             }
         }
@@ -62,7 +61,6 @@ namespace restaurant.ViewModels
             RegisterBtn = new Command(RegisterBtnTappedAsync);
             LoginBtn = new Command(LoginBtnTappedAsync);
             ForgotBtn = new Command(ForgotBtnTappedAsync);
-            LoadSavedCredentials();
         }
 
         private async void RegisterBtnTappedAsync()
@@ -78,17 +76,6 @@ namespace restaurant.ViewModels
         {
             await AuthenticateAndNavigate(UserName, UserPassword);
         }
-
-        private async void LoadSavedCredentials()
-        {
-            if (Preferences.ContainsKey("RememberMe"))
-            {
-                string savedUsername = Preferences.Get("SavedUsername", string.Empty);
-                string savedPassword = Preferences.Get("SavedPassword", string.Empty);
-                await AuthenticateAndNavigate(savedUsername, savedPassword);
-            }
-        }
-
         private async Task AuthenticateAndNavigate(string username, string password)
         {
             var authConfig = new FirebaseAuthConfig

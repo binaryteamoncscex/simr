@@ -87,23 +87,13 @@ namespace restaurant.ViewModels
 
         private async void LoadRestaurantName()
         {
-            var authConfig = new FirebaseAuthConfig
-            {
-                ApiKey = WebApiKey,
-                AuthDomain = "restaurant-3e115.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[]
-                {
-                    new EmailProvider()
-                }
-            };
-            var authProvider = new FirebaseAuthClient(authConfig);
-            var user = authProvider.User;
+            var user = Preferences.Get("uid", null);
             if (user != null)
             {
                 var firebaseClient = new FirebaseClient(FirebaseUrl);
                 var restaurantData = await firebaseClient
                     .Child("users")
-                    .Child(user.Uid)
+                    .Child(user)
                     .OnceSingleAsync<dynamic>();
                 if (restaurantData.Name != null)
                 {
@@ -117,22 +107,13 @@ namespace restaurant.ViewModels
         }
         private async void SignOutBtnTappedAsync(object obj)
         {
-            var authConfig = new FirebaseAuthConfig
-            {
-                ApiKey = WebApiKey,
-                AuthDomain = "restaurant-3e115.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[]
-                {
-            new EmailProvider()
-                }
-            };
-            var authProvider = new FirebaseAuthClient(authConfig);
             try
             {
-                authProvider.SignOut();
                 Preferences.Remove("SavedUsername");
                 Preferences.Remove("SavedPassword");
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Preferences.Remove("uid");
+                Preferences.Remove("RememberMe");
+                Application.Current.MainPage = new NavigationPage(new IntroPage(isFirstLaunch: false, rememberMe: false));
             }
             catch (Exception ex)
             {

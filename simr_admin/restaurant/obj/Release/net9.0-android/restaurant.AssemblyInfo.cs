@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("restaurant")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("SIMRAdmin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("restaurant")]
-[assembly: System.Reflection.AssemblyTitleAttribute("restaurant")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+8492be7048c1ab441d56d9b280d0697cc1af23f7")]
+[assembly: System.Reflection.AssemblyProductAttribute("SIMRAdmin")]
+[assembly: System.Reflection.AssemblyTitleAttribute("SIMR Admin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Android35.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Android21.0")]

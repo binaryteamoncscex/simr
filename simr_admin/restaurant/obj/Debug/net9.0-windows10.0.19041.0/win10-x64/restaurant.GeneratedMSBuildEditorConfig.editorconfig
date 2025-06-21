@@ -165,6 +165,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = restaurant.IngrCommands.xa
 build_metadata.AdditionalFiles.TargetPath = IngrCommands.xaml
 build_metadata.AdditionalFiles.RelativePath = IngrCommands.xaml
 
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/IntroPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.IntroPage.xaml
+build_metadata.AdditionalFiles.TargetPath = IntroPage.xaml
+build_metadata.AdditionalFiles.RelativePath = IntroPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/LoadingScreen.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoadingScreen.xaml
+build_metadata.AdditionalFiles.TargetPath = LoadingScreen.xaml
+build_metadata.AdditionalFiles.RelativePath = LoadingScreen.xaml
+
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoginPage.xaml

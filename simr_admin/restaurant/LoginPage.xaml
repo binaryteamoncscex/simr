@@ -2,7 +2,6 @@
     x:Class="restaurant.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    NavigationPage.HasNavigationBar="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto, Auto, Auto, *, Auto" ColumnDefinitions="*" Padding="0">
@@ -22,13 +21,9 @@
             Spacing="5"
             HorizontalOptions="Center">
             <Label
-                Text="Welcome!"
+                Text="Sign In"
                 FontSize="Title"
                 FontAttributes="Bold"
-                HorizontalOptions="Center" />
-            <Label
-                Text="Sign in to continue!"
-                FontSize="Subtitle"
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
 
@@ -105,14 +100,6 @@
             Padding="0,10,0,0"
             Spacing="10"
             VerticalOptions="StartAndExpand">
-
-            <HorizontalStackLayout HorizontalOptions="Start" Margin="10,0,0,0">
-                <CheckBox
-                    IsChecked="{Binding RememberMe}"
-                    Color="DeepSkyBlue" />
-                <Label Text="Remember me?" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-
             <Label
                 Text="Forgot password?"
                 TextColor="DeepSkyBlue"
@@ -139,18 +126,6 @@
                 HeightRequest="50"
                 CornerRadius="25"
                 Margin="10,0" />
-
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Label Text="New User?" TextColor="Gray" />
-                <Label
-                    Text=" Sign Up"
-                    TextColor="DeepSkyBlue"
-                    FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding RegisterBtn}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

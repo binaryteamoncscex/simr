@@ -124,11 +124,9 @@ namespace restaurant.ViewModels
                     await _firebaseClient
                         .Child($"kitchen/{_userId}/ingredients/list/{trimmedIngredientId}/date")
                         .PutAsync($"\"{todayDate}\"");
-                }
-
-
-                await LoadOrdersAsync();            
+                }           
                 await Application.Current.MainPage.DisplayAlert("Success", "Order delivered and ingredients updated.", "OK");
+                await LoadOrdersAsync();
             }
             catch (Exception ex)
             {

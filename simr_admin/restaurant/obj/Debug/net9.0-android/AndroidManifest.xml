@@ -9,8 +9,8 @@
   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <application android:allowBackup="true" android:supportsRtl="true" android:label="SIMR Admin" android:icon="@mipmap/appicon" android:name="crc645b117839d6c80efa.MainApplication" android:debuggable="true" android:extractNativeLibs="true">
-    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme" android:name="crc645b117839d6c80efa.MainActivity" android:exported="true">
+  <application android:allowBackup="true" android:supportsRtl="true" android:label="SIMR Admin" android:icon="@mipmap/appicon" android:name="crc646fc36ec9064effcd.MainApplication" android:debuggable="true" android:extractNativeLibs="true">
+    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme" android:name="crc646fc36ec9064effcd.MainActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

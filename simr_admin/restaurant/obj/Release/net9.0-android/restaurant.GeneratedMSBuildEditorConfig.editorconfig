@@ -161,11 +161,35 @@ build_metadata.AdditionalFiles.ManifestResourceName = restaurant.IngrCommands.xa
 build_metadata.AdditionalFiles.TargetPath = IngrCommands.xaml
 build_metadata.AdditionalFiles.RelativePath = IngrCommands.xaml
 
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/IntroPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.IntroPage.xaml
+build_metadata.AdditionalFiles.TargetPath = IntroPage.xaml
+build_metadata.AdditionalFiles.RelativePath = IntroPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/LoadingScreen.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoadingScreen.xaml
+build_metadata.AdditionalFiles.TargetPath = LoadingScreen.xaml
+build_metadata.AdditionalFiles.RelativePath = LoadingScreen.xaml
+
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/MyAccCoWa.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.MyAccCoWa.xaml
+build_metadata.AdditionalFiles.TargetPath = MyAccCoWa.xaml
+build_metadata.AdditionalFiles.RelativePath = MyAccCoWa.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/MyAccount.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.MyAccount.xaml
+build_metadata.AdditionalFiles.TargetPath = MyAccount.xaml
+build_metadata.AdditionalFiles.RelativePath = MyAccount.xaml
 
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/RegisterPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

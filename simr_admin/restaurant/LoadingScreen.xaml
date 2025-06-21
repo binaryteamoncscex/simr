@@ -1,0 +1,16 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.LoadingScreen"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <ActivityIndicator IsRunning="True"
+                           IsVisible="True"
+                           Color="#3B82F6"
+                           WidthRequest="60"
+                           HeightRequest="60"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

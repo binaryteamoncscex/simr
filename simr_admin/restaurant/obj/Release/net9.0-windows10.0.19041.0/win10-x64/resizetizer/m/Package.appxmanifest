@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
-      <uap:VisualElements DisplayName="SIMRAR Admin" Description="An application for managing your restaurant." Square150x150Logo="appiconMediumTile.png" Square44x44Logo="appiconLogo.png" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="SIMR Admin" Description="An application for managing your restaurant." Square150x150Logo="appiconMediumTile.png" Square44x44Logo="appiconLogo.png" BackgroundColor="transparent">
         <uap:DefaultTile Square71x71Logo="appiconSmallTile.png" Wide310x150Logo="appiconWideTile.png" Square310x310Logo="appiconLargeTile.png" ShortName="SIMR Admin">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
@@ -24,6 +24,9 @@
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="$placeholder$.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape" />
+        </uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

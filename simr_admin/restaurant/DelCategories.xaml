@@ -5,32 +5,49 @@
              x:Class="restaurant.DelCategories"
              Title="Delete Categories">
     <VerticalStackLayout Padding="10">
-        <Label Text="Select a category to delete:" 
-               FontSize="20" 
+        <Label Text="Select a category to delete:"
+               FontSize="20"
                HorizontalOptions="Center" />
 
         <CollectionView ItemsSource="{Binding Categories}" SelectionMode="Single">
             <CollectionView.EmptyView>
-                <Label Text="No categories found." 
-                       VerticalOptions="CenterAndExpand" 
+                <Label Text="No categories found."
+                       VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand" />
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Reveal">
-                                <SwipeItem Text="Delete"
-                                           BackgroundColor="Salmon"
-                                           Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference ThisPage}}"
-                                           CommandParameter="{Binding .}" />
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Value}" FontSize="18" />
+                    <Grid>
+
+                        <SwipeView IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false}">
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Salmon"
+                                               Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference ThisPage}}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10">
+                                <Label Text="{Binding Value}" FontSize="18" />
+                            </Grid>
+                        </SwipeView>
+
+                        <Grid Padding="10"
+                              IsVisible="{OnPlatform Android=false, iOS=false, WinUI=true}">
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Value}" FontSize="18" VerticalOptions="Center"/>
+                                <Button Text="Delete"
+                                        BackgroundColor="Salmon"
+                                        TextColor="White"
+                                        Margin="10,0,0,0"
+                                        Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference ThisPage}}"
+                                        CommandParameter="{Binding .}" />
+                            </HorizontalStackLayout>
                         </Grid>
-                    </SwipeView>
+
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

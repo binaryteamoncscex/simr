@@ -1,4 +1,8 @@
-﻿obj\Debug\net9.0-android\resizetizer\r\drawable\passkey.png
+﻿obj\Debug\net9.0-android\resizetizer\r\drawable\intro1.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\intro2.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\intro3.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\intro4.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\passkey.png
 obj\Debug\net9.0-android\resizetizer\r\drawable\user.png
 obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml

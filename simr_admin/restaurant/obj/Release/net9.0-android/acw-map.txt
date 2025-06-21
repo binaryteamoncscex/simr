@@ -1,9 +1,6 @@
 CommunityToolkit.Maui.Core.Views.MauiDrawingView, CommunityToolkit.Maui.Core;crc64159f3caeb1269279.MauiDrawingView
 CommunityToolkit.Maui.Core.Views.MauiDrawingView;crc64159f3caeb1269279.MauiDrawingView
 communitytoolkit.maui.core.views.MauiDrawingView;crc64159f3caeb1269279.MauiDrawingView
-CommunityToolkit.Maui.Core.Views.MauiPopup, CommunityToolkit.Maui.Core;crc64159f3caeb1269279.MauiPopup
-CommunityToolkit.Maui.Core.Views.MauiPopup;crc64159f3caeb1269279.MauiPopup
-communitytoolkit.maui.core.views.MauiPopup;crc64159f3caeb1269279.MauiPopup
 CommunityToolkit.Maui.Core.Views.MauiSemanticOrderView, CommunityToolkit.Maui.Core;crc64159f3caeb1269279.MauiSemanticOrderView
 CommunityToolkit.Maui.Core.Views.MauiSemanticOrderView;crc64159f3caeb1269279.MauiSemanticOrderView
 communitytoolkit.maui.core.views.MauiSemanticOrderView;crc64159f3caeb1269279.MauiSemanticOrderView
@@ -1039,9 +1036,9 @@ kotlinx.serialization.encoding.Encoder;kotlinx.serialization.encoding.Encoder
 KotlinX.Serialization.Descriptors.ISerialDescriptor, Xamarin.KotlinX.Serialization.Core.Jvm;kotlinx.serialization.descriptors.SerialDescriptor
 KotlinX.Serialization.Descriptors.ISerialDescriptor;kotlinx.serialization.descriptors.SerialDescriptor
 kotlinx.serialization.descriptors.SerialDescriptor;kotlinx.serialization.descriptors.SerialDescriptor
-restaurant.MainActivity, restaurant;crc645b117839d6c80efa.MainActivity
-restaurant.MainActivity;crc645b117839d6c80efa.MainActivity
-restaurant.MainActivity;crc645b117839d6c80efa.MainActivity
-restaurant.MainApplication, restaurant;crc645b117839d6c80efa.MainApplication
-restaurant.MainApplication;crc645b117839d6c80efa.MainApplication
-restaurant.MainApplication;crc645b117839d6c80efa.MainApplication
+restaurant.MainActivity, SIMRAdmin;crc646fc36ec9064effcd.MainActivity
+restaurant.MainActivity;crc646fc36ec9064effcd.MainActivity
+restaurant.MainActivity;crc646fc36ec9064effcd.MainActivity
+restaurant.MainApplication, SIMRAdmin;crc646fc36ec9064effcd.MainApplication
+restaurant.MainApplication;crc646fc36ec9064effcd.MainApplication
+restaurant.MainApplication;crc646fc36ec9064effcd.MainApplication

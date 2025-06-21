@@ -20,21 +20,44 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Reveal">
-                                <SwipeItem Text="Delete" 
-                                           BackgroundColor="LightSkyBlue"
-                                           Command="{Binding Path=BindingContext.DeleteMenuItemCommand, Source={x:Reference ThisPage}}"
-                                           CommandParameter="{Binding .}" />
-                            </SwipeItems>
-                        </SwipeView.RightItems>
+                    <Grid>
 
-                        <Grid Padding="10">
-                            <Label Text="{Binding name}" 
-                                   FontSize="18" />
-                        </Grid>
-                    </SwipeView>
+                        <SwipeView IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false}">
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Delete" 
+                                               BackgroundColor="LightSkyBlue"
+                                               Command="{Binding Path=BindingContext.DeleteMenuItemCommand, Source={x:Reference ThisPage}}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="10">
+                                <Label Text="{Binding name}" 
+                                       FontSize="18" />
+                            </Grid>
+                        </SwipeView>
+
+                        <Frame Padding="10"
+                               Margin="0,5"
+                               BorderColor="#DDD"
+                               BackgroundColor="#FAFAFA"
+                               CornerRadius="12"
+                               HasShadow="True"
+                               IsVisible="{OnPlatform Android=false, iOS=false, WinUI=true}">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding name}" 
+                                       FontSize="18" />
+                                <Button Text="Delete"
+                                        Margin="0,10,0,0"
+                                        BackgroundColor="LightSkyBlue"
+                                        TextColor="White"
+                                        Command="{Binding Path=BindingContext.DeleteMenuItemCommand, Source={x:Reference ThisPage}}"
+                                        CommandParameter="{Binding .}" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

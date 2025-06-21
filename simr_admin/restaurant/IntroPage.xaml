@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:restaurant.ViewModels"
+             xmlns:converters="clr-namespace:restaurant.Converters"
+             x:Class="restaurant.IntroPage"
+             BackgroundColor="#FFFFFF"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid x:Name="MobileLayout"
+              RowDefinitions="*,Auto,Auto,Auto"
+              Padding="30"
+              IsVisible="{OnPlatform Android=True, iOS=True, Default=False}">
+            <CarouselView x:Name="CarouselMobile"
+                          Grid.Row="0"
+                          ItemsSource="{Binding Pages}"
+                          Position="{Binding CurrentIndex, Mode=TwoWay}"
+                          IndicatorView="Pager"
+                          IsBounceEnabled="False"
+                          IsScrollAnimated="True"
+                          HorizontalScrollBarVisibility="Never"
+                          VerticalScrollBarVisibility="Never">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:IntroPageModel">
+                        <StackLayout VerticalOptions="CenterAndExpand" Spacing="20">
+                            <Image Source="{Binding Image}"
+                                   HeightRequest="300"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center" />
+                            <Label Text="{Binding Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="32"
+                                   TextColor="#1F2937"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding Description}"
+                                   FontSize="18"
+                                   TextColor="#6B7280"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="20,0" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <IndicatorView x:Name="Pager"
+                           Grid.Row="1"
+                           IndicatorColor="#E5E7EB"
+                           SelectedIndicatorColor="#3B82F6"
+                           IndicatorsShape="Circle"
+                           IndicatorSize="12"
+                           HorizontalOptions="Center"
+                           Margin="0,20" />
+
+            <StackLayout Grid.Row="2"
+                         Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Spacing="30"
+                         Margin="0,10">
+                <Button Text="←"
+                        FontSize="20"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        Command="{Binding PreviousCommand}"
+                        CornerRadius="25"
+                        BackgroundColor="{Binding IsNotFirstPage, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#3B82F6|#F3F4F6'}"
+                        TextColor="{Binding IsNotFirstPage, Converter={StaticResource BoolToColorConverter}, ConverterParameter='White|#B1B5BB'}" />
+
+                <Button Text="→"
+                        FontSize="20"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        Command="{Binding NextCommand}"
+                        CornerRadius="25"
+                        BackgroundColor="{Binding IsNotLastPage, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#3B82F6|#F3F4F6'}"
+                        TextColor="{Binding IsNotLastPage, Converter={StaticResource BoolToColorConverter}, ConverterParameter='White|#B1B5BB'}" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="3"
+                         Orientation="Horizontal"
+                         Spacing="20"
+                         HorizontalOptions="Center"
+                         Margin="0,30,0,10"
+                         IsVisible="{Binding IsLastPage}">
+                <Button Text="Login"
+                        Command="{Binding LoginCommand}"
+                        BackgroundColor="#10B981"
+                        TextColor="White"
+                        FontSize="16"
+                        WidthRequest="140"
+                        HeightRequest="50"
+                        CornerRadius="12" />
+                <Button Text="Sign Up"
+                        Command="{Binding SignUpCommand}"
+                        BackgroundColor="#6366F1"
+                        TextColor="White"
+                        FontSize="16"
+                        WidthRequest="140"
+                        HeightRequest="50"
+                        CornerRadius="12" />
+            </StackLayout>
+        </Grid>
+
+        <Grid x:Name="DesktopLayout"
+              RowDefinitions="*,Auto"
+              Padding="30"
+              IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}">
+
+            <StackLayout x:Name="FirstPagesContainer"
+                         Grid.Row="0"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" Spacing="50">
+                        <StackLayout WidthRequest="300" Spacing="20" VerticalOptions="Center">
+                            <Image Source="intro1.png"
+                                   HeightRequest="200"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Welcome!"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   TextColor="#1F2937"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="Manage your restaurant with SIMR Admin."
+                                   FontSize="16"
+                                   TextColor="#6B7280"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="20,0" />
+                        </StackLayout>
+
+                        <StackLayout WidthRequest="300" Spacing="20" VerticalOptions="Center">
+                            <Image Source="intro2.png"
+                                   HeightRequest="200"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Track Orders"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   TextColor="#1F2937"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="Monitor food orders and ingredients."
+                                   FontSize="16"
+                                   TextColor="#6B7280"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="20,0" />
+                        </StackLayout>
+
+                        <StackLayout WidthRequest="300" Spacing="20" VerticalOptions="Center">
+                            <Image Source="intro3.png"
+                                   HeightRequest="200"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Analyze Statistics"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   TextColor="#1F2937"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="Gain insights on your restaurant's performance."
+                                   FontSize="16"
+                                   TextColor="#6B7280"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="20,0" />
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+            <Button x:Name="NextButton"
+                    Grid.Row="1"
+                    Text="Next"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    FontSize="18"
+                    HeightRequest="50"
+                    CornerRadius="12"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"
+                    Margin="0,20,0,0" />
+
+            <StackLayout x:Name="LastPage" 
+                         Grid.Row="0"
+                         Grid.RowSpan="2"
+                         Spacing="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         IsVisible="False">
+                <Image Source="intro4.png"
+                       HeightRequest="250"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center" />
+                <Label Text="Get Started"
+                       FontAttributes="Bold"
+                       FontSize="28"
+                       TextColor="#1F2937"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Login or sign up to begin using SIMR Admin."
+                       FontSize="18"
+                       TextColor="#6B7280"
+                       HorizontalTextAlignment="Center"
+                       Margin="20,0" />
+
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             HorizontalOptions="Center"
+                             Margin="0,30">
+                    <Button Text="Login"
+                            Command="{Binding LoginCommand}"
+                            BackgroundColor="#10B981"
+                            TextColor="White"
+                            FontSize="16"
+                            WidthRequest="140"
+                            HeightRequest="50"
+                            CornerRadius="12" />
+                    <Button Text="Sign Up"
+                            Command="{Binding SignUpCommand}"
+                            BackgroundColor="#6366F1"
+                            TextColor="White"
+                            FontSize="16"
+                            WidthRequest="140"
+                            HeightRequest="50"
+                            CornerRadius="12" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

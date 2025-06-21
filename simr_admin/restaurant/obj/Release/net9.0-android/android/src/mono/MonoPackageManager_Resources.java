@@ -1,8 +1,8 @@
 package mono;
 public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
-		/* We need to ensure that "restaurant.dll" comes first in this list. */
-		"restaurant.dll",
+		/* We need to ensure that "SIMRAdmin.dll" comes first in this list. */
+		"SIMRAdmin.dll",
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
 		"Microsoft.Maui.Controls.resources.dll",
