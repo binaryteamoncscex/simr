@@ -7,6 +7,6 @@ public partial class Waiter : ContentPage
 	public Waiter()
 	{
 		InitializeComponent();
-        BindingContext = new WaiterViewModel();
+        BindingContext = new WaiterViewModel(Navigation);
     }
 }

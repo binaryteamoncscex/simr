@@ -14,12 +14,14 @@ namespace restaurant.ViewModels
         private readonly FirebaseClient firebaseClient;
         private readonly string uid;
         public event PropertyChangedEventHandler PropertyChanged;
+        public INavigation _navigation { get; set; }
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         public ObservableCollection<string> Providers { get; set; } = new ObservableCollection<string>();
-
+        public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
-        public ICommand RefreshCommand { get; }   
+        public ICommand RefreshCommand { get; } 
+        public ICommand AddIngrProv { get; } 
 
         private bool _isRefreshing;
         public bool IsRefreshing    
@@ -35,16 +37,27 @@ namespace restaurant.ViewModels
             }
         }
 
-        public DelIngrProvViewModel()
+        public DelIngrProvViewModel(INavigation navigation)
         {
             firebaseClient = new FirebaseClient(firebaseUrl);
             uid = Preferences.Get("uid", string.Empty);
+            _navigation = navigation;
             DeleteCommand = new RelayCommand<string>(async (provider) => await DeleteProvider(provider));
-            RefreshCommand = new AsyncRelayCommand(LoadProviders);   
-
+            RefreshCommand = new AsyncRelayCommand(LoadProviders);
+            EditCommand = new AsyncRelayCommand<string>(async (provider) => await EditProvider(provider));
+            AddIngrProv = new Command(async () => await navigation.PushAsync(new AddIngrProv()));
             LoadProviders();
         }
+        private async Task EditProvider(string providerKey)
+        {
+            if (string.IsNullOrEmpty(providerKey)) return;
 
+            var emailNode = await firebaseClient
+                .Child($"users/{uid}/providers")
+                .Child(providerKey)
+                .OnceSingleAsync<string>();
+            await _navigation.PushAsync(new EditIngrProv(providerKey, emailNode));
+        }
         private async Task LoadProviders()
         {
             try

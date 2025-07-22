@@ -8,11 +8,18 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
-googleGmsGoogleServices = "4.4.2"
+# Am redenumit această versiune pentru a se potrivi cu referința din [plugins]
+# Numele CamelCase (googleGmsGoogleServices) este cel mai comun, dar cel mai important e consistența
+googleServices = "4.4.2" # Această versiune este acum referită ca 'googleServices'
 firebaseAuth = "23.2.0"
 navigationRuntimeAndroid = "2.9.0-alpha08"
 navigationCompose = "2.8.9"
 firebaseDatabaseKtx = "21.0.0"
+generativeai = "0.8.0" # Adaugă versiunea pentru Gemini API
+coil = "2.4.0" # Adaugă versiunea pentru Coil
+retrofit = "2.9.0" # Adaugă versiunea pentru Retrofit
+okhttp = "4.12.0" # Adaugă versiunea pentru OkHttp
+workRuntimeKtx = "2.9.0" # Adaugă versiunea pentru WorkManager
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,9 +41,18 @@ androidx-navigation-runtime-android = { group = "androidx.navigation", name = "n
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
+# Noi intrări pentru Gemini, Coil, Retrofit, OkHttp și WorkManager
+google-ai-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" } # Reutilizează versiunea Retrofit
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" } # Reutilizează versiunea OkHttp
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
-
+# Aici am corectat referința la versiune
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }

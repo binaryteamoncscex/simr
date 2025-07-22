@@ -5,6 +5,7 @@
              Title="My Account">
     <VerticalStackLayout Padding="20">
         <Label Text="{Binding Email}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+        <Label Text="Your Name" FontAttributes="Bold" FontSize="18"/>
         <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="Your Name" />
         <Button Text="Update Your Name"
                 BackgroundColor="LightSkyBlue"

@@ -290,10 +290,6 @@ D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-macc
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet-nativeaot.a
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.a
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.dylib
-D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Controls.HotReload.Forms.dll
-D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
-D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.TapContract.dll
-D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\restaurant.csproj.AssemblyReference.cache
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\mauiimage.inputs
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\mauifont.inputs
@@ -347,3 +343,11 @@ D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-macc
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\SIMRAdmin.pdb
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\restaurant.genruntimeconfig.cache
 D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\ref\SIMRAdmin.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\ClosedXML.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\ClosedXML.Parser.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\DocumentFormat.OpenXml.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\DocumentFormat.OpenXml.Framework.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\ExcelNumberFormat.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\RBush.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\SixLabors.Fonts.dll
+D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\System.IO.Packaging.dll

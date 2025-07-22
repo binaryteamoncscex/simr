@@ -84,7 +84,7 @@ fun HomePage(navController: NavController) {
                     ) {
                         for (i in 1..tableCount) {
                             Button(
-                                onClick = { navController.navigate("meniu/$i") },
+                                onClick = { navController.navigate("precomanda/$i") },
                                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00BFFF))
                             ) {
                                 Text("Table $i", color = Color.White)
@@ -93,7 +93,7 @@ fun HomePage(navController: NavController) {
 
                         if (driveThruEnabled) {
                             Button(
-                                onClick = { navController.navigate("meniu/drive") },
+                                onClick = { navController.navigate("precomanda/drive") },
                                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00BFFF))
                             ) {
                                 Text("Drive Thru", color = Color.White)

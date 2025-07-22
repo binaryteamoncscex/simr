@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.ManageEmployees"
+             Title="Manage Employees">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+        <Button Text="Add Employees"
+                BackgroundColor="LightSkyBlue"
+                TextColor="White"
+                Padding="15"
+                WidthRequest="200"
+                Command="{Binding AddEmplCommand}" />
+        <Button Text="Delete Employees"
+                BackgroundColor="LightSkyBlue"
+                TextColor="White"
+                Padding="15"
+                WidthRequest="200"
+                Command="{Binding DeleteEmplCommand}" />
+        <Button Text="Manage Clocking"
+                BackgroundColor="LightSkyBlue"
+                TextColor="White"
+                Padding="15"
+                WidthRequest="200"
+                Command="{Binding ManageClockingCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

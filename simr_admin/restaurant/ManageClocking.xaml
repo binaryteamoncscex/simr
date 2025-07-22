@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.ManageClocking"
+             Title="Manage Clocking">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <CollectionView ItemsSource="{Binding Employees}">
+                <CollectionView.Header>
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Name" FontAttributes="Bold" Grid.Column="0"/>
+                        <Label Text="Role" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label Text="Status" FontAttributes="Bold" Grid.Column="2"/>
+                        <Label Text="Hours" FontAttributes="Bold" Grid.Column="3"/>
+                        <Label Text="Norm" FontAttributes="Bold" Grid.Column="4"/>
+                        <Label Text="Wage/h" FontAttributes="Bold" Grid.Column="5"/>
+                        <Label Text="Wage/mo" FontAttributes="Bold" Grid.Column="6"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Label Text="{Binding Role}" Grid.Column="1"/>
+                            <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" Grid.Column="2"/>
+                            <Label Text="{Binding Hours}" Grid.Column="3"/>
+                            <Label Text="{Binding Norm}" Grid.Column="4"/>
+                            <Label Text="{Binding WagePerHour}" Grid.Column="5"/>
+                            <Label Text="{Binding WageForMonth}" Grid.Column="6"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Download Excel"
+                    Command="{Binding DownloadExcelCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="45" />
+            </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -8,7 +8,7 @@ using Microsoft.Maui.Controls;
 using static restaurant.ViewModels.ApproveOrdersViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json.Linq;        
+using Newtonsoft.Json.Linq;
 
 namespace restaurant.ViewModels
 {
@@ -17,6 +17,7 @@ namespace restaurant.ViewModels
         private readonly FirebaseClient _firebaseClient;
         private readonly string _userId;
         private readonly string _databaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private bool _navigated = false;
 
         public ObservableCollection<OrderItem> Orders { get; set; } = new();
         public ICommand MarkAsDeliveredCommand { get; }
@@ -31,14 +32,14 @@ namespace restaurant.ViewModels
             _firebaseClient = new FirebaseClient(_databaseUrl);
             MarkAsDeliveredCommand = new Command<OrderItem>(async (order) => await UpdateOrderStatus(order, "delivered"));
             RefreshCommand = new AsyncRelayCommand(LoadOrdersAsync);
-            _ = LoadOrdersAsync();
         }
 
-        private async Task LoadOrdersAsync()
+        public async Task LoadOrdersAsync()
         {
             try
             {
                 IsRefreshing = true;
+
                 var ingredientList = await _firebaseClient
                     .Child($"kitchen/{_userId}/ingredients/list")
                     .OnceSingleAsync<List<Ingredient>>();
@@ -68,6 +69,7 @@ namespace restaurant.ViewModels
                     skey = skey.Substring(1);
                     order.id = skey;
                     order.IDS = "Id: " + skey;
+
                     if (!string.Equals(order.Status, "approved", StringComparison.OrdinalIgnoreCase))
                         continue;
 
@@ -90,8 +92,9 @@ namespace restaurant.ViewModels
                     Orders.Add(order);
                 }
 
-                if (!Orders.Any())
+                if (!Orders.Any() && !_navigated)
                 {
+                    _navigated = true;
                     await Application.Current.MainPage.DisplayAlert("Notification", "No pending orders.", "OK");
                     Application.Current.MainPage = new NavigationPage(new Dashboard());
                 }
@@ -124,7 +127,8 @@ namespace restaurant.ViewModels
                     await _firebaseClient
                         .Child($"kitchen/{_userId}/ingredients/list/{trimmedIngredientId}/date")
                         .PutAsync($"\"{todayDate}\"");
-                }           
+                }
+
                 await Application.Current.MainPage.DisplayAlert("Success", "Order delivered and ingredients updated.", "OK");
                 await LoadOrdersAsync();
             }

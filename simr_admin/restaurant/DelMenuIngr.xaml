@@ -4,71 +4,87 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:restaurant.ViewModels"
     x:Name="ThisPage"
-    Title="Delete Menu Ingredient">
+    Title="Manage Menu Ingredients">
 
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-        <VerticalStackLayout Padding="10">
-            <Label
-                HorizontalOptions="Center"
-                FontSize="20"
-                Text="Select an ingredient to delete:" />
-
-            <CollectionView ItemsSource="{Binding Ingredients}" SelectionMode="Single">
-
+    <Grid>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Ingredients}" SelectionMode="None">
                 <CollectionView.EmptyView>
-                    <Label
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        Text="No ingredients found." />
+                    <Label Text="No ingredients found."
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
                 </CollectionView.EmptyView>
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-
-                            <SwipeView IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false}">
+                            <SwipeView IsVisible="{OnPlatform Android=true, iOS=true, WinUI=false, MacCatalyst=false}">
                                 <SwipeView.RightItems>
                                     <SwipeItems Mode="Reveal">
                                         <SwipeItem
-                                            BackgroundColor="LightSkyBlue"
+                                            Text="Delete"
+                                            BackgroundColor="LightSalmon"
                                             Command="{Binding Path=BindingContext.DeleteIngredientCommand, Source={x:Reference ThisPage}}"
-                                            CommandParameter="{Binding Key}"
-                                            Text="Delete" />
+                                            CommandParameter="{Binding Key}" />
+                                        <SwipeItem
+                                            Text="Edit"
+                                            BackgroundColor="Orange"
+                                            Command="{Binding Path=BindingContext.EditIngredientCommand, Source={x:Reference ThisPage}}"
+                                            CommandParameter="{Binding .}" />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
-
-                                <Grid Padding="10">
-                                    <Label
-                                        FontSize="18"
-                                        Text="{Binding Value.name}" />
-                                </Grid>
+                                <Frame Padding="15"
+                                       Margin="0,5"
+                                       BorderColor="#DDD"
+                                       BackgroundColor="#FAFAFA"
+                                       CornerRadius="12"
+                                       HasShadow="True">
+                                    <Label Text="{Binding Value.name}"
+                                           FontSize="18"
+                                           VerticalOptions="Center"
+                                           TextColor="Black" />
+                                </Frame>
                             </SwipeView>
 
-                            <Frame Padding="10"
+                            <Frame IsVisible="{OnPlatform Android=false, iOS=false, WinUI=true, MacCatalyst=true}"
+                                   Padding="15"
                                    Margin="0,5"
                                    BorderColor="#DDD"
                                    BackgroundColor="#FAFAFA"
                                    CornerRadius="12"
-                                   HasShadow="True"
-                                   IsVisible="{OnPlatform Android=false, iOS=false, WinUI=true}">
-                                <VerticalStackLayout>
-                                    <Label
-                                        FontSize="18"
-                                        Text="{Binding Value.name}" />
-                                    <Button
-                                        Text="Delete"
-                                        Margin="0,10,0,0"
-                                        BackgroundColor="LightSkyBlue"
-                                        TextColor="White"
-                                        Command="{Binding Path=BindingContext.DeleteIngredientCommand, Source={x:Reference ThisPage}}"
-                                        CommandParameter="{Binding Key}" />
+                                   HasShadow="True">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="{Binding Value.name}"
+                                           FontSize="18"
+                                           TextColor="Black" />
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Button Text="Edit"
+                                                BackgroundColor="Orange"
+                                                TextColor="White"
+                                                Command="{Binding Path=BindingContext.EditIngredientCommand, Source={x:Reference ThisPage}}"
+                                                CommandParameter="{Binding .}" />
+                                        <Button Text="Delete"
+                                                BackgroundColor="LightSalmon"
+                                                TextColor="White"
+                                                Command="{Binding Path=BindingContext.DeleteIngredientCommand, Source={x:Reference ThisPage}}"
+                                                CommandParameter="{Binding Key}" />
+                                    </HorizontalStackLayout>
                                 </VerticalStackLayout>
                             </Frame>
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </VerticalStackLayout>
-    </RefreshView>
+        </RefreshView>
+        <Button Text="+" 
+                Command="{Binding AddMenuIngr}"
+                FontSize="28"
+                WidthRequest="60"
+                HeightRequest="60"
+                CornerRadius="30"
+                BackgroundColor="LightSkyBlue"
+                TextColor="White"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="20"/>
+    </Grid>
 </ContentPage>

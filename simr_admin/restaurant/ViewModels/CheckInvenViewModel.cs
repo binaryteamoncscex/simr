@@ -9,7 +9,7 @@ using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Microsoft.Maui.Storage;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;         
+using CommunityToolkit.Mvvm.Input;
 
 namespace restaurant.ViewModels
 {
@@ -18,40 +18,28 @@ namespace restaurant.ViewModels
         private const string WebApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
         private const string DatabaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
 
-        private ObservableCollection<Ingredient> _ingredients;
-        public ObservableCollection<Ingredient> Ingredients
-        {
-            get => _ingredients;
-            set { _ingredients = value; OnPropertyChanged(); }
-        }
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
 
-        private string _temperature;
-        public string Temperature
-        {
-            get => _temperature;
-            set { _temperature = value; OnPropertyChanged(); }
-        }
+        private string _pantryTemperature;
+        public string PantryTemperature { get => _pantryTemperature; set { _pantryTemperature = value; OnPropertyChanged(); } }
 
-        private string _humidity;
-        public string Humidity
-        {
-            get => _humidity;
-            set { _humidity = value; OnPropertyChanged(); }
-        }
+        private string _pantryHumidity;
+        public string PantryHumidity { get => _pantryHumidity; set { _pantryHumidity = value; OnPropertyChanged(); } }
+
+        private string _fridgeTemperature;
+        public string FridgeTemperature { get => _fridgeTemperature; set { _fridgeTemperature = value; OnPropertyChanged(); } }
+
+        private string _fridgeHumidity;
+        public string FridgeHumidity { get => _fridgeHumidity; set { _fridgeHumidity = value; OnPropertyChanged(); } }
+
+        private string _freezerTemperature;
+        public string FreezerTemperature { get => _freezerTemperature; set { _freezerTemperature = value; OnPropertyChanged(); } }
+
+        private string _freezerHumidity;
+        public string FreezerHumidity { get => _freezerHumidity; set { _freezerHumidity = value; OnPropertyChanged(); } }
 
         private bool _isRefreshing;
-        public bool IsRefreshing
-        {
-            get => _isRefreshing;
-            set
-            {
-                if (_isRefreshing != value)
-                {
-                    _isRefreshing = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public bool IsRefreshing { get => _isRefreshing; set { _isRefreshing = value; OnPropertyChanged(); } }
 
         public ICommand RefreshCommand { get; }
 
@@ -59,13 +47,13 @@ namespace restaurant.ViewModels
         {
             Ingredients = new ObservableCollection<Ingredient>();
             RefreshCommand = new AsyncRelayCommand(ExecuteRefreshCommand);
-            _ = LoadAllData();           
+            _ = LoadAllData();
         }
 
         private async Task ExecuteRefreshCommand()
         {
             IsRefreshing = true;
-            await Task.Delay(200);        
+            await Task.Delay(200);
             await LoadAllData();
             IsRefreshing = false;
         }
@@ -73,7 +61,7 @@ namespace restaurant.ViewModels
         private async Task LoadAllData()
         {
             await LoadIngredients();
-            await LoadDhtData();
+            await LoadAllSensors();
         }
 
         private async Task LoadIngredients()
@@ -94,21 +82,12 @@ namespace restaurant.ViewModels
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonResponse = await response.Content.ReadAsStringAsync();
-                    if (string.IsNullOrWhiteSpace(jsonResponse) || jsonResponse == "null")
-                    {
-                        await ShowError("No ingredients found.");
-                        Ingredients.Clear();         
-                        return;
-                    }
-
-                    var ingredientsList = JsonSerializer.Deserialize<List<Ingredient>>(jsonResponse);
                     Ingredients.Clear();
+                    var ingredientsList = JsonSerializer.Deserialize<List<Ingredient>>(jsonResponse);
                     if (ingredientsList != null)
                     {
                         foreach (var item in ingredientsList)
-                        {
                             if (item != null) Ingredients.Add(item);
-                        }
                     }
                 }
                 else
@@ -122,7 +101,7 @@ namespace restaurant.ViewModels
             }
         }
 
-        private async Task LoadDhtData()
+        private async Task LoadAllSensors()
         {
             try
             {
@@ -133,71 +112,39 @@ namespace restaurant.ViewModels
                     return;
                 }
 
-                string tempUnitUrl = $"{DatabaseUrl}/users/{uid}/tu.json";
                 using HttpClient client = new HttpClient();
-                var tempUnitResponse = await client.GetAsync(tempUnitUrl);
-                string temperatureUnit = "C";    
-
-                if (tempUnitResponse.IsSuccessStatusCode)
-                {
-                    string tuJson = await tempUnitResponse.Content.ReadAsStringAsync();
-                    if (!string.IsNullOrEmpty(tuJson) && tuJson != "null")
-                    {
-                        temperatureUnit = JsonSerializer.Deserialize<string>(tuJson)?.Trim('"') ?? "C";
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Warning: Could not fetch temperature unit. Status code: {tempUnitResponse.StatusCode}");
-                }
-
-                string dhtUrl = $"{DatabaseUrl}/users/{uid}/DHT.json";
-                var dhtResponse = await client.GetAsync(dhtUrl);
-
-                if (dhtResponse.IsSuccessStatusCode)
-                {
-                    string json = await dhtResponse.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<DhtData>(json);
-                    if (data != null)
-                    {
-                        double displayedTemperature = data.temp;
-                        string unitSymbol = "°C";
-
-                        if (temperatureUnit.Equals("F", StringComparison.OrdinalIgnoreCase))
-                        {
-                            displayedTemperature = (data.temp * 9 / 5) + 32;
-                            unitSymbol = "°F";
-                        }
-                        else if (temperatureUnit.Equals("K", StringComparison.OrdinalIgnoreCase))
-                        {
-                            displayedTemperature = data.temp + 273.15;        
-                            unitSymbol = "K";
-                        }
-
-                        Temperature = $"Temperature: {displayedTemperature:F1}{unitSymbol}";
-                        Humidity = $"Humidity: {data.umd:F1}%";
-                    }
-                }
-                else
-                {
-                    await ShowError($"Failed to load DHT data: {dhtResponse.StatusCode}");
-                }
+                PantryTemperature = await GetSensorValue(client, uid, "camara/temp", "°C");
+                PantryHumidity = await GetSensorValue(client, uid, "camara/umd", "%");
+                FridgeTemperature = await GetSensorValue(client, uid, "frigider/temp", "°C");
+                FridgeHumidity = await GetSensorValue(client, uid, "frigider/umd", "%");
+                FreezerTemperature = await GetSensorValue(client, uid, "congelator/temp", "°C");
+                FreezerHumidity = await GetSensorValue(client, uid, "congelator/umd", "%");
             }
             catch (Exception ex)
             {
-                await ShowError($"Error loading DHT data: {ex.Message}");
+                await ShowError($"Error loading sensors: {ex.Message}");
             }
         }
+        private async Task<string> GetSensorValue(HttpClient client, string uid, string path, string suffix)
+        {
+            string url = $"{DatabaseUrl}/users/{uid}/{path}.json";
+            var response = await client.GetAsync(url);
 
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();;
+                return $"{json}{suffix}";
+            }
+
+            return "N/A";
+        }
         private async Task<string> GetUserId()
         {
             try
             {
                 string uid = Preferences.Get("uid", string.Empty);
                 if (!string.IsNullOrEmpty(uid))
-                {
                     return uid;
-                }
 
                 var authConfig = new FirebaseAuthConfig
                 {
@@ -205,7 +152,7 @@ namespace restaurant.ViewModels
                     AuthDomain = "restaurant-3e115.firebaseapp.com",
                     Providers = new FirebaseAuthProvider[]
                     {
-                        new EmailProvider()       
+                        new EmailProvider()
                     }
                 };
                 var authProvider = new FirebaseAuthClient(authConfig);
@@ -216,7 +163,7 @@ namespace restaurant.ViewModels
                     Preferences.Set("uid", user.Uid);
                     return user.Uid;
                 }
-                return string.Empty;     
+                return string.Empty;
             }
             catch (Exception ex)
             {
@@ -233,6 +180,7 @@ namespace restaurant.ViewModels
             });
         }
     }
+
     public class DhtData
     {
         public double temp { get; set; }

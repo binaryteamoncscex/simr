@@ -5,6 +5,6 @@ public partial class DelIngrProv : ContentPage
 	public DelIngrProv()
 	{
 		InitializeComponent();
-		BindingContext = new DelIngrProvViewModel();
+		BindingContext = new DelIngrProvViewModel(Navigation);
 	}
 }

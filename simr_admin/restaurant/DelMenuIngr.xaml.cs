@@ -9,7 +9,7 @@ public partial class DelMenuIngr : ContentPage
     public DelMenuIngr()
     {
         InitializeComponent();
-        _viewModel = new DelMenuIngrViewModel();
+        _viewModel = new DelMenuIngrViewModel(Navigation);
         BindingContext = _viewModel;
     }
 

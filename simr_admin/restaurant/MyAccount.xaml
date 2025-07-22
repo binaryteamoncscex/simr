@@ -4,35 +4,69 @@
              x:Class="restaurant.MyAccount"
              Title="My Account">
     <ScrollView>
-        <VerticalStackLayout Padding="20">
+        <VerticalStackLayout Padding="20" Spacing="15">
             <Label Text="{Binding Email}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
 
+            <Label Text="Your Name" FontAttributes="Bold" />
             <Entry Text="{Binding YourName, Mode=TwoWay}" Placeholder="Your Name" />
+
+            <Label Text="Restaurant Name" FontAttributes="Bold" />
             <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="Restaurant Name" />
 
-            <Picker Title="Select Your Local Timezone"
-            TitleColor="LightGray"
-            ItemsSource="{Binding Timezones}"
-            SelectedItem="{Binding SelectedTimezone, Mode=TwoWay}" />
-            <Picker Title="Select Currency"
-            TitleColor="LightGray"
-            ItemsSource="{Binding Currencies}"
-            SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}" />
-            <Picker Title="Select Temperature Unit"
-            TitleColor="LightGray"
-            ItemsSource="{Binding TemperatureUnits}"
-            SelectedItem="{Binding SelectedTemperatureUnit, Mode=TwoWay}" />
+            <Label Text="Local Timezone" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Timezones}" SelectedIndex="{Binding SelectedTimezoneIndex, Mode=TwoWay}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select your local timezone" />
+                        <On Platform="iOS" Value="Select your local timezone" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Label Text="Currency" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select currency" />
+                        <On Platform="iOS" Value="Select currency" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Label Text="Temperature Unit" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding TemperatureUnits}" SelectedIndex="{Binding SelectedTemperatureUnitIndex, Mode=TwoWay}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select temperature unit" />
+                        <On Platform="iOS" Value="Select temperature unit" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Label Text="Daily Inventory Update Hour" FontAttributes="Bold" />
             <Entry Text="{Binding UpdateHour, Mode=TwoWay}" Placeholder="Daily Inventory Update Hour" Keyboard="Numeric" />
-            <Entry Text="{Binding TempMin, Mode=TwoWay}" Placeholder="Min Temperature °C" Keyboard="Numeric" />
-            <Entry Text="{Binding TempMax, Mode=TwoWay}" Placeholder="Max Temperature °C" Keyboard="Numeric" />
-            <Entry Text="{Binding UmdMin, Mode=TwoWay}" Placeholder="Min Humidity %" Keyboard="Numeric" />
-            <Entry Text="{Binding UmdMax, Mode=TwoWay}" Placeholder="Max Humidity %" Keyboard="Numeric" />
-            <Picker Title="Do you have a Drive-thru?"
-            TitleColor="LightGray"
-            ItemsSource="{Binding DriveThruOptions}"
-            SelectedItem="{Binding SelectedDriveThru, Mode=TwoWay}" />
-            <Button Text="Update Account Info" BackgroundColor="LightSkyBlue"
-            CornerRadius="20" Command="{Binding UpdateAccountCommand}" />
+
+            <Label Text="Pay Day" FontAttributes="Bold" />
+            <Entry Text="{Binding PayDay, Mode=TwoWay}" Placeholder="Pay Day (1–31)" Keyboard="Numeric" />
+
+            <Label Text="Pay Hour" FontAttributes="Bold" />
+            <Entry Text="{Binding PayHour, Mode=TwoWay}" Placeholder="Pay Hour (0–23)" Keyboard="Numeric" />
+
+            <Label Text="Drive‑thru Available?" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding DriveThruOptions}" SelectedItem="{Binding SelectedDriveThru, Mode=TwoWay}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Do you have a Drive-thru?" />
+                        <On Platform="iOS" Value="Do you have a Drive-thru?" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Button Text="Update Account Info"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="White"
+                    CornerRadius="20"
+                    Command="{Binding UpdateAccountCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

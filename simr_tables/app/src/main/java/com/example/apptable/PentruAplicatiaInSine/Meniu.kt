@@ -22,33 +22,27 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.gson.Gson
-import kotlinx.coroutines.*
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 import java.util.*
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MeniuScreen(navController: NavController, tableId: String) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
     val userId = auth.currentUser?.uid
-    val database = FirebaseDatabase.getInstance()
+    val database = Firebase.database
     val menuRef = userId?.let { database.getReference("kitchen").child(it).child("menu").child("list") }
-    val orderRef = userId?.let { database.getReference("kitchen").child(it).child("menu").child("orders").child("list") }
+    val userCurrencyRef = userId?.let { database.getReference("users").child(it).child("currency") }
 
     val menuItems = remember { mutableStateListOf<MenuItem>() }
-    val cartItems = remember { mutableStateMapOf<String, Int>() }
+    val cartItems = remember { mutableMapOf<String, Int>() }
     var showCart by remember { mutableStateOf(false) }
     var showThankYou by remember { mutableStateOf(false) }
-    var foodRecommendation by remember { mutableStateOf("Spune-mi preferințele tale și îți voi recomanda ceva din meniu!") }
-    var showRecommendationDialog by remember { mutableStateOf(false) }
-    var userMessage by remember { mutableStateOf("") }
-    var showCancelDialog by remember { mutableStateOf(false) }
-    var lastOrderSnapshot by remember { mutableStateOf<DataSnapshot?>(null) }
-    var showCancelButton by remember { mutableStateOf(false) }
-    var isLoadingRecommendation by remember { mutableStateOf(false) }
+    var navigateToPreorder by remember { mutableStateOf(false) }
+    var currencySymbol by remember { mutableStateOf("lei") }
 
     LaunchedEffect(Unit) {
         menuRef?.addValueEventListener(object : ValueEventListener {
@@ -56,18 +50,41 @@ fun MeniuScreen(navController: NavController, tableId: String) {
                 menuItems.clear()
                 snapshot.children.forEach { itemSnapshot ->
                     val id = itemSnapshot.key ?: return@forEach
-                    val isAvailable = itemSnapshot.child("menuAvailability").getValue(Boolean::class.java) ?: true
 
+                    // MODIFICĂRI AICI pentru a preveni "Cannot infer type"
+                    // Citim ca Any, apoi castăm/convertim în siguranță
+                    val isAvailable = itemSnapshot.child("menuAvailability").getValue(Any::class.java).let {
+                        when (it) {
+                            is Boolean -> it
+                            is Long -> it != 0L // Considerăm 0 ca false, orice altceva true
+                            is String -> it.toBooleanStrictOrNull() ?: (it == "true") // Convertim string "true"/"false"
+                            else -> true // Valoare implicită dacă tipul nu e recunoscut sau e null
+                        }
+                    }
+
+                    val category = itemSnapshot.child("category").getValue(String::class.java) ?: "Other" // Acest tip ar trebui să fie de obicei String
+
+                    // Asigură-te că citești doar elementele disponibile dacă asta e logica dorită
                     if (isAvailable) {
-                        val name = itemSnapshot.child("name").getValue(String::class.java) ?: "Unknown"
-                        val photo = itemSnapshot.child("photo").getValue(String::class.java) ?: ""
-                        val price = itemSnapshot.child("price").getValue(String::class.java) ?: "0.0"
-                        val ingredients = itemSnapshot.child("ingredients").getValue(String::class.java) ?: ""
-                        val quantities = itemSnapshot.child("quantities").getValue(String::class.java) ?: ""
-
-                        menuItems.add(MenuItem(id, name, photo, price, ingredients, quantities, isAvailable))
+                        menuItems.add(
+                            MenuItem(
+                                id = id,
+                                name = itemSnapshot.child("name").getValue(String::class.java) ?: "Unknown",
+                                photo = itemSnapshot.child("photo").getValue(String::class.java) ?: "",
+                                price = itemSnapshot.child("price").getValue(String::class.java) ?: "0.0",
+                                ingredients = itemSnapshot.child("ingredients").getValue(String::class.java) ?: "",
+                                quantities = itemSnapshot.child("quantities").getValue(String::class.java) ?: "",
+                                isAvailable = true, // Deja filtrat de isAvailable de mai sus
+                                category = category,
+                                nutritional = itemSnapshot.child("nutritional").getValue(String::class.java)
+                                    ?: "No nutritional information available",
+                                allergens = itemSnapshot.child("allergens").getValue(String::class.java)
+                                    ?: "No allergens declared"
+                            )
+                        )
                     }
                 }
+                menuItems.sortBy { it.category }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -76,24 +93,34 @@ fun MeniuScreen(navController: NavController, tableId: String) {
         })
     }
 
-    LaunchedEffect(Unit) {
-        orderRef?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val lastOrder = snapshot.children.lastOrNull()
-                val status = lastOrder?.child("status")?.getValue(String::class.java)
-                showCancelButton = status == "placed" || status == "pending"
-                lastOrderSnapshot = lastOrder
-            }
+    // This DisposableEffect monitors the user's currency preference
+    DisposableEffect(Unit) {
+        if (userCurrencyRef != null) {
+            val listener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    currencySymbol = snapshot.getValue(String::class.java) ?: "lei"
+                }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Failed to read orders", error.toException())
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Firebase", "Failed to read currency symbol: ${error.message}", error.toException())
+                    currencySymbol = "lei"
+                }
             }
-        })
+            userCurrencyRef.addValueEventListener(listener)
+
+            // The onDispose block is crucial for removing the listener when the composable leaves the composition
+            onDispose {
+                userCurrencyRef.removeEventListener(listener)
+            }
+        } else {
+            // If userCurrencyRef is null, there's nothing to dispose of
+            onDispose { }
+        }
     }
 
     LaunchedEffect(showThankYou) {
         if (showThankYou) {
-            delay(5000)
+            delay(2500)
             showThankYou = false
         }
     }
@@ -106,67 +133,87 @@ fun MeniuScreen(navController: NavController, tableId: String) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(horizontal = 16.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                        IconButton(onClick = { showCart = true }) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Spacer(Modifier.weight(1f))
+                        IconButton(
+                            onClick = { showCart = true },
+                            colors = IconButtonDefaults.iconButtonColors(
+                                contentColor = Color(0xFF00BFFF)
+                            )
+                        ) {
                             Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "Cart")
                             if (cartItems.any { it.value > 0 }) {
-                                Badge {
+                                Badge(
+                                    containerColor = Color(0xFF00BFFF),
+                                    contentColor = Color.White
+                                ) {
                                     Text(text = cartItems.values.sum().toString())
                                 }
                             }
                         }
                     }
 
-                    menuItems.forEach { item ->
-                        MenuItemCard(item, cartItems)
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(
-                        onClick = { showRecommendationDialog = true },
-                        modifier = Modifier.fillMaxWidth().padding(8.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003366))
-                    ) {
-                        Text("Obține recomandare personalizată", color = Color.White)
-                    }
-
-                    if (isLoadingRecommendation) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-                    } else {
+                    val groupedItems = menuItems.groupBy { it.category }
+                    groupedItems.forEach { (category, itemsInCategory) ->
                         Text(
-                            text = foodRecommendation,
-                            color = Color(0xFF00BFFF),
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(8.dp)
+                            text = category,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color(0xFF003366),
+                            modifier = Modifier.padding(vertical = 16.dp)
                         )
+                        itemsInCategory.forEach { item ->
+                            MenuItemCard(item, cartItems, currencySymbol)
+                        }
                     }
 
-                    Spacer(modifier = Modifier.height(100.dp))
+                    Spacer(modifier = Modifier.height(64.dp))
                 }
 
-                if (showThankYou) {
-                    ThankYouDialog()
-                }
-
-                if (showCancelButton) {
+                // Butonul "Redeem Your Code"
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Button(
-                        onClick = { showCancelDialog = true },
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                        onClick = { navController.navigate("redeem_code") },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF00BFFF),
+                            contentColor = Color.White
+                        )
                     ) {
-                        Text("Anulează ultima comandă", color = Color.White)
+                        Text("Redeem Your Code")
                     }
                 }
             }
         }
     )
+
+    if (showThankYou) {
+        ThankYouDialog()
+    }
+
+    LaunchedEffect(navigateToPreorder) {
+        if (navigateToPreorder) {
+            delay(2500)
+            navController.navigate("precomanda/$tableId") {
+                popUpTo("meniu/$tableId") { inclusive = true }
+            }
+            navigateToPreorder = false
+        }
+    }
 
     if (showCart) {
         CartDialog(
@@ -174,44 +221,12 @@ fun MeniuScreen(navController: NavController, tableId: String) {
             menuItems = menuItems,
             userId = userId,
             tableId = tableId,
+            currency = currencySymbol,
             onDismiss = { showCart = false },
-            onOrderPlaced = { showThankYou = true }
-        )
-    }
-
-    if (showRecommendationDialog) {
-        RecommendationDialog(
-            userMessage = userMessage,
-            onMessageChange = { userMessage = it },
-            onDismiss = { showRecommendationDialog = false },
-            onSubmit = {
-                isLoadingRecommendation = true
-                fetchDeepSeekRecommendation(
-                    context = context,
-                    userMessage = userMessage,
-                    menuItems = menuItems,
-                    onSuccess = { recommendation ->
-                        foodRecommendation = recommendation
-                        showRecommendationDialog = false
-                        isLoadingRecommendation = false
-                    },
-                    onFailure = { error ->
-                        foodRecommendation = "Eroare: $error\n${getFallbackRecommendation(menuItems)}"
-                        showRecommendationDialog = false
-                        isLoadingRecommendation = false
-                    }
-                )
-            },
-            isLoading = isLoadingRecommendation
-        )
-    }
-
-    if (showCancelDialog && lastOrderSnapshot != null) {
-        CancelOrderDialog(
-            orderSnapshot = lastOrderSnapshot!!,
-            onDismiss = {
-                showCancelDialog = false
-                showCancelButton = false
+            onOrderPlaced = {
+                showThankYou = true
+                showCart = false
+                navigateToPreorder = true
             }
         )
     }
@@ -234,15 +249,16 @@ private fun ThankYouDialog() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "Comandă plasată cu succes!",
+                    "Order Placed Successfully!",
                     color = Color(0xFF00BFFF),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    "Vă mulțumim!",
-                    fontSize = 18.sp
+                    "Thank You!",
+                    fontSize = 18.sp,
+                    color = Color(0xFF003366)
                 )
             }
         }
@@ -250,8 +266,14 @@ private fun ThankYouDialog() {
 }
 
 @Composable
-fun MenuItemCard(item: MenuItem, cartItems: MutableMap<String, Int>) {
+fun MenuItemCard(item: MenuItem, cartItems: MutableMap<String, Int>, currency: String) {
     var quantity by remember { mutableStateOf(cartItems[item.id] ?: 0) }
+    var showNutritionInfo by remember { mutableStateOf(false) }
+    var showAllergensInfo by remember { mutableStateOf(false) }
+
+    LaunchedEffect(cartItems[item.id]) {
+        quantity = cartItems[item.id] ?: 0
+    }
 
     Card(
         modifier = Modifier
@@ -267,25 +289,24 @@ fun MenuItemCard(item: MenuItem, cartItems: MutableMap<String, Int>) {
             if (item.photo.isNotBlank()) {
                 AsyncImage(
                     model = item.photo,
-                    contentDescription = "Imagine ${item.name}",
+                    contentDescription = "Image of ${item.name}",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(180.dp)
-                        .padding(bottom = 8.dp)
-                )
+                        .height(180.dp))
             }
 
             Text(
                 text = item.name,
                 color = Color(0xFF003366),
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 8.dp)
             )
 
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "${item.price} lei",
+                text = "${item.price} $currency",
                 color = Color(0xFF00BFFF),
                 fontSize = 16.sp
             )
@@ -293,10 +314,40 @@ fun MenuItemCard(item: MenuItem, cartItems: MutableMap<String, Int>) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = item.ingredients,
+                text = "Ingredients: ${item.ingredients}",
                 color = Color.Gray,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                modifier = Modifier.padding(bottom = 8.dp)
             )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(
+                    onClick = { showNutritionInfo = true },
+                    modifier = Modifier.weight(1f).padding(end = 4.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF4CAF50),
+                        contentColor = Color.White
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                ) {
+                    Text("Nutritional Values", fontSize = 12.sp)
+                }
+
+                Button(
+                    onClick = { showAllergensInfo = true },
+                    modifier = Modifier.weight(1f).padding(start = 4.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFF44336),
+                        contentColor = Color.White
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                ) {
+                    Text("Allergens", fontSize = 12.sp)
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -309,6 +360,58 @@ fun MenuItemCard(item: MenuItem, cartItems: MutableMap<String, Int>) {
             )
         }
     }
+
+    if (showNutritionInfo) {
+        AlertDialog(
+            onDismissRequest = { showNutritionInfo = false },
+            title = {
+                Text(
+                    text = "Nutritional Values: ${item.name}",
+                    color = Color(0xFF4CAF50),
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            text = {
+                Text(item.nutritional, color = Color(0xFF003366))
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { showNutritionInfo = false },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = Color(0xFF4CAF50)
+                    )
+                ) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+
+    if (showAllergensInfo) {
+        AlertDialog(
+            onDismissRequest = { showAllergensInfo = false },
+            title = {
+                Text(
+                    text = "Allergens: ${item.name}",
+                    color = Color(0xFFF44336),
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            text = {
+                Text(item.allergens, color = Color(0xFF003366))
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { showAllergensInfo = false },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = Color(0xFFF44336)
+                    )
+                ) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -319,9 +422,12 @@ private fun QuantitySelector(currentQuantity: Int, onQuantityChange: (Int) -> Un
     ) {
         IconButton(
             onClick = { if (currentQuantity > 0) onQuantityChange(currentQuantity - 1) },
-            modifier = Modifier.size(48.dp)
+            modifier = Modifier.size(48.dp),
+            colors = IconButtonDefaults.iconButtonColors(
+                contentColor = Color(0xFF00BFFF)
+            )
         ) {
-            Text("-", fontSize = 24.sp, color = Color(0xFF003366))
+            Text("-", fontSize = 24.sp)
         }
 
         Text(
@@ -333,23 +439,28 @@ private fun QuantitySelector(currentQuantity: Int, onQuantityChange: (Int) -> Un
 
         IconButton(
             onClick = { onQuantityChange(currentQuantity + 1) },
-            modifier = Modifier.size(48.dp)
+            modifier = Modifier.size(48.dp),
+            colors = IconButtonDefaults.iconButtonColors(
+                contentColor = Color(0xFF00BFFF)
+            )
         ) {
-            Text("+", fontSize = 24.sp, color = Color(0xFF003366))
+            Text("+", fontSize = 24.sp)
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartDialog(
     cartItems: MutableMap<String, Int>,
     menuItems: List<MenuItem>,
     userId: String?,
     tableId: String,
+    currency: String,
     onDismiss: () -> Unit,
     onOrderPlaced: () -> Unit
 ) {
-    val database = FirebaseDatabase.getInstance()
+    val database = Firebase.database
     val orderRef = userId?.let {
         database.getReference("kitchen").child(it).child("menu").child("orders").child("list")
     }
@@ -358,78 +469,256 @@ fun CartDialog(
     var paymentMethod by remember { mutableStateOf("Card") }
     var observations by remember { mutableStateOf("") }
     var isPlacingOrder by remember { mutableStateOf(false) }
+    // State to hold the active discount percentage from voucher
+    var voucherDiscountPercent by remember { mutableStateOf(0.0) } // Initialize to 0.0
+
+    // States for Happy Hour
+    var happyHourProcent by remember { mutableStateOf(0) }
+    var happyHourStart by remember { mutableStateOf(-1) }
+    var happyHourStop by remember { mutableStateOf(-1) }
+
+    // Listener for voucher active discount
+    DisposableEffect(userId) {
+        var voucherListener: ValueEventListener? = null
+        var happyHourListener: ValueEventListener? = null
+
+        if (userId != null) {
+            // Listener for Voucher Discount
+            val userDiscountRef = database.getReference("users").child(userId).child("activeDiscount")
+            voucherListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    voucherDiscountPercent = snapshot.getValue(String::class.java)?.toDoubleOrNull() ?: 0.0
+                    Log.d("CartDialog", "Voucher discount loaded: $voucherDiscountPercent%")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("CartDialog", "Failed to read voucher discount: ${error.message}", error.toException())
+                    voucherDiscountPercent = 0.0
+                }
+            }
+            userDiscountRef.addValueEventListener(voucherListener)
+
+            // Listener for Happy Hour Discount
+            val happyHourRef = database.getReference("users").child(userId).child("HappyHour")
+            happyHourListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    happyHourProcent = snapshot.child("procent").getValue(Long::class.java)?.toInt() ?: 0
+                    happyHourStart = snapshot.child("start").getValue(Long::class.java)?.toInt() ?: -1
+                    happyHourStop = snapshot.child("stop").getValue(Long::class.java)?.toInt() ?: -1
+                    Log.d("CartDialog", "Happy Hour loaded: Procent: $happyHourProcent%, Start: $happyHourStart, Stop: $happyHourStop")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("CartDialog", "Failed to read Happy Hour data: ${error.message}", error.toException())
+                    happyHourProcent = 0
+                    happyHourStart = -1
+                    happyHourStop = -1
+                }
+            }
+            happyHourRef.addValueEventListener(happyHourListener)
+        }
+
+        onDispose {
+            voucherListener?.let {
+                userId?.let { uid ->
+                    database.getReference("users").child(uid).child("activeDiscount").removeEventListener(it)
+                }
+            }
+            happyHourListener?.let {
+                userId?.let { uid ->
+                    database.getReference("users").child(uid).child("HappyHour").removeEventListener(it)
+                }
+            }
+        }
+    }
 
     val itemsInCart = cartItems.filterValues { it > 0 }
     val selectedMenuItems = menuItems.filter { itemsInCart.containsKey(it.id) }
 
-    val totalPrice = selectedMenuItems.sumOf { item ->
-        val quantity = itemsInCart[item.id] ?: 0
-        item.price.toDoubleOrNull() ?: 0.0 * quantity
+    val totalPriceBeforeDiscount = selectedMenuItems.sumOf { item ->
+        (item.price.toDoubleOrNull() ?: 0.0) * (itemsInCart[item.id] ?: 0)
     }
+
+    // Calculate total applicable discount
+    val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    val isHappyHourActive = if (happyHourStart != -1 && happyHourStop != -1) {
+        if (happyHourStart <= happyHourStop) {
+            currentHour >= happyHourStart && currentHour < happyHourStop
+        } else { // Handles cases like 22:00 - 02:00 (overnight)
+            currentHour >= happyHourStart || currentHour < happyHourStop
+        }
+    } else false
+
+    val totalDiscountPercent = voucherDiscountPercent + if (isHappyHourActive) happyHourProcent.toDouble() else 0.0
+
+    // Calculate final price with combined discounts
+    val finalPrice = totalPriceBeforeDiscount * (1 - (totalDiscountPercent / 100))
 
     AlertDialog(
         onDismissRequest = { if (!isPlacingOrder) onDismiss() },
         title = {
             Text(
-                text = "Coș de cumpărături",
-                color = Color(0xFF003366),
+                text = "Shopping Cart",
+                color = Color(0xFF00BFFF),
                 fontWeight = FontWeight.Bold
             )
         },
         text = {
             if (itemsInCart.isEmpty()) {
-                Text("Coșul tău este gol.", modifier = Modifier.padding(16.dp))
+                Text("Your cart is empty.", modifier = Modifier.padding(16.dp))
             } else {
                 Column {
-                    selectedMenuItems.forEach { item ->
-                        val quantity = itemsInCart[item.id] ?: 0
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("${item.name} x$quantity")
-                            Text("${(item.price.toDoubleOrNull() ?: 0.0) * quantity} lei")
+                    Column(Modifier.verticalScroll(rememberScrollState()).weight(1f, fill = false)) {
+                        selectedMenuItems.forEach { item ->
+                            val quantity = itemsInCart[item.id] ?: 0
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(item.name, color = Color(0xFF003366))
+                                Text(
+                                    "${"%.2f".format((item.price.toDoubleOrNull() ?: 0.0) * quantity)} $currency",
+                                    color = Color(0xFF00BFFF)
+                                )
+                            }
                         }
                     }
 
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    Divider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        color = Color(0xFF00BFFF).copy(alpha = 0.5f)
+                    )
 
+                    // Display Total Before Discount
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Total (before discount):", color = Color(0xFF003366))
+                        Text(
+                            "${"%.2f".format(totalPriceBeforeDiscount)} $currency",
+                            color = Color(0xFF00BFFF)
+                        )
+                    }
+
+                    // Display Voucher Discount if applicable
+                    if (voucherDiscountPercent > 0) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                "Voucher Discount ($voucherDiscountPercent%):",
+                                color = Color(0xFF4CAF50) // Green for discount
+                            )
+                            Text(
+                                "-${"%.2f".format(totalPriceBeforeDiscount * (voucherDiscountPercent / 100))} $currency",
+                                color = Color(0xFF4CAF50)
+                            )
+                        }
+                    }
+
+                    // Display Happy Hour Discount if applicable
+                    if (isHappyHourActive && happyHourProcent > 0) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                "Happy Hour Discount ($happyHourProcent%):",
+                                color = Color(0xFF8BC34A) // A different shade of green for Happy Hour
+                            )
+                            Text(
+                                "-${"%.2f".format(totalPriceBeforeDiscount * (happyHourProcent.toDouble() / 100))} $currency",
+                                color = Color(0xFF8BC34A)
+                            )
+                        }
+                    }
+
+                    if (totalDiscountPercent > 0) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                "Total Combined Discount ($totalDiscountPercent%):",
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF2196F3) // Blue for total discount
+                            )
+                            Text(
+                                "-${"%.2f".format(totalPriceBeforeDiscount * (totalDiscountPercent / 100))} $currency",
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF2196F3)
+                            )
+                        }
+                    }
+
+
+                    // Display Final Price
                     Row(
                         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("Total:", fontWeight = FontWeight.Bold)
-                        Text("${"%.2f".format(totalPrice)} lei", fontWeight = FontWeight.Bold)
+                        Text("Final Price:", fontWeight = FontWeight.Bold, color = Color(0xFF003366))
+                        Text(
+                            "${"%.2f".format(finalPrice)} $currency",
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF00BFFF)
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text("Metodă de plată:", fontWeight = FontWeight.SemiBold)
+                    Text(
+                        "Payment Method:",
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF003366)
+                    )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(
                             selected = paymentMethod == "Card",
-                            onClick = { paymentMethod = "Card" }
+                            onClick = { paymentMethod = "Card" },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color(0xFF00BFFF),
+                                unselectedColor = Color(0xFF003366)
+                            )
                         )
-                        Text("Card", modifier = Modifier.padding(start = 4.dp))
+                        Text("Card", modifier = Modifier.padding(start = 4.dp), color = Color(0xFF003366))
 
                         Spacer(modifier = Modifier.width(16.dp))
 
                         RadioButton(
                             selected = paymentMethod == "Cash",
-                            onClick = { paymentMethod = "Cash" }
+                            onClick = { paymentMethod = "Cash" },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color(0xFF00BFFF),
+                                unselectedColor = Color(0xFF003366)
+                            )
                         )
-                        Text("Cash", modifier = Modifier.padding(start = 4.dp))
+                        Text("Cash", modifier = Modifier.padding(start = 4.dp), color = Color(0xFF003366))
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text("Observații:", fontWeight = FontWeight.SemiBold)
+                    Text(
+                        "Notes:",
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF003366)
+                    )
                     OutlinedTextField(
                         value = observations,
                         onValueChange = { observations = it },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = { Text("Ex: fără ceapă, extra picant...") },
-                        singleLine = true
+                        placeholder = { Text("Ex: no onions, extra spicy...") },
+                        singleLine = true,
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.White,
+                            unfocusedContainerColor = Color.White,
+                            focusedTextColor = Color(0xFF003366),
+                            unfocusedTextColor = Color(0xFF003366),
+                            focusedIndicatorColor = Color(0xFF00BFFF),
+                            unfocusedIndicatorColor = Color(0xFF00BFFF)
+                        )
                     )
                 }
             }
@@ -439,37 +728,54 @@ fun CartDialog(
                 Button(
                     onClick = {
                         isPlacingOrder = true
-                        val orderId = orderRef?.push()?.key ?: UUID.randomUUID().toString()
+                        val orderId = UUID.randomUUID().toString()
+
                         val orderDetails = hashMapOf(
-                            "id" to orderId,
-                            "table" to tableId,
-                            "items" to itemsInCart.mapKeys { entry ->
-                                menuItems.find { it.id == entry.key }?.name ?: "Unknown"
-                            },
-                            "totalPrice" to totalPrice,
-                            "status" to "placed",
-                            "paymentMethod" to paymentMethod,
+                            "food" to itemsInCart.keys.joinToString(","),
+                            "foodNames" to selectedMenuItems.joinToString(",") { it.name },
                             "observations" to observations,
-                            "timestamp" to System.currentTimeMillis()
+                            "payment" to paymentMethod,
+                            "price" to finalPrice, // Use the finalPrice (with combined discounts) here!
+                            "quantities" to itemsInCart.values.joinToString(","),
+                            "status" to "placed",
+                            "table" to tableId,
+                            "timestamp" to System.currentTimeMillis(),
+                            "orderPosition" to ServerValue.TIMESTAMP,
+                            "currency" to currency,
+                            "discountApplied" to totalDiscountPercent // Add the total combined discount percentage
                         )
 
                         orderRef?.child(orderId)?.setValue(orderDetails)
                             ?.addOnCompleteListener { task ->
                                 isPlacingOrder = false
                                 if (task.isSuccessful) {
+                                    // Optionally clear the active voucher discount after placing the order
+                                    userId?.let {
+                                        database.getReference("users").child(it).child("activeDiscount").removeValue()
+                                            .addOnSuccessListener {
+                                                Log.d("CartDialog", "Active voucher discount cleared for user $it")
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Log.e("CartDialog", "Failed to clear active voucher discount: ${e.message}", e)
+                                            }
+                                    }
                                     cartItems.clear()
                                     onOrderPlaced()
                                     onDismiss()
                                 } else {
                                     Toast.makeText(
                                         context,
-                                        "Eroare la plasarea comenzii",
-                                        Toast.LENGTH_SHORT
+                                        "Error placing order: ${task.exception?.message}",
+                                        Toast.LENGTH_LONG
                                     ).show()
                                 }
                             }
                     },
-                    enabled = !isPlacingOrder
+                    enabled = !isPlacingOrder,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF00BFFF),
+                        contentColor = Color.White
+                    )
                 ) {
                     if (isPlacingOrder) {
                         CircularProgressIndicator(
@@ -478,212 +784,28 @@ fun CartDialog(
                             strokeWidth = 2.dp
                         )
                     } else {
-                        Text("Plasează comanda")
+                        Text("Place Order")
                     }
                 }
             }
         },
         dismissButton = {
             if (!isPlacingOrder) {
-                Button(onClick = onDismiss) {
-                    Text("Închide")
+                TextButton(
+                    onClick = onDismiss,
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = Color(0xFF00BFFF)
+                    )
+                ) {
+                    Text("Close")
                 }
             }
-        }
+        },
+        containerColor = Color.White,
+        tonalElevation = 8.dp
     )
 }
 
-@Composable
-fun RecommendationDialog(
-    userMessage: String,
-    onMessageChange: (String) -> Unit,
-    onDismiss: () -> Unit,
-    onSubmit: () -> Unit,
-    isLoading: Boolean
-) {
-    AlertDialog(
-        onDismissRequest = { if (!isLoading) onDismiss() },
-        title = {
-            Text(
-                text = "Recomandare personalizată",
-                color = Color(0xFF003366),
-                fontWeight = FontWeight.Bold
-            )
-        },
-        text = {
-            Column {
-                Text(
-                    "Spune-ne ce preferințe ai (ex: 'vegetarian', 'fără lactate', 'picant')",
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                OutlinedTextField(
-                    value = userMessage,
-                    onValueChange = onMessageChange,
-                    modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Introdu preferințele tale aici...") },
-                    enabled = !isLoading
-                )
-            }
-        },
-        confirmButton = {
-            Button(
-                onClick = onSubmit,
-                enabled = userMessage.isNotBlank() && !isLoading
-            ) {
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp),
-                        color = Color.White,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Text("Obține recomandare")
-                }
-            }
-        },
-        dismissButton = {
-            if (!isLoading) {
-                Button(onClick = onDismiss) {
-                    Text("Anulează")
-                }
-            }
-        }
-    )
-}
-
-@Composable
-fun CancelOrderDialog(
-    orderSnapshot: DataSnapshot,
-    onDismiss: () -> Unit
-) {
-    val context = LocalContext.current
-    var isCanceling by remember { mutableStateOf(false) }
-    val order = remember(orderSnapshot) {
-        orderSnapshot.getValue(Order::class.java) ?: Order()
-    }
-
-    val surcharge = order.totalPrice * 0.2
-
-    AlertDialog(
-        onDismissRequest = { if (!isCanceling) onDismiss() },
-        title = {
-            Text(
-                text = "Anulare comandă",
-                color = Color.Red,
-                fontWeight = FontWeight.Bold
-            )
-        },
-        text = {
-            Column {
-                Text("Detalii comandă:", fontWeight = FontWeight.SemiBold)
-                Spacer(modifier = Modifier.height(8.dp))
-
-                order.items?.forEach { (itemName, quantity) ->
-                    Text("• $itemName x$quantity")
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Total: ${"%.2f".format(order.totalPrice)} lei")
-                Spacer(modifier = Modifier.height(16.dp))
-
-                if (order.status == "pending") {
-                    Text(
-                        "Atenție: Anularea acestei comenzi va atrage o taxă de 20% (${"%.2f".format(surcharge)} lei)",
-                        color = Color.Red,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
-        },
-        confirmButton = {
-            Button(
-                onClick = {
-                    isCanceling = true
-                    val newStatus = if (order.status == "pending") "canceled_with_fee" else "canceled"
-                    orderSnapshot.ref.child("status").setValue(newStatus)
-                        .addOnCompleteListener {
-                            isCanceling = false
-                            if (it.isSuccessful) {
-                                Toast.makeText(
-                                    context,
-                                    if (order.status == "pending")
-                                        "Comandă anulată. Taxa de ${"%.2f".format(surcharge)} lei va fi aplicată."
-                                    else
-                                        "Comandă anulată cu succes",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                onDismiss()
-                            }
-                        }
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
-                enabled = !isCanceling
-            ) {
-                if (isCanceling) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp),
-                        color = Color.White,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Text("Confirmă anularea")
-                }
-            }
-        },
-        dismissButton = {
-            if (!isCanceling) {
-                Button(onClick = onDismiss) {
-                    Text("Înapoi")
-                }
-            }
-        }
-    )
-}
-
-// Funcții pentru recomandări DeepSeek
-private fun fetchDeepSeekRecommendation(
-    context: Context,
-    userMessage: String,
-    menuItems: List<MenuItem>,
-    onSuccess: (String) -> Unit,
-    onFailure: (String) -> Unit
-) {
-    CoroutineScope(Dispatchers.IO).launch {
-        try {
-            val availableItems = menuItems.filter { it.isAvailable }
-            if (availableItems.isEmpty()) {
-                onFailure("Nu sunt preparate disponibile în meniu")
-                return@launch
-            }
-
-            val recommendation = DeepSeekApi.getRecommendation(
-                context = context,
-                userMessage = userMessage,
-                menuItems = availableItems
-            )
-
-            withContext(Dispatchers.Main) {
-                onSuccess(recommendation)
-            }
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                onFailure(e.message ?: "Eroare necunoscută")
-            }
-        }
-    }
-}
-
-private fun getFallbackRecommendation(menuItems: List<MenuItem>): String {
-    val availableItems = menuItems.filter { it.isAvailable }
-    return if (availableItems.isNotEmpty()) {
-        val randomItem = availableItems.random()
-        "Recomandare: ${randomItem.name} - ${randomItem.ingredients}"
-    } else {
-        "Nu sunt preparate disponibile în meniu"
-    }
-}
-
-// Modele de date
 data class MenuItem(
     val id: String,
     val name: String,
@@ -691,109 +813,12 @@ data class MenuItem(
     val price: String,
     val ingredients: String,
     val quantities: String,
-    val isAvailable: Boolean = true
+    val isAvailable: Boolean = true,
+    val category: String = "Other",
+    val calories: String = "0",
+    val protein: String = "0g",
+    val carbs: String = "0g",
+    val fats: String = "0g",
+    val allergens: String = "No allergens declared",
+    val nutritional: String = "No nutritional information available"
 )
-
-data class Order(
-    val id: String = "",
-    val table: String = "",
-    val items: Map<String, Int> = emptyMap(),
-    val totalPrice: Double = 0.0,
-    val status: String = "",
-    val paymentMethod: String = "",
-    val observations: String = "",
-    val timestamp: Long = 0L
-)
-
-object DeepSeekApi {
-    private const val API_KEY = "sk-71a1b4376efb466e88aeb96cb6888244" // Înlocuiește cu cheia ta reală
-    private const val BASE_URL = "https://api.deepseek.com/v1/"
-    private val client = OkHttpClient()
-    private val gson = Gson()
-
-    suspend fun getRecommendation(
-        context: Context,
-        userMessage: String,
-        menuItems: List<MenuItem>
-    ): String {
-        val menuContext = buildMenuContext(menuItems)
-
-        val messages = listOf(
-            Message(
-                role = "system",
-                content = """
-                Ești asistentul unui restaurant sofisticat. 
-                Meniul disponibil este:
-                $menuContext
-                
-                Reguli stricte:
-                1. Recomandă DOAR preparate din lista de mai sus
-                2. Menționează ingredientele principale
-                3. Explică de ce ai ales acel preparat (max 2 propoziții)
-                4. Dacă cererea nu se potrivește, sugerează ceva similar din meniu
-                5. Răspunsul să fie în limba română
-                """.trimIndent()
-            ),
-            Message(
-                role = "user",
-                content = userMessage
-            )
-        )
-
-        val requestBody = gson.toJson(
-            ChatRequest(
-                model = "deepseek-chat",
-                messages = messages,
-                max_tokens = 200,
-                temperature = 0.7
-            )
-        )
-
-        val request = Request.Builder()
-            .url("${BASE_URL}chat/completions")
-            .post(requestBody.toRequestBody("application/json".toMediaType()))
-            .addHeader("Authorization", "Bearer $API_KEY")
-            .addHeader("Content-Type", "application/json")
-            .build()
-
-        val response = withContext(Dispatchers.IO) {
-            client.newCall(request).execute()
-        }
-
-        if (!response.isSuccessful) {
-            throw Exception("Eroare API: ${response.code}")
-        }
-
-        val responseBody = response.body?.string() ?: throw Exception("Răspuns gol")
-        val chatResponse = gson.fromJson(responseBody, ChatResponse::class.java)
-
-        return chatResponse.choices.firstOrNull()?.message?.content
-            ?: throw Exception("Nu am putut genera recomandarea")
-    }
-
-    private fun buildMenuContext(menuItems: List<MenuItem>): String {
-        return menuItems.joinToString("\n") { item ->
-            "- ${item.name} (${item.price} lei): ${item.ingredients}"
-        }
-    }
-
-    private data class ChatRequest(
-        val model: String,
-        val messages: List<Message>,
-        val max_tokens: Int,
-        val temperature: Double = 0.7
-    )
-
-    private data class Message(
-        val role: String,
-        val content: String
-    )
-
-    private data class ChatResponse(
-        val choices: List<Choice>
-    )
-
-    private data class Choice(
-        val message: Message
-    )
-}

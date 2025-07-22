@@ -3,50 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="restaurant.AddMenuItem"
              Title="Add Menu Item">
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
-            <Label Text="Name" />
+
+            <Label Text="Name" FontAttributes="Bold" />
             <Entry Text="{Binding Name}" Placeholder="Enter the name of the dish" />
 
-            <Label Text="Price" />
+            <Label Text="Price" FontAttributes="Bold" />
             <Entry Text="{Binding Price}" Placeholder="Enter the price" Keyboard="Numeric" />
 
-            <Label Text="Photo Link" />
+            <Label Text="Photo Link" FontAttributes="Bold" />
             <Entry Text="{Binding Photo}" Placeholder="Enter the photo link" />
 
-            <Label Text="Category" />
+            <Label Text="Category" FontAttributes="Bold" />
             <Picker ItemsSource="{Binding Categories}" 
-                    SelectedItem="{Binding SelectedCategory}" 
-                    Title="Select a category" />
+                    SelectedItem="{Binding SelectedCategory}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select a category" />
+                        <On Platform="iOS" Value="Select a category" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
 
-            <Label Text="Allergens Info" />
+            <Label Text="Allergens Info" FontAttributes="Bold" />
             <Entry Text="{Binding Allergens}" Placeholder="E.g.: Contains nuts, dairy..." />
 
-            <Label Text="Nutritional Info" />
+            <Label Text="Nutritional Info" FontAttributes="Bold" />
             <Entry Text="{Binding NutritionalInfo}" Placeholder="E.g.: 250 kcal per serving..." />
 
-            <Label Text="Select Ingredients" />
-            <CollectionView ItemsSource="{Binding IngredientsList}"
-                            SelectionMode="Multiple"
-                            SelectionChanged="OnSelectionChanged">
+            <Label Text="Select Ingredients and Quantities" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding IngredientsList}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border StrokeThickness="1" Stroke="Black" Padding="10" Margin="5">
-                            <Grid ColumnDefinitions="*, Auto">
-                                <Label Text="{Binding name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                                <Label Text="{Binding unit}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End"/>
-                            </Grid>
-                        </Border>
+                        <Grid Padding="10"
+                              ColumnDefinitions="Auto,*,Auto,Auto"
+                              VerticalOptions="Center">
+                            <CheckBox
+                                Grid.Column="0"
+                                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                VerticalOptions="Center" Color="LightSkyBlue" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding name}"
+                                FontSize="16"
+                                VerticalOptions="Center"
+                                Margin="10,0"
+                                TextColor="Black" />
+                            <Entry
+                                Grid.Column="2"
+                                WidthRequest="60"
+                                Text="{Binding EnteredQuantity, Mode=TwoWay}"
+                                Keyboard="Numeric"
+                                Placeholder="Qty"
+                                VerticalOptions="Center"
+                                IsEnabled="{Binding IsSelected}"
+                                PlaceholderColor="LightSkyBlue"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Column="3"
+                                Text="{Binding unit}"
+                                FontSize="14"
+                                VerticalOptions="Center"
+                                TextColor="Black"
+                                Margin="5,0" />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Label Text="Quantities (in the same order as selected ingredients)" />
-            <Entry Text="{Binding Quantities}" Placeholder="E.g.: '0.5 0.5'" />
-
             <Button Text="Add Menu Item" 
                     Command="{Binding AddMenuItemCommand}" 
-                    BackgroundColor="LightSkyBlue"/>
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="White" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

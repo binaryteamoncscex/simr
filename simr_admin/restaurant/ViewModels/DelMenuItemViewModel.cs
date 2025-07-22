@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Storage;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace restaurant.ViewModels
 {
@@ -16,15 +17,21 @@ namespace restaurant.ViewModels
         private const string FirebaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
         private readonly FirebaseClient _firebaseClient = new FirebaseClient(FirebaseUrl);
         private string _userUid = Preferences.Get("uid", string.Empty);
+        private readonly INavigation _navigation;
 
         [ObservableProperty]
-        private ObservableCollection<MenuItem> _recipies = new();
+        private ObservableCollection<MenuItem> recipies = new();
 
         public IAsyncRelayCommand<MenuItem> DeleteMenuItemCommand { get; }
+        public IAsyncRelayCommand<MenuItem> EditMenuItemCommand { get; }
+        public ICommand AddMenuItem { get; }
 
-        public DelMenuItemViewModel()
+        public DelMenuItemViewModel(INavigation navigation)
         {
+            _navigation = navigation;
             DeleteMenuItemCommand = new AsyncRelayCommand<MenuItem>(DeleteMenuItemAsync);
+            EditMenuItemCommand = new AsyncRelayCommand<MenuItem>(EditMenuItemAsync);
+            AddMenuItem = new Command(async () => await _navigation.PushAsync(new AddMenuItem()));
         }
 
         public async Task LoadMenuItemsAsync()
@@ -39,7 +46,7 @@ namespace restaurant.ViewModels
                 .Child($"kitchen/{_userUid}/menu/list")
                 .OnceSingleAsync<dynamic>();
 
-            _recipies.Clear();
+            recipies.Clear();
 
             if (firebaseData == null)
             {
@@ -59,7 +66,7 @@ namespace restaurant.ViewModels
                         {
                             MenuItem menuItem = property.Value.ToObject<MenuItem>();
                             menuItem.FirebaseKey = property.Name;
-                            _recipies.Add(menuItem);
+                            recipies.Add(menuItem);
                         }
                     }
                 }
@@ -72,13 +79,9 @@ namespace restaurant.ViewModels
                         {
                             MenuItem menuItem = arr[i].ToObject<MenuItem>();
                             menuItem.FirebaseKey = i.ToString();
-                            _recipies.Add(menuItem);
+                            recipies.Add(menuItem);
                         }
                     }
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", "Unexpected data format.", "OK");
                 }
             }
             catch (System.Exception ex)
@@ -108,16 +111,7 @@ namespace restaurant.ViewModels
             if (firebaseData == null)
                 return;
 
-            JToken token;
-            try
-            {
-                token = JToken.FromObject(firebaseData);
-            }
-            catch (System.Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", $"Data format error: {ex.Message}", "OK");
-                return;
-            }
+            JToken token = JToken.FromObject(firebaseData);
 
             if (token.Type == JTokenType.Object)
             {
@@ -134,16 +128,6 @@ namespace restaurant.ViewModels
                     {
                         jArray[deleteIndex] = null;
                     }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("Error", "Invalid index.", "OK");
-                        return;
-                    }
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", "Invalid Firebase key format.", "OK");
-                    return;
                 }
                 var newList = jArray.ToObject<List<MenuItem>>();
                 await _firebaseClient
@@ -151,14 +135,17 @@ namespace restaurant.ViewModels
                     .Child("list")
                     .PutAsync(newList);
             }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "Unsupported data format for delete.", "OK");
-                return;
-            }
 
             await LoadMenuItemsAsync();
             await App.Current.MainPage.DisplayAlert("Success", "Menu item deleted.", "OK");
+        }
+
+        private async Task EditMenuItemAsync(MenuItem item)
+        {
+            if (item == null || string.IsNullOrWhiteSpace(item.FirebaseKey))
+                return;
+
+            await _navigation.PushAsync(new EditMenuItem(item.FirebaseKey, item));
         }
     }
 
@@ -169,5 +156,9 @@ namespace restaurant.ViewModels
         public string photo { get; set; }
         public string ingredients { get; set; }
         public string quantities { get; set; }
+        public string category { get; set; }
+        public string allergens { get; set; }
+        public string nutritional { get; set; }
+        public string price { get; set; }
     }
 }

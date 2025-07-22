@@ -4,6 +4,21 @@
         <name>SIMRAdmin</name>
     </assembly>
     <members>
+        <member name="T:restaurant.ViewModels.DashboardViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:restaurant.ViewModels.DashboardViewModel.MostOrderedIngredientsChart">
+            <inheritdoc cref="F:restaurant.ViewModels.DashboardViewModel.mostOrderedIngredientsChart"/>
+        </member>
+        <member name="P:restaurant.ViewModels.DashboardViewModel.MostOrderedDishesChart">
+            <inheritdoc cref="F:restaurant.ViewModels.DashboardViewModel.mostOrderedDishesChart"/>
+        </member>
+        <member name="P:restaurant.ViewModels.DashboardViewModel.IsRefreshing">
+            <inheritdoc cref="F:restaurant.ViewModels.DashboardViewModel.isRefreshing"/>
+        </member>
+        <member name="P:restaurant.ViewModels.DashboardViewModel.RestaurantName">
+            <inheritdoc cref="F:restaurant.ViewModels.DashboardViewModel.restaurantName"/>
+        </member>
         <member name="T:restaurant.ViewModels.DelCategoriesViewModel">
             <inheritdoc/>
         </member>
@@ -23,7 +38,61 @@
             <inheritdoc/>
         </member>
         <member name="P:restaurant.ViewModels.DelMenuItemViewModel.Recipies">
-            <inheritdoc cref="F:restaurant.ViewModels.DelMenuItemViewModel._recipies"/>
+            <inheritdoc cref="F:restaurant.ViewModels.DelMenuItemViewModel.recipies"/>
+        </member>
+        <member name="T:restaurant.ViewModels.EditMenuIngrViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.Name">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.name"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.Unit">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.unit"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.RestockThreshold">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.restockThreshold"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.SupplyQuantity">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.supplyQuantity"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.Days">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.days"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.Price">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.price"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.ProviderKeys">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.providerKeys"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuIngrViewModel.SelectedProvider">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuIngrViewModel.selectedProvider"/>
+        </member>
+        <member name="T:restaurant.ViewModels.EditMenuItemViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.Name">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.name"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.Photo">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.photo"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.Price">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.price"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.Categories">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.categories"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.SelectedCategory">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.selectedCategory"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.Allergens">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.allergens"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.NutritionalInfo">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.nutritionalInfo"/>
+        </member>
+        <member name="P:restaurant.ViewModels.EditMenuItemViewModel.IngredientsList">
+            <inheritdoc cref="F:restaurant.ViewModels.EditMenuItemViewModel.ingredientsList"/>
         </member>
         <member name="T:restaurant.ViewModels.IngrCommandsViewModel">
             <inheritdoc/>
@@ -163,17 +232,65 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MostOrderedIngredientsChart">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MostOrderedIngredientsChart" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MostOrderedDishesChart">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MostOrderedDishesChart" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RestaurantName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RestaurantName" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Categories">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Categories" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Ingredients">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Ingredients" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Recipies">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Recipies" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Unit">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Unit" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RestockThreshold">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RestockThreshold" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SupplyQuantity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SupplyQuantity" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Days">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Days" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Price" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProviderKeys">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProviderKeys" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedProvider">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedProvider" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Photo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Photo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCategory">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Allergens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Allergens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NutritionalInfo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NutritionalInfo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IngredientsList">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IngredientsList" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -181,17 +298,65 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MostOrderedIngredientsChart">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MostOrderedIngredientsChart" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MostOrderedDishesChart">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MostOrderedDishesChart" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RestaurantName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RestaurantName" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Categories">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Categories" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Ingredients">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Ingredients" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Recipies">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Recipies" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Unit">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Unit" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RestockThreshold">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RestockThreshold" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SupplyQuantity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SupplyQuantity" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Days">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Days" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Price" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProviderKeys">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProviderKeys" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedProvider">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedProvider" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Photo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Photo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCategory">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Allergens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Allergens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NutritionalInfo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NutritionalInfo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IngredientsList">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IngredientsList" generated properties.</summary>
         </member>
     </members>
 </doc>

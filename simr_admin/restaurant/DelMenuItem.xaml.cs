@@ -8,7 +8,7 @@ public partial class DelMenuItem : ContentPage
     public DelMenuItem()
 	{
 		InitializeComponent();
-        _viewModel = new DelMenuItemViewModel();
+        _viewModel = new DelMenuItemViewModel(Navigation);
         BindingContext = _viewModel;
     }
     protected override async void OnAppearing()

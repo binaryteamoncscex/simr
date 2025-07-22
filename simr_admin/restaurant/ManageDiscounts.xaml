@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="restaurant.ManageDiscounts"
+             Title="Manage Discounts"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Padding="20" Spacing="25" VerticalOptions="Center">
+        <Button x:Name="StartButton"
+                Text="Activate Happy Hour"
+                TextColor="White"
+                BackgroundColor="Green"
+                Command="{Binding ShowPopupCommand}"
+                IsVisible="{Binding IsNotActive}" />
+
+        <Button x:Name="StopButton"
+                Text="Deactivate Happy Hour"
+                TextColor="White"
+                BackgroundColor="Red"
+                Command="{Binding DeactivateCommand}"
+                IsVisible="{Binding IsActive}" />
+
+        <Button Text="Set Fidelity Card"
+                TextColor="White"
+                BackgroundColor="LightSkyBlue"
+                Command="{Binding ShowFidelityPopupCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,24 +1,25 @@
 ﻿using restaurant.ViewModels;
+using Microsoft.Maui.Controls;
 
 namespace restaurant
 {
     public partial class Dashboard : ContentPage
     {
+        private DashboardViewModel _viewModel;
+
         public Dashboard()
         {
             InitializeComponent();
             Padding = new Thickness(0, 30, 0, 0);
-            NavigationPage.SetHasBackButton(this, false);
-            NavigationPage.SetBackButtonTitle(this, "");
-            BindingContext = new DashboardViewModel(Navigation);
+            _viewModel = new DashboardViewModel(Navigation);
+            BindingContext = _viewModel;
         }
-        protected override void OnAppearing()
+
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             NavigationPage.SetHasBackButton(this, false);
-            NavigationPage.SetBackButtonTitle(this, "");
+            await _viewModel.LoadStatistics();
         }
     }
-
-
 }

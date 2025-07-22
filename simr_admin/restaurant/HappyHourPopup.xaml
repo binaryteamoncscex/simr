@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="restaurant.Views.HappyHourPopup"
+    BackgroundColor="White">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Set Happy Hour"
+               FontSize="20"
+               HorizontalOptions="Center" />
+
+        <Label Text="Start Hour" />
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+            <Stepper x:Name="StartHourStepper" Minimum="1" Maximum="24" Increment="1" Value="1" WidthRequest="120"/>
+            <Entry x:Name="StartHourEntry" WidthRequest="60" Keyboard="Numeric" Text="01" />
+        </HorizontalStackLayout>
+
+        <Label Text="End Hour" />
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+            <Stepper x:Name="EndHourStepper" Minimum="1" Maximum="24" Increment="1" Value="1" WidthRequest="120"/>
+            <Entry x:Name="EndHourEntry" WidthRequest="60" Keyboard="Numeric" Text="01" />
+        </HorizontalStackLayout>
+
+        <Label Text="Discount (%)" />
+        <Entry x:Name="DiscountEntry"
+               Keyboard="Numeric"
+               Placeholder="e.g. 15" />
+
+        <Button Text="Apply"
+                BackgroundColor="Green"
+                TextColor="White"
+                Clicked="OnApplyClicked" />
+    </VerticalStackLayout>
+</toolkit:Popup>

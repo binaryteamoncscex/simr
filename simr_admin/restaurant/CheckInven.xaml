@@ -7,8 +7,6 @@
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ScrollView>
             <VerticalStackLayout Padding="10" Spacing="10">
-                <Label Text="Inventory" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
-
                 <CollectionView ItemsSource="{Binding Ingredients}"
                                 SelectionMode="None"
                                 BackgroundColor="Transparent">
@@ -24,8 +22,7 @@
                                            FontSize="18"
                                            FontAttributes="Bold"
                                            Grid.Row="0" Grid.Column="0"/>
-                                    <Label x:Name="DaysLabel"
-                                           Text="{Binding DaysLeft, StringFormat='Exp. in {0} days'}"
+                                    <Label Text="{Binding DaysLeft, StringFormat='Exp. in {0} days'}"
                                            FontSize="14"
                                            TextColor="DarkGreen"
                                            Grid.Row="1" Grid.Column="0">
@@ -56,15 +53,40 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="{Binding Temperature}"
-                       FontSize="16"
-                       TextColor="DarkBlue"
-                       HorizontalOptions="Center" />
+                <Grid ColumnDefinitions="*,Auto,Auto"
+                      RowDefinitions="Auto,Auto,Auto,Auto"
+                      Padding="10"
+                      ColumnSpacing="30"
+                      BackgroundColor="#f2f2f2"
+                      Margin="0,20,0,0">
 
-                <Label Text="{Binding Humidity}"
-                       FontSize="16"
-                       TextColor="DarkBlue"
-                       HorizontalOptions="Center" />
+                    <Label Text="" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="Temperature"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,5"
+                           Grid.Row="0" Grid.Column="1" />
+                    <Label Text="Humidity"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,5"
+                           Grid.Row="0" Grid.Column="2" />
+
+                    <Label Text="Pantry" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" />
+                    <Label Text="{Binding PantryTemperature}" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" />
+                    <Label Text="{Binding PantryHumidity}" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" />
+
+                    <Label Text="Fridge" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" />
+                    <Label Text="{Binding FridgeTemperature}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" />
+                    <Label Text="{Binding FridgeHumidity}" Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" />
+
+                    <Label Text="Freezer" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" />
+                    <Label Text="{Binding FreezerTemperature}" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" />
+                    <Label Text="{Binding FreezerHumidity}" Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" />
+                </Grid>
+
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>

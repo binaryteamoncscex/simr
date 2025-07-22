@@ -4,7 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="restaurant.CookOrders"
              x:Name="page"
-             Title="Food orders">
+             Title="Food Orders">
 
     <ContentPage.Resources>
         <Style x:Key="ArrowLabelStyle" TargetType="Label">

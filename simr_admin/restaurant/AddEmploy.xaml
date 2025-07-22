@@ -1,13 +1,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="restaurant.AddEmploy"
-             Title="Add employees">
+             Title="Add Employees">
     <ScrollView>
         <Grid BackgroundColor="White"
               Padding="20"
               RowSpacing="20"
               VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -39,7 +40,19 @@
                     SelectedItem="{Binding Type, Mode=TwoWay}"
                     HorizontalOptions="FillAndExpand" />
 
-            <Button Grid.Row="4"
+            <Entry Grid.Row="4"
+                   Placeholder="Norm (hours/month)"
+                   Keyboard="Numeric"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding Norm, Mode=TwoWay}" />
+
+            <Entry Grid.Row="5"
+                   Placeholder="Wage per Hour"
+                   Keyboard="Numeric"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding WagePerHour, Mode=TwoWay}" />
+
+            <Button Grid.Row="6"
                     Margin="0,10"
                     BackgroundColor="LightSkyBlue"
                     HorizontalOptions="FillAndExpand"

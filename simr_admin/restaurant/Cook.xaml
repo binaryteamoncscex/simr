@@ -13,7 +13,25 @@
                    FontSize="24"
                    TextColor="Black"
                    HorizontalOptions="Center" />
-
+            <Border Background="LightSkyBlue" StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5"/>
+                </Border.StrokeShape>
+                <Grid Padding="10" ColumnDefinitions="Auto,*" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/88/88383.png"
+                           HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Label Text="Clocking"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Margin="40,0,0,0" />
+                </Grid>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClockingBtn}" />
+                </Border.GestureRecognizers>
+            </Border>
             <Border Background="LightSkyBlue" StrokeThickness="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="5"/>

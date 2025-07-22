@@ -4,19 +4,40 @@
              x:Class="restaurant.AddMenuIngr"
              Title="Add Menu Ingredient">
 
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="Ingredient Name" FontAttributes="Bold" />
         <Entry Text="{Binding Name}" Placeholder="Ingredient Name"/>
+
+        <Label Text="Measurement Unit" FontAttributes="Bold" />
         <Entry Text="{Binding Unit}" Placeholder="Measurement Unit"/>
+
+        <Label Text="Restock Threshold" FontAttributes="Bold" />
         <Entry Text="{Binding RestockThreshold}" Placeholder="Restock Threshold" Keyboard="Numeric"/>
+
+        <Label Text="Supply Quantity" FontAttributes="Bold" />
         <Entry Text="{Binding SupplyQuantity}" Placeholder="Supply Quantity" Keyboard="Numeric"/>
+
+        <Label Text="Validity Period (Days)" FontAttributes="Bold" />
         <Entry Text="{Binding Days}" Placeholder="Validity Period" Keyboard="Numeric"/>
+
+        <Label Text="Price per Unit" FontAttributes="Bold" />
         <Entry Text="{Binding Price}" Placeholder="Price per Unit" Keyboard="Numeric"/>
-        <Picker Title="Select Provider"
-                ItemsSource="{Binding ProviderKeys}"
-                SelectedItem="{Binding SelectedProvider}" />
+
+        <Label Text="Provider" FontAttributes="Bold" />
+        <Picker ItemsSource="{Binding ProviderKeys}"
+                SelectedItem="{Binding SelectedProvider}">
+            <Picker.Title>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android" Value="Select Provider" />
+                    <On Platform="iOS" Value="Select Provider" />
+                </OnPlatform>
+            </Picker.Title>
+        </Picker>
 
         <Button Text="Add Ingredient"
                 BackgroundColor="LightSkyBlue"
                 Command="{Binding AddIngredientCommand}" />
+
     </VerticalStackLayout>
 </ContentPage>

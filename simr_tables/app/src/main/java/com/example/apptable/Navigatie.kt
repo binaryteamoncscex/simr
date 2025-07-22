@@ -10,6 +10,10 @@ import androidx.navigation.compose.composable
 import com.example.apptable.PentruAplicatiaInSine.HomePage
 import com.example.apptable.PentruAplicatiaInSine.LoginScreen
 import com.example.apptable.PentruAplicatiaInSine.MeniuScreen
+import com.example.apptable.PentruAplicatiaInSine.PreComandaScreen
+import com.example.apptable.PentruAplicatiaInSine.OrderCancellationScreen
+import com.example.apptable.PentruAplicatiaInSine.RedeemCodeScreen
+import com.example.apptable.PentruAplicatiaInSine.FidelityCardScreen // <-- Adaugă acest import!
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -25,17 +29,29 @@ class Navigatie : ComponentActivity() {
             val startDestination = if (rememberMe && auth.currentUser != null) "home" else "login"
 
             val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = startDestination) {
-                        composable("login") { LoginScreen(navController) }
-                        composable("home") { HomePage(navController) }
-                        composable("meniu/{masaId}") { backStackEntry ->
-                            val masaId = backStackEntry.arguments?.getString("masaId") ?: "1"
-                            MeniuScreen(navController, masaId)
-                        }
-                    }
-
+            NavHost(navController = navController, startDestination = startDestination) {
+                composable("login") { LoginScreen(navController) }
+                composable("home") { HomePage(navController) }
+                composable("precomanda/{masaId}") { backStackEntry ->
+                    val masaId = backStackEntry.arguments?.getString("masaId") ?: "1"
+                    PreComandaScreen(navController, masaId)
+                }
+                composable("meniu/{masaId}") { backStackEntry ->
+                    val masaId = backStackEntry.arguments?.getString("masaId") ?: "1"
+                    MeniuScreen(navController, masaId)
+                }
+                composable("order_cancellation/{tableId}") { backStackEntry ->
+                    val tableId = backStackEntry.arguments?.getString("tableId") ?: "1"
+                    OrderCancellationScreen(navController = navController, tableId = tableId)
+                }
+                composable("redeem_code") {
+                    RedeemCodeScreen(navController = navController)
+                }
+                // MODIFICARE AICI: Adaugă ruta pentru FidelityCardScreen
+                composable("fidelity_screen") {
+                    FidelityCardScreen(navController = navController)
                 }
             }
         }
-
-
+    }
+}

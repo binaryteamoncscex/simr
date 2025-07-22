@@ -1,4 +1,4 @@
-﻿using Firebase.Auth.Providers;
+﻿ using Firebase.Auth.Providers;
 using Firebase.Auth;
 using Firebase.Database;
 using System;
@@ -21,7 +21,10 @@ namespace restaurant.ViewModels
         private string _password;
         private string _name;
         private string _type;
+        private string _norm;
+        private string _wagePerHour;
         private string _owner = Preferences.Get("uid", string.Empty);
+
         public ObservableCollection<string> Roles { get; } = new ObservableCollection<string> { "Cook", "Waiter" };
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -31,7 +34,7 @@ namespace restaurant.ViewModels
             set
             {
                 _email = value;
-                RaisePropertyChanged("Email");
+                RaisePropertyChanged(nameof(Email));
             }
         }
 
@@ -41,7 +44,7 @@ namespace restaurant.ViewModels
             set
             {
                 _password = value;
-                RaisePropertyChanged("Password");
+                RaisePropertyChanged(nameof(Password));
             }
         }
 
@@ -51,7 +54,7 @@ namespace restaurant.ViewModels
             set
             {
                 _name = value;
-                RaisePropertyChanged("Name");
+                RaisePropertyChanged(nameof(Name));
             }
         }
 
@@ -61,9 +64,30 @@ namespace restaurant.ViewModels
             set
             {
                 _type = value;
-                RaisePropertyChanged("Type");
+                RaisePropertyChanged(nameof(Type));
             }
         }
+
+        public string Norm
+        {
+            get => _norm;
+            set
+            {
+                _norm = value;
+                RaisePropertyChanged(nameof(Norm));
+            }
+        }
+
+        public string WagePerHour
+        {
+            get => _wagePerHour;
+            set
+            {
+                _wagePerHour = value;
+                RaisePropertyChanged(nameof(WagePerHour));
+            }
+        }
+
         public Command RegisterUser { get; }
 
         public AddEmployViewModel()
@@ -90,17 +114,19 @@ namespace restaurant.ViewModels
                 }
 
                 string ownerEmail = currentUser.Info.Email;
-                string ownerPassword = Preferences.Get("SavedPassword", string.Empty);     
+                string ownerPassword = Preferences.Get("SavedPassword", string.Empty);
 
                 if (string.IsNullOrEmpty(ownerPassword))
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Owner password not found. Please re-login.", "OK");
                     return;
                 }
-                if (string.IsNullOrEmpty(ownerEmail)) {
+                if (string.IsNullOrEmpty(ownerEmail))
+                {
                     await Application.Current.MainPage.DisplayAlert("Error", "Owner email not found. Please re-login.", "OK");
                     return;
                 }
+
                 var auth = await _authClient.CreateUserWithEmailAndPasswordAsync(Email, Password);
                 string uid = auth.User.Uid;
 
@@ -110,7 +136,9 @@ namespace restaurant.ViewModels
                     {
                         Name = Name,
                         Type = _type,
-                        Owner = _owner      
+                        Owner = _owner,
+                        Norm = Norm,
+                        WagePerHour = WagePerHour
                     };
 
                     await _firebaseClient.Child("users").Child(uid).PutAsync(userData);
@@ -122,6 +150,9 @@ namespace restaurant.ViewModels
                     Password = string.Empty;
                     Name = string.Empty;
                     Type = string.Empty;
+                    Norm = string.Empty;
+                    WagePerHour = string.Empty;
+
                     await Application.Current.MainPage.Navigation.PopAsync();
                 }
             }

@@ -19,7 +19,7 @@ namespace restaurant.ViewModels
         private readonly FirebaseClient _firebaseClient;
         private readonly string _userId;
         private readonly string _databaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
-        private const string SendGridApiKey = "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";
+        private const string SendGridApiKey = "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";
         private const string SenderEmail = "no-reply@management-restaurant.eu";
         private const string SenderName = "SIMR Orders";
 
@@ -53,7 +53,6 @@ namespace restaurant.ViewModels
         {
             try
             {
-                // Preluăm moneda din baza de date
                 var currency = await _firebaseClient
                     .Child($"users/{_userId}/currency")
                     .OnceSingleAsync<string>() ?? "RON";
@@ -85,8 +84,6 @@ namespace restaurant.ViewModels
 
                     if (!string.Equals(order.Status, "requested", StringComparison.OrdinalIgnoreCase))
                         continue;
-
-                    // Adăugăm moneda la preț
                     if (!string.IsNullOrEmpty(order.Price))
                         order.Price = $"{order.Price} {currency}";
 

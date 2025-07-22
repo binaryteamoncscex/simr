@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="restaurant.AddCategories"
-             Title="Add Categories">
+             Title="Add Menu Category">
+
     <VerticalStackLayout Spacing="20" Padding="20">
+
+        <Label Text="Category Name" FontAttributes="Bold" />
         <Entry Placeholder="Category Name"
                Text="{Binding CategoryName}"
                FontSize="Small"
@@ -15,5 +18,6 @@
                 TextColor="White"
                 FontSize="Small"
                 HorizontalOptions="FillAndExpand" />
+
     </VerticalStackLayout>
 </ContentPage>

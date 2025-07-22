@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.ClockingEmpl"
+             Title="Clocking Employees">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Norm (hours/month):" FontAttributes="Bold"/>
+            <Label Text="{Binding Norm}" />
+
+            <Label Text="Wage per Hour:" FontAttributes="Bold"/>
+            <Label Text="{Binding WagePerHour}" />
+
+            <Label Text="Worked Hours:" FontAttributes="Bold"/>
+            <Label Text="{Binding Hours}" />
+
+            <Label Text="Wage this Month:" FontAttributes="Bold"/>
+            <Label Text="{Binding WageForMonth}" />
+
+            <Button Text="{Binding AtWorkButtonText}"
+                    BackgroundColor="{Binding AtWorkButtonColor}"
+                    CornerRadius="20"
+                    Command="{Binding ToggleClockingCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

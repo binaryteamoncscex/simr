@@ -93,6 +93,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = restaurant.CheckInven.xaml
 build_metadata.AdditionalFiles.TargetPath = CheckInven.xaml
 build_metadata.AdditionalFiles.RelativePath = CheckInven.xaml
 
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ClockingEmpl.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ClockingEmpl.xaml
+build_metadata.AdditionalFiles.TargetPath = ClockingEmpl.xaml
+build_metadata.AdditionalFiles.RelativePath = ClockingEmpl.xaml
+
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/Cook.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Cook.xaml
@@ -153,11 +159,41 @@ build_metadata.AdditionalFiles.ManifestResourceName = restaurant.DelMenuItem.xam
 build_metadata.AdditionalFiles.TargetPath = DelMenuItem.xaml
 build_metadata.AdditionalFiles.RelativePath = DelMenuItem.xaml
 
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/EditIngrProv.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.EditIngrProv.xaml
+build_metadata.AdditionalFiles.TargetPath = EditIngrProv.xaml
+build_metadata.AdditionalFiles.RelativePath = EditIngrProv.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/EditMenuIngr.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.EditMenuIngr.xaml
+build_metadata.AdditionalFiles.TargetPath = EditMenuIngr.xaml
+build_metadata.AdditionalFiles.RelativePath = EditMenuIngr.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/EditMenuItem.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.EditMenuItem.xaml
+build_metadata.AdditionalFiles.TargetPath = EditMenuItem.xaml
+build_metadata.AdditionalFiles.RelativePath = EditMenuItem.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/FidelityCardPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.FidelityCardPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = FidelityCardPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = FidelityCardPopup.xaml
+
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ForgotPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ForgotPage.xaml
 build_metadata.AdditionalFiles.TargetPath = ForgotPage.xaml
 build_metadata.AdditionalFiles.RelativePath = ForgotPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/HappyHourPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.HappyHourPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = HappyHourPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = HappyHourPopup.xaml
 
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/IngrCommands.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -182,6 +218,30 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ManageClocking.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ManageClocking.xaml
+build_metadata.AdditionalFiles.TargetPath = ManageClocking.xaml
+build_metadata.AdditionalFiles.RelativePath = ManageClocking.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ManageDiscounts.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ManageDiscounts.xaml
+build_metadata.AdditionalFiles.TargetPath = ManageDiscounts.xaml
+build_metadata.AdditionalFiles.RelativePath = ManageDiscounts.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ManageEmployees.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ManageEmployees.xaml
+build_metadata.AdditionalFiles.TargetPath = ManageEmployees.xaml
+build_metadata.AdditionalFiles.RelativePath = ManageEmployees.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/ManageTables.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.ManageTables.xaml
+build_metadata.AdditionalFiles.TargetPath = ManageTables.xaml
+build_metadata.AdditionalFiles.RelativePath = ManageTables.xaml
 
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/MyAccCoWa.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -219,14 +279,14 @@ build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Setup.xaml
 build_metadata.AdditionalFiles.TargetPath = Setup.xaml
 build_metadata.AdditionalFiles.RelativePath = Setup.xaml
 
-[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/Statistics.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Statistics.xaml
-build_metadata.AdditionalFiles.TargetPath = Statistics.xaml
-build_metadata.AdditionalFiles.RelativePath = Statistics.xaml
-
 [D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/Waiter.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = restaurant.Waiter.xaml
 build_metadata.AdditionalFiles.TargetPath = Waiter.xaml
 build_metadata.AdditionalFiles.RelativePath = Waiter.xaml
+
+[D:/Scoala/24-25/Info/CEX GL/Robotica/simr_admin/restaurant/WaiterOrders.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = restaurant.WaiterOrders.xaml
+build_metadata.AdditionalFiles.TargetPath = WaiterOrders.xaml
+build_metadata.AdditionalFiles.RelativePath = WaiterOrders.xaml

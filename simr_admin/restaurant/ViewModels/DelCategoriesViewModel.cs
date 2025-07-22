@@ -6,6 +6,7 @@ using Firebase.Database.Query;
 using Microsoft.Maui.Storage;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace restaurant.ViewModels
 {
@@ -17,12 +18,13 @@ namespace restaurant.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<CategoryItem> categories = new();
-
+        public ICommand AddMenuCat { get; }
         public IAsyncRelayCommand<CategoryItem> DeleteCategoryCommand { get; }
 
-        public DelCategoriesViewModel()
+        public DelCategoriesViewModel(INavigation navigation)
         {
             DeleteCategoryCommand = new AsyncRelayCommand<CategoryItem>(DeleteCategoryAsync);
+            AddMenuCat = new Command(async () => await navigation.PushAsync(new AddCategories()));
             LoadCategoriesAsync();
         }
 

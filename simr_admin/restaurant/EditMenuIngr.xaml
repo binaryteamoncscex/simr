@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.EditMenuIngr"
+             Title="Edit Menu Ingredient">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Ingredient Name" FontAttributes="Bold" />
+            <Entry Text="{Binding Name}" Placeholder="Ingredient Name" IsReadOnly="True"/>
+
+            <Label Text="Measurement Unit" FontAttributes="Bold" />
+            <Entry Text="{Binding Unit}" Placeholder="Measurement Unit"/>
+
+            <Label Text="Restock Threshold" FontAttributes="Bold" />
+            <Entry Text="{Binding RestockThreshold}" Placeholder="Restock Threshold" Keyboard="Numeric"/>
+
+            <Label Text="Supply Quantity" FontAttributes="Bold" />
+            <Entry Text="{Binding SupplyQuantity}" Placeholder="Supply Quantity" Keyboard="Numeric"/>
+
+            <Label Text="Validity Period (Days)" FontAttributes="Bold" />
+            <Entry Text="{Binding Days}" Placeholder="Validity Period" Keyboard="Numeric"/>
+
+            <Label Text="Price per Unit" FontAttributes="Bold" />
+            <Entry Text="{Binding Price}" Placeholder="Price per Unit" Keyboard="Numeric"/>
+
+            <Label Text="Provider"
+                   FontAttributes="Bold"/>
+
+            <Picker ItemsSource="{Binding ProviderKeys}"
+                    SelectedItem="{Binding SelectedProvider}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select Provider" />
+                        <On Platform="iOS" Value="Select Provider" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Button Text="Save Changes"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="White"
+                    Command="{Binding SaveCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

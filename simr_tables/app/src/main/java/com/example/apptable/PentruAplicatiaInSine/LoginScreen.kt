@@ -41,7 +41,7 @@ fun LoginScreen(navController: NavController) {
     var rememberMe by remember { mutableStateOf(isRemembered) }
     var isLoading by remember { mutableStateOf(false) }
 
-    // Define colors
+
     val deepSkyBlue = Color(0xFF00BFFF)
     val darkBlue = Color(0xFF003366)
     val white = Color.White

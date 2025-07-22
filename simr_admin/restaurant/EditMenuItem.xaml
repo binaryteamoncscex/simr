@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="restaurant.EditMenuItem"
+             Title="Edit Menu Item">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Name" FontAttributes="Bold"/>
+            <Entry Text="{Binding Name}" IsReadOnly="True"/>
+
+            <Label Text="Price" FontAttributes="Bold"/>
+            <Entry Text="{Binding Price}" Keyboard="Numeric"/>
+
+            <Label Text="Photo Link" FontAttributes="Bold"/>
+            <Entry Text="{Binding Photo}"/>
+
+            <Label Text="Category" FontAttributes="Bold"/>
+            <Picker ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectedCategory}">
+                <Picker.Title>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Select a category" />
+                        <On Platform="iOS" Value="Select a category" />
+                    </OnPlatform>
+                </Picker.Title>
+            </Picker>
+
+            <Label Text="Allergens Info" FontAttributes="Bold"/>
+            <Entry Text="{Binding Allergens}"/>
+
+            <Label Text="Nutritional Info" FontAttributes="Bold"/>
+            <Entry Text="{Binding NutritionalInfo}"/>
+
+            <Label Text="Edit Ingredients and Quantities" FontAttributes="Bold"/>
+            <CollectionView ItemsSource="{Binding IngredientsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="Auto,*,Auto,Auto">
+                            <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" Color="LightSkyBlue"/>
+                            <Label Grid.Column="1" Text="{Binding name}" VerticalOptions="Center"/>
+                            <Entry Grid.Column="2"
+                                   WidthRequest="60"
+                                   Text="{Binding EnteredQuantity}"
+                                   Keyboard="Numeric"
+                                   IsEnabled="{Binding IsSelected}"/>
+                            <Label Grid.Column="3" Text="{Binding unit}" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Save Changes"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

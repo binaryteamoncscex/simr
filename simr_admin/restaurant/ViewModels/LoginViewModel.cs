@@ -2,11 +2,11 @@
 using Firebase.Auth.Providers;
 using Firebase.Database;
 using Firebase.Database.Query;
+using Microsoft.Maui.Storage;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
 
 namespace restaurant.ViewModels
 {
@@ -15,8 +15,10 @@ namespace restaurant.ViewModels
         public string webApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
+
         private string userName, userPassword;
         private bool rememberMe;
+
         private FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
 
         public Command RegisterBtn { get; }
@@ -32,6 +34,7 @@ namespace restaurant.ViewModels
                 RaisePropertyChanged("UserName");
             }
         }
+
         public string UserPassword
         {
             get => userPassword;
@@ -41,23 +44,25 @@ namespace restaurant.ViewModels
                 RaisePropertyChanged("UserPassword");
             }
         }
+
         public bool RememberMe
         {
-            get => true;
+            get => rememberMe;
             set
             {
+                rememberMe = value;
                 RaisePropertyChanged("RememberMe");
             }
         }
 
-        private void RaisePropertyChanged(string v)
+        private void RaisePropertyChanged(string propName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         public LoginViewModel(INavigation navigation)
         {
-            this._navigation = navigation;
+            _navigation = navigation;
             RegisterBtn = new Command(RegisterBtnTappedAsync);
             LoginBtn = new Command(LoginBtnTappedAsync);
             ForgotBtn = new Command(ForgotBtnTappedAsync);
@@ -65,17 +70,19 @@ namespace restaurant.ViewModels
 
         private async void RegisterBtnTappedAsync()
         {
-            await this._navigation.PushAsync(new RegisterPage());
+            await _navigation.PushAsync(new RegisterPage());
         }
+
         private async void ForgotBtnTappedAsync()
         {
-            await this._navigation.PushAsync(new ForgotPage());
+            await _navigation.PushAsync(new ForgotPage());
         }
 
         private async void LoginBtnTappedAsync(object obj)
         {
             await AuthenticateAndNavigate(UserName, UserPassword);
         }
+
         private async Task AuthenticateAndNavigate(string username, string password)
         {
             var authConfig = new FirebaseAuthConfig
@@ -84,30 +91,37 @@ namespace restaurant.ViewModels
                 AuthDomain = "restaurant-3e115.firebaseapp.com",
                 Providers = new FirebaseAuthProvider[]
                 {
-            new EmailProvider()
+                    new EmailProvider()
                 }
             };
+
             var authProvider = new FirebaseAuthClient(authConfig);
+
             try
             {
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(username, password);
                 var uid = auth.User.Uid;
                 var token = await auth.User.GetIdTokenAsync();
+
                 Preferences.Set("uid", uid);
                 Preferences.Set("SavedUsername", username);
                 Preferences.Set("SavedPassword", password);
+
                 if (RememberMe)
                     Preferences.Set("RememberMe", true);
                 else
                     Preferences.Remove("RememberMe");
+
                 var firebaseClient = new FirebaseClient(
                     "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/",
                     new FirebaseOptions
                     {
                         AuthTokenAsyncFactory = () => Task.FromResult(token)
                     });
+
                 var userData = await firebaseClient.Child("users").Child(uid).OnceSingleAsync<dynamic>();
                 string userType = userData?.Type ?? "unknown";
+
                 if (userType == "owner")
                 {
                     var setupData = await firebaseClient.Child("users").Child(uid).Child("setup").OnceSingleAsync<dynamic>();
@@ -129,11 +143,37 @@ namespace restaurant.ViewModels
                     await App.Current.MainPage.DisplayAlert("Alert", "User type not recognized!", "OK");
                 }
             }
+            catch (FirebaseAuthException ex)
+            {
+                string message;
+
+                if (ex.Message.Contains("INVALID_LOGIN_CREDENTIALS"))
+                {
+                    message = "Incorrect email or password.";
+                }
+                else if (ex.Reason == AuthErrorReason.InvalidEmailAddress)
+                {
+                    message = "The email address format is invalid.";
+                }
+                else if (ex.Reason == AuthErrorReason.UserDisabled)
+                {
+                    message = "This user account has been disabled.";
+                }
+                else if (ex.Reason == AuthErrorReason.TooManyAttemptsTryLater)
+                {
+                    message = "Too many attempts. Please try again later.";
+                }
+                else
+                {
+                    message = $"Authentication failed: {ex.Message}";
+                }
+
+                await App.Current.MainPage.DisplayAlert("Login Error", message, "OK");
+            }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Unexpected Error", ex.Message, "OK");
             }
         }
-
     }
 }

@@ -19,6 +19,7 @@ namespace restaurant.ViewModels
         public Command FoodOrdersBtn { get; }
         public Command MenuRecipiesBtn { get; }
         public Command MyAccountCommand { get; }
+        public Command ClockingBtn { get; }
 
         private string _userId;
         private string _welcomeMessage;
@@ -37,6 +38,7 @@ namespace restaurant.ViewModels
             SignOutBtn = new Command(SignOutBtnTappedAsync);
             FoodOrdersBtn = new Command(FoodOrdersBtnTappedAsync);
             MenuRecipiesBtn = new Command(MenuRecipiesBtnTappedAsync);
+            ClockingBtn = new Command(async () => await _navigation.PushAsync(new ClockingEmpl()));
             MyAccountCommand = new Command(async () => await _navigation.PushAsync(new MyAccCoWa()));
             LoadUserData();
             _navigation = navigation;
@@ -80,22 +82,13 @@ namespace restaurant.ViewModels
         }
         private async void SignOutBtnTappedAsync(object obj)
         {
-            var authConfig = new FirebaseAuthConfig
-            {
-                ApiKey = WebApiKey,
-                AuthDomain = "restaurant-3e115.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[]
-                {
-            new EmailProvider()
-                }
-            };
-            var authProvider = new FirebaseAuthClient(authConfig);
             try
             {
-                authProvider.SignOut();
                 Preferences.Remove("SavedUsername");
                 Preferences.Remove("SavedPassword");
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Preferences.Remove("uid");
+                Preferences.Remove("RememberMe");
+                Application.Current.MainPage = new NavigationPage(new IntroPage(isFirstLaunch: false, rememberMe: false));
             }
             catch (Exception ex)
             {
