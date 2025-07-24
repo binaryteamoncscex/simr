@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SIMRAdmin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.0+2f867837bbf53ab3c756b31b43e20ec0f2b737fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.0+6088fc5f641eca5156aef4cad3f674b533e56366")]
 [assembly: System.Reflection.AssemblyProductAttribute("SIMRAdmin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SIMR Admin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.0.0.0")]

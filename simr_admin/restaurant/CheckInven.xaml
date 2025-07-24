@@ -54,7 +54,7 @@
                 </CollectionView>
 
                 <Grid ColumnDefinitions="*,Auto,Auto"
-                      RowDefinitions="Auto,Auto,Auto,Auto"
+                      RowDefinitions="Auto,Auto,Auto"
                       Padding="10"
                       ColumnSpacing="30"
                       BackgroundColor="#f2f2f2"
@@ -81,12 +81,14 @@
                     <Label Text="Fridge" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" />
                     <Label Text="{Binding FridgeTemperature}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" />
                     <Label Text="{Binding FridgeHumidity}" Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" />
-
-                    <Label Text="Freezer" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" />
-                    <Label Text="{Binding FreezerTemperature}" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" />
-                    <Label Text="{Binding FreezerHumidity}" Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" />
                 </Grid>
 
+                <Label Text="{Binding GasStatusText}"
+                       TextColor="{Binding GasStatusColor}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Margin="0,10,0,0"/>
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>

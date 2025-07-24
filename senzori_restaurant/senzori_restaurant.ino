@@ -21,6 +21,7 @@ Preferences prefs;
 WebServer server(80);
 
 unsigned long sendDataPrevMillis = 0;
+String userID = "";
 
 const char* htmlForm = R"rawliteral(
 <!DOCTYPE html>
@@ -89,25 +90,41 @@ void connectToWiFi() {
     Serial.print(".");
     retries++;
   }
+
   if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("");
-    Serial.println("Conexiune WiFi reușită!");
+    Serial.println("\nConexiune WiFi reușită!");
     Serial.print("IP-ul este: ");
     Serial.println(WiFi.localIP());
+
     Serial.println("Mă conectez la Firebase...");
     config.database_url = FIREBASE_HOST;
     config.api_key = FIREBASE_AUTH;
     auth.user.email = email.c_str();
     auth.user.password = fpass.c_str();
+
     Firebase.begin(&config, &auth);
     Firebase.reconnectWiFi(true);
-    Serial.println("Firebase a pornit.");
+
+    unsigned long start = millis();
+    while (!Firebase.ready() && millis() - start < 10000) {
+      Serial.print(".");
+      delay(500);
+    }
+
+    if (Firebase.ready()) {
+      userID = auth.token.uid.c_str();
+      Serial.println("\nFirebase conectat!");
+      Serial.print("UID-ul utilizatorului: ");
+      Serial.println(userID);
+    } else {
+      Serial.println("\nNu s-a reușit conectarea la Firebase!");
+    }
   } else {
-    Serial.println("");
-    Serial.println("Nu am reușit să mă conectez la WiFi!");
+    Serial.println("\nNu am reușit să mă conectez la WiFi!");
     startConfigPortal();
   }
 }
+
 
 void setup() {
   Serial.begin(115200);

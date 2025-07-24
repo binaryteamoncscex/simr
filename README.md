@@ -1,181 +1,168 @@
-# 📄 Documentație tehnică - Sistem Inteligent de Management al Restaurantului
+# Documentație tehnică - Sistem Inteligent de Management al Restaurantului (SIMR)
 
-## 📌 Descrierea problemei
+## Descrierea problemei
 
-Restaurantele se confruntă frecvent cu provocări legate de gestionarea eficientă a comenzilor și a stocurilor, ceea ce duce la risipă alimentară semnificativă. Această risipă nu doar că afectează profitabilitatea afacerii, dar contribuie și la probleme de mediu, precum emisiile de gaze cu efect de seră generate de alimentele irosite. În plus, lipsa unei comunicări eficiente între personalul restaurantului și clienți poate duce la erori în comenzi și la o experiență nesatisfăcătoare pentru consumatori.
+În industria HoReCa, procesele de gestionare a comenzilor, ingredientelor, personalului și interacțiunii cu clienții sunt în continuare efectuate în mare parte manual, ceea ce duce la:
 
-## 💡 Descrierea soluției propuse
+- Întârzieri în procesarea comenzilor și livrării acestora.
+- Erori umane în calcularea stocurilor și rețetelor.
+- Lipsa transparenței în monitorizarea consumului și profitabilității.
+- Costuri suplimentare datorate risipelor alimentare și aprovizionării haotice.
+- Experiență deficitară pentru client din cauza timpilor mari de așteptare și lipsei digitalizării.
 
-SIMR este un sistem integrat care combină aplicații software și componente hardware pentru a optimiza gestionarea comenzilor și a stocurilor într-un restaurant. Soluția include:
+Aceste probleme afectează profitabilitatea, satisfacția clientului și calitatea serviciilor.
 
-- O aplicație destinată clienților, dezvoltată în Kotlin, care permite vizualizarea meniului și plasarea comenzilor personalizate.
-- O aplicație pentru manageri, bucătari și chelneri, realizată în C#, care facilitează gestionarea comenzilor și monitorizarea stocurilor în timp real.
-- Un sistem hardware format din senzori de presiune conectați la un microcontroler Arduino, amplasați sub o magazie, pentru a măsura precis cantitatea de alimente disponibile.
-- Integrarea cu Firebase pentru stocarea și sincronizarea datelor în timp real, precum și pentru trimiterea de notificări automate atunci când stocurile scad sub un prag prestabilit.
+## Soluția propusă
 
-## 🎯 Definirea publicului țintă
+SIMR este o platformă hibridă software-hardware care optimizează automatizat fluxurile dintr-un restaurant:
 
-Publicul țintă al proiectului include:
+- Digitalizează complet procesele de gestiune a stocurilor, comenzilor și personalului.
+- Utilizează IoT și senzori pentru monitorizarea în timp real a condițiilor de depozitare.
+- Integrează AI pentru recomandări de marketing și analize predictive.
+- Include modul drive-thru automatizat cu interfață pentru client.
+- Comunicarea și stocarea datelor se realizează în cloud (Firebase), garantând scalabilitatea și actualizarea în timp real.
 
-- Restaurante de dimensiuni mici și medii care doresc să își optimizeze operațiunile și să reducă risipa alimentară.
-- Lanțuri de restaurante interesate de implementarea unor soluții tehnologice moderne pentru gestionarea eficientă a stocurilor și comenzilor.
-- Manageri și bucătari care caută instrumente intuitive pentru monitorizarea și controlul inventarului.
-- Clienți care apreciază o experiență de comandă rapidă și personalizată.
+## Public țintă
 
-## ⚙️ Prezentarea funcționalităților aplicației
+- Restaurante mici și medii ce doresc digitalizare rapidă și cu cost redus.
+- Lanțuri de restaurante care au nevoie de control centralizat asupra tuturor locațiilor.
+- Manageri și bucătari care doresc să optimizeze costurile și timpii de lucru.
+- Clienți orientați către experiențe digitale și rapide (comandă la masă sau drive-thru).
 
-### Aplicația pentru clienți (Kotlin):
+## Analiza pieței și diferențiatori
 
-- Vizualizarea meniului digital al restaurantului.
-- Plasarea comenzilor personalizate.
-- Integrare cu sistemul de drive-through pentru preluarea rapidă a comenzilor.
+Există soluții pe piață (Glovo, Tazz, Square POS), însă acestea acoperă doar parțial nevoile unui restaurant.  
+SIMR este unic prin:
 
-### Aplicația pentru manageri, bucătari și chelneri (C#):
+- Gestiune complet automatizată a ingredientelor și meniurilor.
+- Drive-thru fizic integrat cu hardware și software.
+- Predicție AI pentru aprovizionare inteligentă.
+- Comenzi automate către furnizori în funcție de stocuri.
+- Integrare IoT pentru siguranța alimentelor (temperatură, umiditate, greutate).
 
-- Gestionarea angajaților.
-- Monitorizarea în timp real a comenzilor primite.
-- Gestionarea și actualizarea statusului comenzilor.
-- Vizualizarea stocurilor disponibile și primirea de alerte automate când acestea scad sub un anumit prag.
-- Comenzi automatizate de materie primă.
-- Statistici în timp real privind comenzile de ingrediente și preparate.
+## Funcționalități detaliate
 
-### Sistemul hardware:
+### Aplicația Admin (MAUI – Windows & Android)
 
-- Senzori de presiune montați sub o magazie pentru măsurarea precisă a cantității de alimente.
-- Microcontroler Arduino care colectează datele de la senzori și le transmite către Firebase.
+- Gestiune ingrediente: adăugare, modificare, ștergere, cu urmărirea cantităților și unităților de măsură.
+- Alertare stocuri critice: notificări când ingredientele scad sub un prag definit.
+- Vizualizare meniuri și rețete: afișare compoziție produse, cantități necesare.
+- Statistici, rapoarte vizuale și analize AI:
+  - Previziune consum ingrediente → Reduce risipa alimentară.
+  - Analiză popularitate produse → Optimizează meniul.
+  - Sugestii aprovizionare → Comenzi automate către furnizori.
+  - Raport profitabilitate per produs → Ajută la decizii de business.
+- Control personal: creare conturi angajați, pontaj, roluri (chelner, bucătar, manager).
+- Predicție și recomandări AI: aprovizionare optimă pentru reducerea pierderilor.
 
-## 🧱 Arhitectura aplicației
+### Aplicația Client (Kotlin – Android)
 
-Sistemul SIMR este compus din următoarele componente:
+- Acces meniu în timp real sincronizat cu stocurile.
+- Plasare comandă rapidă cu opțiuni de personalizare.
+- Alegere între servire la masă sau drive-thru.
+- Notificări despre statusul comenzii (pregătire, livrare).
+- Sistem de fidelitate al clienților cu carduri, respectiv coduri de reducere primite prin email / Happy Hour
 
-- **Frontend:** Aplicație pentru clienți (Kotlin) și aplicație pentru manageri/bucătari/chelneri (C#).
-- **Backend:** Firebase pentru stocarea datelor, autentificare și trimiterea de notificări.
-- **Hardware:** Senzori de presiune conectați la un microcontroler Arduino, amplasați sub o magazie mobilă pe șine.
-- **Comunicare:** Datele colectate de senzori sunt transmise către Firebase, iar aplicațiile frontend se sincronizează în timp real cu backend-ul pentru actualizarea informațiilor.
+### Sistem IoT – Monitorizare și Automatizare
 
-## 🌟 Elemente distinctive ale aplicației / puncte forte în comparație cu competiția
+#### Arduino Nano ESP32:
 
-- Integrarea completă între aplicațiile software și sistemul hardware pentru o monitorizare precisă a stocurilor.
-- Utilizarea senzorilor de greutate pentru măsurarea în timp real a cantității de alimente, reducând astfel risipa.
-- Notificări automate pentru manageri atunci când stocurile scad sub un prag prestabilit, facilitând reaprovizionarea la timp.
-- Interfață intuitivă pentru clienți, permițând o experiență de comandă rapidă și personalizată.
-- Utilizarea Firebase pentru sincronizarea în timp real a datelor și pentru trimiterea de notificări.
+- Senzori presiune pentru măsurarea greutății ingredientelor.
+- DHT11 pentru control temperatură/umiditate în depozit.
+- Ventilatoare automate în funcție de valori critice.
+- Comunicare real-time cu Firebase pentru actualizarea aplicațiilor.
 
-## 🛠️ Ghid de instalare și configurare a aplicației
+#### Arduino UNO + Raspberry Pi 5:
 
-### Configurarea hardware:
+- Senzor de mișcare pentru detectarea vehiculului la drive-thru.
+- Semafor LED pentru semnalizarea traficului la fereastra de drive-thru.
+- Afișaj LED cu mesaje dinamice pentru clienții care așteaptă.
+- Touchscreen interactiv cu aplicația client pentru plasarea comenzilor.
 
-1. Asamblați magazia și montați senzorii de presiune sub aceasta.
-2. Conectați senzorii la microcontrolerul Arduino.
-3. Programați Arduino pentru a colecta datele de la senzori și a le transmite către Firebase.
+## Securitate implementată
 
-### Instalarea aplicațiilor:
+- Autentificare Firebase (email + parolă) cu roluri configurate.
+- Reguli Firebase stricte pentru citire/scriere doar pe UID-ul proprietarului.
+- Validare input în aplicații
+- Criptare conexiuni între aplicații și Firebase.
 
-- Pentru aplicația clienților, instalați-o pe o tabletă sau integrați-o într-un kiosk interactiv.
-- Pentru aplicația managerilor/bucătarilor/chelneri, instalați-o pe dispozitivele utilizate în bucătărie/sala de mese sau birou.
 
-### Testare și calibrare:
+## Tehnologii utilizate
 
-- Testați funcționalitatea senzorilor și calibrați-i pentru a asigura măsurători precise.
-- Verificați sincronizarea datelor între hardware, Firebase și aplicațiile frontend.
+| Componentă      | Tehnologie                                    |
+|------------------|----------------------------------------------|
+| Admin App        | .NET MAUI + CommunityToolkit.Mvvm          |
+| Client App       | Kotlin + Jetpack Compose                   |
+| Backend          | Firebase Realtime DB + Firebase Auth       |
+| AI               | Gemini AI                                  |
+| Email            | SendGrid / Java Mail                                 |
+| Statistici       | Microcharts + LiveCharts           |
+| Senzori          | Arduino Nano ESP32 + DHT11 + senzor presiune + modul Peltier + senzor gaz metan|
+| Drive-thru       | Arduino UNO cu senzor de mișcare, semafor LED și Display LED + Raspberry Pi 5 + HDMI Display|
 
-## 🧠 Justificarea folosirii tehnologiilor alese
-
-Am ales să utilizăm Firebase datorită capacităților sale de sincronizare în timp real, autentificare ușoară și trimitere de notificări push, toate esențiale pentru funcționarea eficientă a sistemului nostru. Pentru partea hardware, Arduino oferă o platformă flexibilă și accesibilă pentru colectarea datelor de la senzori. Limbajele JavaScript și C# au fost alese pentru dezvoltarea aplicațiilor frontend datorită popularității lor și a suportului extins pentru dezvoltarea de interfețe intuitive și funcționale.
-
-## 💬 Opinia autorilor despre ideea proiectului și utilitatea acestuia pentru publicul țintă
-
-Considerăm că SIMR aduce o contribuție semnificativă în domeniul gestionării eficiente a resurselor într-un restaurant. Prin integrarea tehnologiilor moderne, oferim o soluție care nu doar că reduce risipa alimentară, dar îmbunătățește și experiența clienților și eficiența operațională a personalului. De exemplu, într-un restaurant pilot unde am testat sistemul, managerul a observat o reducere cu 30% a risipei alimentare și o îmbunătățire a timpului de procesare a comenzilor cu 25%.
-
-## 🗺️ Roadmap
-
+## Roadmap
 1. **Faza 1:** Realizarea unui studiu de piață.
-2. **Faza 2:** Finalizarea dezvoltării aplicațiilor și a sistemului hardware.
-3. **Faza 3:** Testarea sistemului într-un mediu controlat și colectarea feedback-ului.
-4. **Faza 4:** Implementarea îmbunătățirilor bazate pe feedback și optimizarea performanței.
-5. **Faza 5:** Extinderea sistemului pentru a fi utilizat în lanțuri de restaurante și integrarea de funcționalități suplimentare, precum analiza predictivă a stocurilor.
+2. **Faza 2:** Dezvoltarea aplicației de management
+3. **Faza 3:** Dezvoltarea aplicației pentru clienți
+4. **Faza 4:** Implementarea sistemului hardware
 
----
+## Opinia autorilor
+Considerăm că SIMR aduce o contribuție semnificativă în domeniul gestionării eficiente a resurselor într-un restaurant. Prin integrarea tehnologiilor moderne, oferim o soluție care nu doar că reduce risipa alimentară, dar îmbunătățește și experiența clienților și eficiența operațională a personalului. 
 
-## 📎 Anexa 1 - Conectarea senzorilor de presiune la Arduino
+## Resurse externe
 
-![Conectarea senzorilor de presiune la Arduino](anexa1_conectare_senzori.png)
+- Firebase SDK
+- Gemini AI SDK
+- SendGrid API
+- Java Mail
+- Arduino libraries pentru DHT11 și Firebase ESP32
+- MAUI CommunityToolkit
 
-Această imagine prezintă modul în care sunt conectați senzorii de presiune la placa Arduino, utilizând un breadboard pentru distribuția alimentării și a semnalelor. Fiecare senzor este fixat sub o suprafață transparentă și conectat prin fire colorate pentru a facilita identificarea individuală.
+## Anexa 1 - Ghid de instalare și utilizare a aplicațiilor
 
-## 📎 Anexa 2 - Conectarea ecranului HDMI pentru drive-through cu Raspberry Pi 5
+- **SIMR Admin**: [https://bit.ly/simr2025-infoedu-ghid-admin](https://bit.ly/simr2025-infoedu-ghid-admin)
+- **SIMR Tables**: [https://bit.ly/simr2025-infoedu-ghid-tables](https://bit.ly/simr2025-infoedu-ghid-tables)
 
-![Conectarea ecranului HDMI la Raspberry Pi 5](anexa2_hdmi_rpi.png)
+## Anexa 2 - Arhitectura sistemului
 
-Această fotografie ilustrează conectarea unui ecran HDMI la un Raspberry Pi 5. Se poate observa conexiunea HDMI, alimentarea și poziționarea ecranului într-o structură de tip kiosk, utilizată pentru afișarea comenzilor în sistemul drive-through.
+![Arhitectura Sistemului](anexe_documentatie/anexa2.png)
 
-## 📎 Anexa 3 - Cod Arduino Nano ESP32
+## Anexa 3 - Schema machetei
 
-```cpp
-#include <WiFi.h>
-#include <Firebase_ESP_Client.h>
-#include <DHT.h>
+![Schema machetei 1](anexe_documentatie/anexa3-1.png)  
+![Schema machetei 2](anexe_documentatie/anexa3-2.png)
 
-#define FIREBASE_HOST "restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app"
-#define FIREBASE_AUTH "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k"
-#define WIFI_SSID "Mihai"
-#define WIFI_PASSWORD "MihaiC2009"
-#define UserID "SLIJplDtuncEpdZ0PuWYXDC7j0y1"
+## Anexa 4 - Firebase Realtime Database Security Rules
 
-#define DHTPIN D2
-#define DHTTYPE DHT11
-
-DHT dht(DHTPIN,DHTTYPE);
-FirebaseData fbdo;
-FirebaseAuth auth;
-FirebaseConfig config;
-
-unsigned long sendDataPrevMillis = 0;
-const int interval = 2000;
-
-void setup() {
-  pinMode(A0, INPUT);
-  pinMode(A1, INPUT);
-  pinMode(A2, INPUT);
-  Serial.begin(115200);
-  WiFi.begin (WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  dht.begin();
-  Serial.println ("");
-  Serial.println ("WiFi Connected!");
-  config.database_url = FIREBASE_HOST;
-  config.signer.tokens.legacy_token = FIREBASE_AUTH;
-  Firebase.begin(&config, &auth);
-  Firebase.reconnectWiFi(true);
-}
-
-void loop() {
-  if (millis() - sendDataPrevMillis > interval) {
-    sendDataPrevMillis = millis();
-    int sensor1 = 4095-analogRead(A0);
-    int sensor2 = 4095-analogRead(A1);
-    int sensor3 = 4095-analogRead(A2);
-    int sensor4 = 4095-analogRead(A3);
-    int sensor5 = 4095-analogRead(A4);
-    int sensor6 = 4095-analogRead(A5);
-    int sensor7 = 4095-analogRead(A6);
-    float temp = dht.readTemperature();
-    float umiditate = dht.readHumidity();
-
-    Serial.printf("Sensor1: %d | Sensor2: %d | Sensor3: %d | Sensor4: %d | Sensor5: %d | Sensor6: %d | Sensor7: %d \n", 
-        sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7);
-
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/1/quantity", sensor1);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/2/quantity", sensor2);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/3/quantity", sensor3);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/4/quantity", sensor4);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/5/quantity", sensor5);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/6/quantity", sensor6);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/SLIJplDtuncEpdZ0PuWYXDC7j0y1/ingredients/list/7/quantity", sensor7);
-    Firebase.RTDB.setInt(&fbdo, "/users/SLIJplDtuncEpdZ0PuWYXDC7j0y1/DHT/temp", temp);
-    Firebase.RTDB.setInt(&fbdo, "/users/SLIJplDtuncEpdZ0PuWYXDC7j0y1/DHT/umd", umiditate);
+```json
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "kitchen": {
+      "$ownerId": {
+        ".read": "auth != null && (auth.uid === $ownerId || root.child('users').child(auth.uid).child('Owner').val() === $ownerId)",
+        ".write": "auth != null && (auth.uid === $ownerId || root.child('users').child(auth.uid).child('Owner').val() === $ownerId)"
+      }
+    },
+    "users": {
+      "$userId": {
+        ".read": "auth != null && (auth.uid === $userId || root.child('users').child(auth.uid).child('Owner').val() === root.child('users').child($userId).child('Owner').val() || (root.child('users').child(auth.uid).child('Type').val() === 'owner' && root.child('users').child($userId).child('Owner').val() === auth.uid))",
+        ".write": "auth != null && (auth.uid === $userId || (root.child('users').child(auth.uid).child('Type').val() === 'owner' && root.child('users').child($userId).child('Owner').val() === auth.uid))"
+      }
+    }
   }
 }
+```
+
+## Anexa 5 - Schema Arduino Nano ESP32
+
+![Schema Arduino Nano ESP32](anexe_documentatie/anexa5.png)
+
+## Anexa 6 - Schema Arduino UNO
+
+![Schema Arduino UNO](anexe_documentatie/anexa6.png)
+
+## Anexa 7 - Schema Raspberry PI 5
+
+![Schema Raspberry PI 5](anexe_documentatie/anexa7.png)
