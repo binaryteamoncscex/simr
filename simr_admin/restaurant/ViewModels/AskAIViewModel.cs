@@ -65,7 +65,7 @@ namespace restaurant.ViewModels
                             {
                                 parts = new[]
                                 {
-                                    new { text = $"Based on the following restaurant statistics: \"{_statistics}\"\n\nAnswer this question: \"{UserPrompt}\"" }
+                                    new { text = $"Based on the following restaurant statistics: \"{_statistics}\"\n\nAnswer this question: \"{UserPrompt}\". Don't answer the question if it's related to another topic." }
                                 }
                             }
                         }

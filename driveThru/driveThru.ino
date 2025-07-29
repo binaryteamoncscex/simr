@@ -6,10 +6,10 @@
 
 constexpr int TrigPin = 2;
 constexpr int EchoPin = 3;
-DistanceSensor<TrigPin, EchoPin> sensor;
+DistanceSensor sensor(TrigPin, EchoPin);
 
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
-#define MAX_DEVICES 4
+#define MAX_DEVICES 8
 #define CLK_PIN   13
 #define DATA_PIN  11
 #define CS_PIN    10
@@ -19,6 +19,8 @@ DistanceSensor<TrigPin, EchoPin> sensor;
 
 int rosu= 4;
 int verde= 5;
+int vent=6;
+int sensGaz = 9;
 
 MD_Parola P = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
 MD_Parola F = MD_Parola(HARDWARE_TYPE, CS_PIN1, MAX_DEVICES);
@@ -33,19 +35,21 @@ struct animations
   uint16_t       pause;       
   textPosition_t just;
 };
-animations text1= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "BINE ATI VENIT", 4, 0, PA_LEFT };
-animations text2= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "VA RUGAM ASTEPTATI", 4, 0, PA_LEFT };
-animations text3= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "VA MULTUMIM SI VA MAI ASTEPTAM", 4, 0, PA_LEFT };
-animations text4= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "SIMRAR", 4, 0, PA_LEFT };
+animations text1= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "BINE ATI VENIT  ", 4, 0, PA_LEFT };
+animations text2= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "Va rugam asteptati  ", 4, 0, PA_LEFT };
+animations text3= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "va multumim si va mai asteptam  ", 4, 0, PA_LEFT };
+animations text4= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "SIMR  ", 4, 0, PA_LEFT };
 
 void setup() {
-  sensor.begin();
+  
   dht.begin();
   Serial.begin(9600);
   P.begin();
   F.begin();
   pinMode(rosu, OUTPUT);
   pinMode(verde, OUTPUT);
+  pinMode(vent, OUTPUT);
+  pinMode(sensGaz, OUTPUT);
   text1.speed *= P.getSpeed(); 
   text1.pause *= 500;
   text2.speed *= P.getSpeed(); 
@@ -57,17 +61,8 @@ void setup() {
 }
  
 void loop() {
-  int distanta = sensor.tick();
-  if (distanta == sensor.NREADY) return;
-  if (distanta == sensor.ERR)
-  {
-    Serial.println("error occured");
-    return;
-  }
-  Serial.print("Distance: ");
-  Serial.print(distanta);
-  Serial.println("cm");
-
+  int distanta = sensor.getCM();
+  Serial.println(digitalRead(sensGaz));
  
   if (P.displayAnimate() || F.displayAnimate())
   {
@@ -77,6 +72,8 @@ void loop() {
       F.displayText(text3.textOut, text3.just, text3.speed, text3.pause, text3.anim_in, text3.anim_out);
       digitalWrite(rosu, HIGH);
       digitalWrite(verde, LOW);
+      Serial.print("Auto in drive: ");
+      Serial.println("rosu aprins");
     }
     else
     {
@@ -84,21 +81,29 @@ void loop() {
       F.displayText(text4.textOut, text4.just, text4.speed, text4.pause, text4.anim_in, text4.anim_out);
       digitalWrite(rosu, LOW);
       digitalWrite(verde, HIGH);
+      Serial.print("Auto in asteptare ");
+      Serial.println("verde aprins");
     }
   } 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
  
   if (isnan(h) || isnan(t) ) {
-    Serial.println(F("Failed to read from DHT sensor!"));
+    Serial.println(F("Eroare DHT sensor!"));
     return;
   }
   float hic = dht.computeHeatIndex(t, h, false);
-  Serial.print(F("Humidity: "));
-  Serial.print(h);
-  Serial.print(F("%  Temperature: "));
-  Serial.print(t);
-  Serial.print(F("°C "));
-  Serial.print(hic);
-  Serial.print(F("°C "));
+  if (t>29)
+  {
+     digitalWrite(vent, HIGH);
+     Serial.println("centilator pornit");
+  }
+  else
+  {
+    digitalWrite(vent, LOW);
+    Serial.println("ventilator oprit");
+  }
+    Serial.print(t);
+    Serial.print(F("°C "));
+
 }

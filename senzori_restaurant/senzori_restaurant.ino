@@ -134,6 +134,8 @@ void setup() {
   pinMode(A1, INPUT);
   pinMode(A2, INPUT);
   pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(A5, INPUT);
   pinMode(A6, INPUT);
   pinMode(A7, INPUT);
   pinMode(fanRelay, OUTPUT);
@@ -151,13 +153,30 @@ void loop() {
   if (millis() - sendDataPrevMillis > interval) {
     sendDataPrevMillis = millis();
 
-    int sensor1 = 4095 - analogRead(A0);
-    int sensor2 = 4095 - analogRead(A1);
-    int sensor3 = 4095 - analogRead(A2);
-    int sensor4 = 4095 - analogRead(A3);
-    int sensor5 = 4095 - analogRead(A7);
-    int sensor6 = 4095 - analogRead(A4);
-    int sensor7 = 4095 - analogRead(A6);
+    int sensor1 = analogRead(A0)-1000;
+    if (sensor1<0)
+      sensor1=0;
+    int sensor2 = analogRead(A1)-1000;
+    if (sensor2<0) 
+        sensor2=0;
+    int sensor3 = analogRead(A2)-1000;
+    if (sensor3<0) 
+        sensor3=0;
+    int sensor4 = analogRead(A3)-1000;
+    if (sensor4<0) 
+        sensor4=0;
+    int sensor5 = analogRead(A4)-1000;
+    if (sensor5<0) 
+        sensor5=0;
+    int sensor6 = analogRead(A5)-1000;
+    if (sensor6<0) 
+        sensor6=0;
+    int sensor7 = analogRead(A6)-1000;
+    if (sensor7<0) 
+        sensor7=0;
+    int sensor8 = analogRead(A7)-1000;
+    if (sensor8<0) 
+        sensor8=0;
 
     float temp = dht.readTemperature();
     float humidity = dht.readHumidity();
@@ -170,16 +189,17 @@ void loop() {
     Serial.print("  Senzor 5: "); Serial.println(sensor5);
     Serial.print("  Senzor 6: "); Serial.println(sensor6);
     Serial.print("  Senzor 7: "); Serial.println(sensor7);
+    Serial.print("  Senzor 8: "); Serial.println(sensor8);
 
     Serial.print("Temperatura: "); Serial.print(temp); Serial.println(" °C");
     Serial.print("Umiditatea: "); Serial.print(humidity); Serial.println(" %");
 
-    if (temp < 25) {
+    if (temp > 25) {
       digitalWrite(fanRelay, HIGH);
-      Serial.println("Ventilatorul este pornit (temperatura sub 25°C)");
+      Serial.println("Ventilatorul este pornit (temperatura peste 25°C)");
     } else {
       digitalWrite(fanRelay, LOW);
-      Serial.println("Ventilatorul este oprit (temperatura peste sau egală cu 25°C)");
+      Serial.println("Ventilatorul este oprit (temperatura sub sau egală cu 25°C)");
     }
 
     Serial.println("Trimit datele către Firebase...");
@@ -191,6 +211,7 @@ void loop() {
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/5/quantity", sensor5);
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/6/quantity", sensor6);
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/7/quantity", sensor7);
+    Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/8/quantity", sensor8);
 
     Firebase.RTDB.setFloat(&fbdo, "/users/" + userID + "/DHT/temp", temp);
     Firebase.RTDB.setFloat(&fbdo, "/users/" + userID + "/DHT/umd", humidity);

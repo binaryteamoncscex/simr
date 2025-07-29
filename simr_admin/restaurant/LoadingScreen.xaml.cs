@@ -18,7 +18,6 @@ public partial class LoadingScreen : ContentPage
     private async void OnPageLoaded(object sender, EventArgs e)
     {
         await Task.Delay(100);
-
         bool isFirstLaunch = !Preferences.ContainsKey("HasLaunched");
         bool rememberMe = Preferences.Get("RememberMe", false);
 

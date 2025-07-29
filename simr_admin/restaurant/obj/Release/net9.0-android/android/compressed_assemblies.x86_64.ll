@@ -661,7 +661,7 @@ target triple = "x86_64-unknown-linux-android21"
 		ptr @__compressedAssemblyData_127; uint8_t* data
 	}, ; 127: Xamarin.KotlinX.Serialization.Core.Jvm
 	%struct.CompressedAssemblyDescriptor {
-		i32 1011712, ; uint32_t uncompressed_file_size
+		i32 1006080, ; uint32_t uncompressed_file_size
 		i1 false, ; bool loaded
 		ptr @__compressedAssemblyData_128; uint8_t* data
 	}, ; 128: SIMRAdmin
@@ -1190,7 +1190,7 @@ target triple = "x86_64-unknown-linux-android21"
 @__compressedAssemblyData_125 = internal dso_local global [86016 x i8] zeroinitializer, align 16
 @__compressedAssemblyData_126 = internal dso_local global [18432 x i8] zeroinitializer, align 16
 @__compressedAssemblyData_127 = internal dso_local global [89600 x i8] zeroinitializer, align 16
-@__compressedAssemblyData_128 = internal dso_local global [1011712 x i8] zeroinitializer, align 16
+@__compressedAssemblyData_128 = internal dso_local global [1006080 x i8] zeroinitializer, align 16
 @__compressedAssemblyData_129 = internal dso_local global [254464 x i8] zeroinitializer, align 16
 @__compressedAssemblyData_130 = internal dso_local global [4608 x i8] zeroinitializer, align 16
 @__compressedAssemblyData_131 = internal dso_local global [35328 x i8] zeroinitializer, align 16

@@ -6,7 +6,6 @@
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
-#define WelcomeImage "D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\welcome_image.bmp"
 
 [Setup]
 AppId={{9B14AB14-EF1E-4749-A77E-F92E7BA037F1}}
