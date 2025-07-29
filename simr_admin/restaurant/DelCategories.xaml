@@ -56,7 +56,6 @@
                 TextColor="White"
                 HorizontalOptions="End"
                 VerticalOptions="End"
-                Margin="20"
-                Shadow="Small" />
+                Margin="20"/>
     </Grid>
 </ContentPage>
