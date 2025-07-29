@@ -17,7 +17,6 @@ namespace restaurant.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string userName, userPassword;
-        private bool rememberMe;
 
         private FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
 
@@ -42,16 +41,6 @@ namespace restaurant.ViewModels
             {
                 userPassword = value;
                 RaisePropertyChanged("UserPassword");
-            }
-        }
-
-        public bool RememberMe
-        {
-            get => rememberMe;
-            set
-            {
-                rememberMe = value;
-                RaisePropertyChanged("RememberMe");
             }
         }
 
@@ -107,10 +96,7 @@ namespace restaurant.ViewModels
                 Preferences.Set("SavedUsername", username);
                 Preferences.Set("SavedPassword", password);
 
-                if (RememberMe)
-                    Preferences.Set("RememberMe", true);
-                else
-                    Preferences.Remove("RememberMe");
+                Preferences.Set("RememberMe", true);
 
                 var firebaseClient = new FirebaseClient(
                     "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/",

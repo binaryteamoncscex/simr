@@ -42,44 +42,46 @@ namespace restaurant.ViewModels
         private async void LoadEmployees()
         {
             var users = await firebase
-                            .Child("users")
-                            .OrderBy("Owner")
-                            .EqualTo(currentUid)
-                            .OnceAsync<Dictionary<string, object>>();
+                                .Child("users")
+                                .OnceAsync<Dictionary<string, object>>();
 
             Employees.Clear();
 
             foreach (var user in users)
             {
                 var uidAngajat = user.Key;
-                var u = user.Object;
+                var data = user.Object;
 
-                string name = u.ContainsKey("Name") ? u["Name"]?.ToString() ?? "" : "";
-                string type = u.ContainsKey("Type") ? u["Type"]?.ToString() ?? "" : "";
-                string role = type == "cook" ? "Cook" : type == "waiter" ? "Waiter" : "Unknown";
-
-                bool atWork = u.ContainsKey("at_work") && bool.TryParse(u["at_work"]?.ToString(), out var b) && b;
-                string status = atWork ? "Active" : "Inactive";
-                Color statusColor = atWork ? Colors.Green : Colors.Red;
-
-                int hours = u.ContainsKey("hours") && int.TryParse(u["hours"]?.ToString(), out var h) ? h : 0;
-
-                string norm = u.ContainsKey("Norm") ? u["Norm"]?.ToString() ?? "0" : "0";
-                string wagePerHour = u.ContainsKey("WagePerHour") ? u["WagePerHour"]?.ToString() ?? "0" : "0";
-
-                double wage = double.TryParse(wagePerHour, out var wp) ? wp * hours : 0;
-
-                Employees.Add(new EmployeeModel
+                if (data is Dictionary<string, object> u &&
+                    u.TryGetValue("Owner", out var owner) && owner?.ToString() == currentUid)
                 {
-                    Name = name,
-                    Role = role,
-                    Status = status,
-                    StatusColor = statusColor,
-                    Hours = hours,
-                    Norm = norm,
-                    WagePerHour = wagePerHour,
-                    WageForMonth = wage.ToString("0.00")
-                });
+                    string name = u.ContainsKey("Name") ? u["Name"]?.ToString() ?? "" : "";
+                    string type = u.ContainsKey("Type") ? u["Type"]?.ToString() ?? "" : "";
+                    string role = type == "cook" ? "Cook" : type == "waiter" ? "Waiter" : "Unknown";
+
+                    bool atWork = u.ContainsKey("at_work") && bool.TryParse(u["at_work"]?.ToString(), out var b) && b;
+                    string status = atWork ? "Active" : "Inactive";
+                    Color statusColor = atWork ? Colors.Green : Colors.Red;
+
+                    int hours = u.ContainsKey("hours") && int.TryParse(u["hours"]?.ToString(), out var h) ? h : 0;
+
+                    string norm = u.ContainsKey("Norm") ? u["Norm"]?.ToString() ?? "0" : "0";
+                    string wagePerHour = u.ContainsKey("WagePerHour") ? u["WagePerHour"]?.ToString() ?? "0" : "0";
+
+                    double wage = double.TryParse(wagePerHour, out var wp) ? wp * hours : 0;
+
+                    Employees.Add(new EmployeeModel
+                    {
+                        Name = name,
+                        Role = role,
+                        Status = status,
+                        StatusColor = statusColor,
+                        Hours = hours,
+                        Norm = norm,
+                        WagePerHour = wagePerHour,
+                        WageForMonth = wage.ToString("0.00")
+                    });
+                }
             }
         }
 
@@ -95,6 +97,8 @@ namespace restaurant.ViewModels
 
                 using var workbook = new XLWorkbook();
                 var sheet = workbook.Worksheets.Add("Employees");
+
+                // Header
                 sheet.Cell(1, 1).Value = "Name";
                 sheet.Cell(1, 2).Value = "Role";
                 sheet.Cell(1, 3).Value = "Status";
@@ -102,6 +106,8 @@ namespace restaurant.ViewModels
                 sheet.Cell(1, 5).Value = "Norm";
                 sheet.Cell(1, 6).Value = "Wage/h";
                 sheet.Cell(1, 7).Value = "Wage/mo";
+
+                // Data
                 for (int i = 0; i < Employees.Count; i++)
                 {
                     var emp = Employees[i];
