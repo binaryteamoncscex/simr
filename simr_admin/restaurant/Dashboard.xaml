@@ -23,10 +23,24 @@
                                    FontAttributes="Bold"
                                    TextColor="Black"/>
                             <Grid HeightRequest="180">
-                                <microcharts:ChartView Chart="{Binding MostOrderedIngredientsChart}"
-                                                       VerticalOptions="Fill"
-                                                       HorizontalOptions="Fill"
-                                                       BackgroundColor="#F5F5F5"/>
+                                <microcharts:ChartView Chart="{Binding MostOrderedIngredientsChart}">
+                                    <microcharts:ChartView.Triggers>
+                                        <DataTrigger TargetType="microcharts:ChartView" Binding="{Binding IsIngredientsChartAvailable}" Value="False">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </microcharts:ChartView.Triggers>
+                                </microcharts:ChartView>
+                                <Label Text="Graph not available"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontAttributes="Italic">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsIngredientsChartAvailable}" Value="True">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
                             </Grid>
                             <CollectionView ItemsSource="{Binding IngredientLegend}"
                                             ItemsLayout="VerticalList"
@@ -51,10 +65,24 @@
                                    FontAttributes="Bold"
                                    TextColor="Black"/>
                             <Grid HeightRequest="180">
-                                <microcharts:ChartView Chart="{Binding MostOrderedDishesChart}"
-                                                       VerticalOptions="Fill"
-                                                       HorizontalOptions="Fill"
-                                                       BackgroundColor="#F5F5F5"/>
+                                <microcharts:ChartView Chart="{Binding MostOrderedDishesChart}">
+                                    <microcharts:ChartView.Triggers>
+                                        <DataTrigger TargetType="microcharts:ChartView" Binding="{Binding IsDishesChartAvailable}" Value="False">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </microcharts:ChartView.Triggers>
+                                </microcharts:ChartView>
+                                <Label Text="Graph not available"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontAttributes="Italic">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsDishesChartAvailable}" Value="True">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
                             </Grid>
                             <CollectionView ItemsSource="{Binding DishLegend}"
                                             ItemsLayout="VerticalList"
@@ -69,6 +97,111 @@
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="15" BackgroundColor="#F5F5F5" Padding="15">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Monthly Profit (Last 3 Months)" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                            <Grid HeightRequest="180">
+                                <microcharts:ChartView Chart="{Binding MonthlyProfitChart}">
+                                    <microcharts:ChartView.Triggers>
+                                        <DataTrigger TargetType="microcharts:ChartView" Binding="{Binding IsProfitChartAvailable}" Value="False">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </microcharts:ChartView.Triggers>
+                                </microcharts:ChartView>
+                                <Label Text="Graph not available"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontAttributes="Italic">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsProfitChartAvailable}" Value="True">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="15" BackgroundColor="#F5F5F5" Padding="15">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Monthly Expenses (Last 3 Months)" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                            <Grid HeightRequest="180">
+                                <microcharts:ChartView Chart="{Binding MonthlyExpensesChart}">
+                                    <microcharts:ChartView.Triggers>
+                                        <DataTrigger TargetType="microcharts:ChartView" Binding="{Binding IsExpensesChartAvailable}" Value="False">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </microcharts:ChartView.Triggers>
+                                </microcharts:ChartView>
+                                <Label Text="Graph not available"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontAttributes="Italic">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsExpensesChartAvailable}" Value="True">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="15" BackgroundColor="#F5F5F5" Padding="15">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Accounting Summary" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                            <Grid>
+                                <CollectionView ItemsSource="{Binding AccountingTable}"
+                                                ItemsLayout="VerticalList">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="*,*,*,*" 
+                                                  Padding="10,5"
+                                                  BackgroundColor="Transparent">
+                                                <Label Grid.Column="0" Text="{Binding Month}" FontSize="12"/>
+                                                <Label Grid.Column="1" Text="{Binding Profit}" FontSize="12" HorizontalTextAlignment="End"/>
+                                                <Label Grid.Column="2" Text="{Binding Expenses}" FontSize="12" HorizontalTextAlignment="End"/>
+                                                <Label Grid.Column="3" Text="{Binding TotalRevenue}" FontSize="12" HorizontalTextAlignment="End"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                    <CollectionView.Header>
+                                        <Grid ColumnDefinitions="*,*,*,*" 
+                                              Padding="10,5" 
+                                              BackgroundColor="LightGray">
+                                            <Label Grid.Column="0" Text="Month" FontSize="12" FontAttributes="Bold"/>
+                                            <Label Grid.Column="1" Text="Profit" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                            <Label Grid.Column="2" Text="Expenses" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                            <Label Grid.Column="3" Text="Total Revenue" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                        </Grid>
+                                    </CollectionView.Header>
+                                </CollectionView>
+                                <Label Text="No accounting data available"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"
+                                       FontAttributes="Italic">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsAccountingTableAvailable}" Value="True">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
                         </VerticalStackLayout>
                     </Frame>
 
@@ -182,7 +315,15 @@
                         </Grid.GestureRecognizers>
                     </Grid>
 
-                    <Grid HeightRequest="50" Padding="10,0" ColumnDefinitions="Auto,*" MinimumWidthRequest="150">
+                    <Grid HeightRequest="50" Padding="10,0" ColumnDefinitions="Auto,*" MinimumWidthRequest="140">
+                        <Image Source="https://i.ibb.co/xSfhnQ3p/Captur-de-ecran-2025-10-31-063714-removebg-preview.png" HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Bugs camera" TextColor="White" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" HorizontalTextAlignment="Start"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BugCamera}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <Grid HeightRequest="50" Padding="10,0" ColumnDefinitions="Auto,*" MinimumWidthRequest="120">
                         <Image Source="https://static.thenounproject.com/png/3070444-200.png" HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
                         <Label Grid.Column="1" Text="My account" TextColor="White" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" HorizontalTextAlignment="Start"/>
                         <Grid.GestureRecognizers>

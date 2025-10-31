@@ -3,11 +3,12 @@
 #include <MD_Parola.h>
 #include <MD_MAX72xx.h>
 #include <DistanceSensor.h>
-
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 constexpr int TrigPin = 2;
 constexpr int EchoPin = 3;
 DistanceSensor sensor(TrigPin, EchoPin);
-
+LiquidCrystal_I2C lcd(0x27,  16, 2);
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 8
 #define CLK_PIN   13
@@ -37,7 +38,7 @@ struct animations
 };
 animations text1= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "BINE ATI VENIT  ", 4, 0, PA_LEFT };
 animations text2= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "Va rugam asteptati  ", 4, 0, PA_LEFT };
-animations text3= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "va multumim si va mai asteptam  ", 4, 0, PA_LEFT };
+animations text3= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "Va multumim si va mai asteptam  ", 4, 0, PA_LEFT };
 animations text4= { PA_SCROLL_LEFT, PA_SCROLL_LEFT , "SIMR  ", 4, 0, PA_LEFT };
 
 void setup() {
@@ -58,6 +59,8 @@ void setup() {
   text3.pause *= 500;
   text4.speed *= P.getSpeed(); 
   text4.pause *= 500;
+  lcd.init();
+  lcd.backlight();
 }
  
 void loop() {
@@ -66,7 +69,7 @@ void loop() {
  
   if (P.displayAnimate() || F.displayAnimate())
   {
-    if (distanta<=20)
+    if (distanta>=20)
     {
       P.displayText(text1.textOut, text1.just, text1.speed, text1.pause, text1.anim_in, text1.anim_out);
       F.displayText(text3.textOut, text3.just, text3.speed, text3.pause, text3.anim_in, text3.anim_out);
@@ -87,23 +90,41 @@ void loop() {
   } 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
- 
-  if (isnan(h) || isnan(t) ) {
-    Serial.println(F("Eroare DHT sensor!"));
-    return;
-  }
   float hic = dht.computeHeatIndex(t, h, false);
-  if (t>29)
+  /*if (isnan(t) || isnan(h)) {
+    Serial.println("Failed to read from DHT sensor!");
+    lcd.setCursor(0, 0);
+    lcd.print("Failed to read!");
+    lcd.setCursor(0, 1);
+    lcd.print("Retrying...");
+    delay(2000);
+    return;
+  }*/
+  if (t>25)
   {
      digitalWrite(vent, HIGH);
-     Serial.println("centilator pornit");
+     Serial.println("Ventilator pornit");
   }
   else
   {
     digitalWrite(vent, LOW);
-    Serial.println("ventilator oprit");
+    Serial.println("Ventilator oprit");
   }
-    Serial.print(t);
-    Serial.print(F("°C "));
-
+  Serial.print(t);
+  Serial.print(F("°C "));
+  Serial.print("Temperatura: ");
+  Serial.print(t);
+  Serial.println(" °C");
+  Serial.print("Umiditatea: ");
+  Serial.print(h);
+  Serial.println(" %");
+  lcd.setCursor(0, 0);
+  lcd.print("Temp: "); 
+  lcd.print(t);     
+  lcd.print(" C");     
+  lcd.setCursor(0, 1);
+  lcd.print("Humi: ");
+  lcd.print(h);
+  lcd.print(" %");     
+  //delay(1000);
 }

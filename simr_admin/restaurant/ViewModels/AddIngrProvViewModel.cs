@@ -56,7 +56,7 @@ namespace restaurant.ViewModels
                     return;
                 }
 
-                var firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+                var firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
 
                 await firebaseClient
                     .Child($"users/{uid}/providers")

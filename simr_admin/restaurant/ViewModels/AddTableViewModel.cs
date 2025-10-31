@@ -15,8 +15,8 @@ namespace restaurant.ViewModels
 {
     internal class AddTableViewModel
     {
-        private const string WebApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
-        private const string DatabaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string WebApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
+        private const string DatabaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
 
         private FirebaseAuthClient _authClient;
         private FirebaseClient _firebaseClient;

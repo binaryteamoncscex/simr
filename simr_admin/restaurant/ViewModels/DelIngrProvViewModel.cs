@@ -10,7 +10,7 @@ namespace restaurant.ViewModels
 {
     internal class DelIngrProvViewModel : INotifyPropertyChanged
     {
-        private readonly string firebaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private readonly string firebaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private readonly FirebaseClient firebaseClient;
         private readonly string uid;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -20,11 +20,11 @@ namespace restaurant.ViewModels
         public ObservableCollection<string> Providers { get; set; } = new ObservableCollection<string>();
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
-        public ICommand RefreshCommand { get; } 
-        public ICommand AddIngrProv { get; } 
+        public ICommand RefreshCommand { get; }
+        public ICommand AddIngrProv { get; }
 
         private bool _isRefreshing;
-        public bool IsRefreshing    
+        public bool IsRefreshing
         {
             get => _isRefreshing;
             set
@@ -45,36 +45,37 @@ namespace restaurant.ViewModels
             DeleteCommand = new RelayCommand<string>(async (provider) => await DeleteProvider(provider));
             RefreshCommand = new AsyncRelayCommand(LoadProviders);
             EditCommand = new AsyncRelayCommand<string>(async (provider) => await EditProvider(provider));
-            AddIngrProv = new Command(async () => await navigation.PushAsync(new AddIngrProv()));
+            AddIngrProv = new Command(async () =>
+            {
+                var page = new AddIngrProv();
+                page.Disappearing += async (s, e) => await LoadProviders();
+                await navigation.PushAsync(page);
+            });
             LoadProviders();
         }
+
         private async Task EditProvider(string providerKey)
         {
             if (string.IsNullOrEmpty(providerKey)) return;
-
             var emailNode = await firebaseClient
                 .Child($"users/{uid}/providers")
                 .Child(providerKey)
                 .OnceSingleAsync<string>();
-            await _navigation.PushAsync(new EditIngrProv(providerKey, emailNode));
+            var page = new EditIngrProv(providerKey, emailNode);
+            page.Disappearing += async (s, e) => await LoadProviders();
+            await _navigation.PushAsync(page);
         }
+
         private async Task LoadProviders()
         {
             try
             {
-                IsRefreshing = true;        
+                IsRefreshing = true;
                 var firebaseData = await firebaseClient
                     .Child($"users/{uid}/providers")
                     .OnceAsync<object>();
                 Providers.Clear();
-
-                if (firebaseData == null || firebaseData.Count == 0)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Alert", "No providers found.", "OK");
-                    Application.Current.MainPage = new NavigationPage(new Dashboard());
-                    return;
-                }
-                else
+                if (firebaseData != null && firebaseData.Count > 0)
                 {
                     foreach (var item in firebaseData)
                     {
@@ -84,34 +85,22 @@ namespace restaurant.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", $"Failed to load providers: {ex.Message}", "OK");
-                return;
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to load providers: {ex.Message}", "OK");
             }
             finally
             {
-                IsRefreshing = false;        
+                IsRefreshing = false;
             }
         }
+
         private async Task DeleteProvider(string providerKey)
         {
             if (string.IsNullOrEmpty(providerKey)) return;
-
             await firebaseClient
                 .Child($"users/{uid}/providers")
                 .Child(providerKey)
                 .DeleteAsync();
-
-            Providers.Remove(providerKey);
-
-            if (Providers.Count == 0)
-            {
-                await Shell.Current.DisplayAlert("Alert", "No more providers.", "OK");
-
-                if (Application.Current?.MainPage != null)
-                {
-                    Application.Current.MainPage = new NavigationPage(new Dashboard());
-                }
-            }
+            await LoadProviders();
         }
     }
 }

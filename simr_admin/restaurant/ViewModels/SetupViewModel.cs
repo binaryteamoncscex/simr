@@ -1,6 +1,4 @@
-﻿// usings identice ca înainte
-
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Database;
 using Firebase.Database.Query;
@@ -12,8 +10,8 @@ namespace restaurant.ViewModels
     public class SetupViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly string webApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
-        private readonly FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+        private readonly string webApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
+        private readonly FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
 
         public SetupViewModel()
         {
@@ -148,10 +146,10 @@ namespace restaurant.ViewModels
                 var authConfig = new FirebaseAuthConfig
                 {
                     ApiKey = webApiKey,
-                    AuthDomain = "restaurant-3e115.firebaseapp.com",
+                    AuthDomain = "restaurant-ad63f.firebaseapp.com",
                     Providers = new FirebaseAuthProvider[]
                     {
-                        new EmailProvider()
+                new EmailProvider()
                     }
                 };
                 var authProvider = new FirebaseAuthClient(authConfig);
@@ -165,6 +163,9 @@ namespace restaurant.ViewModels
                     "Kelvin" => "K",
                     _ => null
                 };
+
+                string currentMonthYear = DateTime.Now.ToString("MM-yyyy");
+
                 var updates = new Dictionary<string, object>
                 {
                     ["timezone"] = SelectedTimezone,
@@ -175,10 +176,26 @@ namespace restaurant.ViewModels
                     ["tu"] = temperatureUnitCode,
                     ["setup"] = true
                 };
+
                 await firebaseClient
                     .Child("users")
                     .Child(uid)
                     .PatchAsync(updates);
+
+                await firebaseClient
+                    .Child("users")
+                    .Child(uid)
+                    .Child("profit")
+                    .Child(currentMonthYear)
+                    .PutAsync(0);
+
+                await firebaseClient
+                    .Child("users")
+                    .Child(uid)
+                    .Child("expenses")
+                    .Child(currentMonthYear)
+                    .PutAsync(0);
+
                 await App.Current.MainPage.DisplayAlert("Alert",
                     "Restaurant setup completed successfully!", "OK");
                 Application.Current.MainPage = new NavigationPage(new Dashboard());

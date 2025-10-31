@@ -4,8 +4,13 @@
              x:Name="ThisPage"
              Title="Manage Ingredient Providers">
     <Grid>
-        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-            <CollectionView ItemsSource="{Binding Providers}">
+        <VerticalStackLayout Padding="10">
+            <CollectionView ItemsSource="{Binding Providers}" SelectionMode="Single">
+                <CollectionView.EmptyView>
+                    <Label Text="No providers found."
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand" />
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -63,7 +68,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </RefreshView>
+        </VerticalStackLayout>
         <Button Text="+" 
                 Command="{Binding AddIngrProv}"
                 FontSize="28"

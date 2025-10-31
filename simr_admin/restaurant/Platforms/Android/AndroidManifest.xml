@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.simr.admin" android:versionCode="2" android:versionName="Release">
-	<application android:allowBackup="true" android:supportsRtl="true" android:label="SIMR Admin" android:icon="@mipmap/appicon"></application>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<application android:allowBackup="true" android:supportsRtl="true" android:label="SIMR Admin" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round">
+		<service android:name="restaurant.MyFirebaseMessagingService" android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT" />
+			</intent-filter>
+		</service>
+		<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="default" />
+	</application>
 </manifest>

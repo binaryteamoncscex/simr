@@ -199,17 +199,14 @@ fun CancelOrderConfirmationDialog(
     val context = LocalContext.current
     var isCanceling by remember { mutableStateOf(false) }
 
-    val orderId = orderSnapshot.key ?: ""
-    val totalPrice = orderSnapshot.child("price").getValue(Double::class.java) ?: 0.0
     val status = orderSnapshot.child("status").getValue(String::class.java) ?: ""
+    val totalPrice = orderSnapshot.child("price").getValue(Double::class.java) ?: 0.0
+    val surcharge = if (status == "pending") totalPrice * 0.2 else 0.0
     val foodNames = orderSnapshot.child("foodNames").getValue(String::class.java)?.split(",")?.filter { it.isNotBlank() } ?: emptyList()
     val quantitiesStr = orderSnapshot.child("quantities").getValue(String::class.java) ?: ""
+    val quantities = quantitiesStr.chunked(4).map { it.toIntOrNull() ?: 0 }
     val paymentMethod = orderSnapshot.child("payment").getValue(String::class.java) ?: ""
     val observations = orderSnapshot.child("observations").getValue(String::class.java) ?: ""
-    val table = orderSnapshot.child("table").getValue(String::class.java) ?: ""
-
-    val quantities = quantitiesStr.chunked(4).map { it.toIntOrNull() ?: 0 }
-    val surcharge = if (status == "pending") totalPrice * 0.2 else 0.0
 
     AlertDialog(
         onDismissRequest = { if (!isCanceling) onDismiss() },
@@ -227,37 +224,22 @@ fun CancelOrderConfirmationDialog(
         text = {
             Column {
                 Text("Detalii comandă:", fontWeight = FontWeight.SemiBold, color = Color(0xFF003366))
-                Spacer(modifier = Modifier.height(8.dp))
-
+                Spacer(Modifier.height(8.dp))
                 foodNames.forEachIndexed { index, name ->
                     if (index < quantities.size) {
                         Text("• $name x${quantities[index]}", color = Color(0xFF003366))
                     }
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
+                Spacer(Modifier.height(8.dp))
                 Text("Metodă plată: $paymentMethod", color = Color(0xFF003366))
                 if (observations.isNotBlank()) {
                     Text("Observații: $observations", color = Color(0xFF003366))
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Total: ${"%.2f".format(totalPrice)} lei",
-                    color = Color(0xFF00BFFF),
-                    fontWeight = FontWeight.Bold)
-
-                Spacer(modifier = Modifier.height(16.dp))
-                when (status) {
-                    "pending" -> Text(
-                        "Atenție: Anularea va atrage o taxă de 20% (${"%.2f".format(surcharge)} lei)",
-                        color = Color(0xFFF44336),
-                        fontWeight = FontWeight.Bold
-                    )
-                    "canceled_with_fee" -> Text(
-                        "Taxa de anulare: ${"%.2f".format(surcharge)} lei",
-                        color = Color(0xFF00BFFF)
-                    )
+                Spacer(Modifier.height(8.dp))
+                Text("Total: ${"%.2f".format(totalPrice)} lei", color = Color(0xFF00BFFF), fontWeight = FontWeight.Bold)
+                if (status == "pending") {
+                    Spacer(Modifier.height(8.dp))
+                    Text("Taxă de anulare: ${"%.2f".format(surcharge)} lei", color = Color(0xFFF44336), fontWeight = FontWeight.Bold)
                 }
             }
         },
@@ -267,46 +249,37 @@ fun CancelOrderConfirmationDialog(
                     onClick = {
                         isCanceling = true
                         val newStatus = if (status == "pending") "canceled_with_fee" else "canceled"
-
-                        val updates = hashMapOf<String, Any>(
+                        val updates = mapOf(
                             "status" to newStatus,
                             "canceledAt" to ServerValue.TIMESTAMP
                         )
 
-                        orderSnapshot.ref.updateChildren(updates)
-                            .addOnCompleteListener { task ->
-                                isCanceling = false
-                                if (task.isSuccessful) {
-                                    Toast.makeText(
-                                        context,
-                                        if (newStatus == "canceled_with_fee")
-                                            "Comandă anulată. Taxa aplicată: ${"%.2f".format(surcharge)} lei"
-                                        else
-                                            "Comandă anulată cu succes",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    onCancelSuccess()
-                                } else {
-                                    Toast.makeText(
-                                        context,
-                                        "Eroare: ${task.exception?.message ?: "Nu s-a putut anula comanda"}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                        orderSnapshot.ref.updateChildren(updates).addOnCompleteListener { task ->
+                            isCanceling = false
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    context,
+                                    if (newStatus == "canceled_with_fee")
+                                        "Comandă anulată. Taxa aplicată: ${"%.2f".format(surcharge)} lei"
+                                    else
+                                        "Comandă anulată cu succes",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                onCancelSuccess()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Eroare: ${task.exception?.message ?: "Nu s-a putut anula comanda"}",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
+                        }
                     },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFD32F2F),
-                        contentColor = Color.White
-                    ),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD32F2F), contentColor = Color.White),
                     enabled = !isCanceling
                 ) {
                     if (isCanceling) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(20.dp),
-                            color = Color.White,
-                            strokeWidth = 2.dp
-                        )
+                        CircularProgressIndicator(modifier = Modifier.size(20.dp), color = Color.White, strokeWidth = 2.dp)
                     } else {
                         Text("Confirmă anularea")
                     }
@@ -314,15 +287,11 @@ fun CancelOrderConfirmationDialog(
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = onDismiss,
-                colors = ButtonDefaults.textButtonColors(
-                    contentColor = Color(0xFF00BFFF)
-                )
-            ) {
+            TextButton(onClick = onDismiss, colors = ButtonDefaults.textButtonColors(contentColor = Color(0xFF00BFFF))) {
                 Text(if (status == "completed" || status == "canceled" || status == "canceled_with_fee") "OK" else "Înapoi")
             }
         },
         containerColor = Color.White
     )
 }
+

@@ -7,4 +7,12 @@ public partial class DelCategories : ContentPage
 		InitializeComponent();
         BindingContext = new DelCategoriesViewModel(Navigation);
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is DelCategoriesViewModel vm)
+        {
+            await vm.LoadCategoriesAsync();
+        }
+    }
 }

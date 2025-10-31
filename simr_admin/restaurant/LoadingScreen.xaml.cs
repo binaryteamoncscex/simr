@@ -29,7 +29,7 @@ public partial class LoadingScreen : ContentPage
 
             if (!string.IsNullOrEmpty(uid))
             {
-                var firebase = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+                var firebase = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
                 var userType = await firebase
                     .Child("users")
                     .Child(uid)
@@ -38,8 +38,8 @@ public partial class LoadingScreen : ContentPage
 
                 Page nextPage = userType switch
                 {
-                    "cook" => new Cook(),
-                    "waiter" => new Waiter(),
+                    "Cook" => new Cook(),
+                    "Waiter" => new Waiter(),
                     _ => new ApproveOrders()
                 };
 

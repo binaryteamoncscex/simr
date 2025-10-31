@@ -15,8 +15,8 @@ namespace restaurant.ViewModels
 {
     public class CheckInvenViewModel : BindableObject
     {
-        private const string WebApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
-        private const string DatabaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string WebApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
+        private const string DatabaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
 
         private ObservableCollection<Ingredient> _ingredients;
         public ObservableCollection<Ingredient> Ingredients
@@ -101,13 +101,17 @@ namespace restaurant.ViewModels
                         return;
                     }
 
-                    var ingredientsList = JsonSerializer.Deserialize<List<Ingredient>>(jsonResponse);
+                    var ingredientList = JsonSerializer.Deserialize<List<Ingredient>>(jsonResponse);
+
                     Ingredients.Clear();
-                    if (ingredientsList != null)
+                    if (ingredientList != null)
                     {
-                        foreach (var item in ingredientsList)
+                        foreach (var ing in ingredientList)
                         {
-                            if (item != null) Ingredients.Add(item);
+                            if (ing != null)
+                            {
+                                Ingredients.Add(ing);
+                            }
                         }
                     }
                 }
@@ -145,10 +149,6 @@ namespace restaurant.ViewModels
                     {
                         temperatureUnit = JsonSerializer.Deserialize<string>(tuJson)?.Trim('"') ?? "C";
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"Warning: Could not fetch temperature unit. Status code: {tempUnitResponse.StatusCode}");
                 }
 
                 string dhtUrl = $"{DatabaseUrl}/users/{uid}/DHT.json";
@@ -202,7 +202,7 @@ namespace restaurant.ViewModels
                 var authConfig = new FirebaseAuthConfig
                 {
                     ApiKey = WebApiKey,
-                    AuthDomain = "restaurant-3e115.firebaseapp.com",
+                    AuthDomain = "restaurant-ad63f.firebaseapp.com",
                     Providers = new FirebaseAuthProvider[]
                     {
                         new EmailProvider()

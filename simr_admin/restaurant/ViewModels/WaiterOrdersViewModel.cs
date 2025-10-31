@@ -15,7 +15,7 @@ namespace restaurant.ViewModels
 {
     internal class WaiterOrdersViewModel : INotifyPropertyChanged
     {
-        private const string DatabaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string DatabaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private readonly FirebaseClient _firebaseClient;
         private string _userId;
         private bool _isRefreshing;
@@ -123,8 +123,8 @@ namespace restaurant.ViewModels
                             key = key.Substring(1);
                             order.ids = "Id: " + key;
 
-                            var itemIds = order.food?.Split(' ') ?? Array.Empty<string>();
-                            var quantities = order.quantities?.Split(' ') ?? Array.Empty<string>();
+                            var itemIds = order.food?.Split(',') ?? Array.Empty<string>();
+                            var quantities = order.quantities?.Split(',') ?? Array.Empty<string>();
                             var itemsList = new List<string>();
 
                             for (int i = 0; i < itemIds.Length && i < quantities.Length; i++)
@@ -200,19 +200,23 @@ namespace restaurant.ViewModels
 
             try
             {
-                await _firebaseClient
-                    .Child($"kitchen/{_userId}/menu/orders/list/{orderId}")
-                    .DeleteAsync();
-
-                MainThread.BeginInvokeOnMainThread(() =>
+                var order = CookedOrders.FirstOrDefault(o => o.id == orderId);
+                if (order != null)
                 {
-                    var order = CookedOrders.FirstOrDefault(o => o.id == orderId);
-                    if (order != null)
+                    double totalPrice = CalculateOrderPrice(order);
+
+                    await UpdateMonthlyProfit(totalPrice);
+
+                    await _firebaseClient
+                        .Child($"kitchen/{_userId}/menu/orders/list/{orderId}")
+                        .DeleteAsync();
+
+                    MainThread.BeginInvokeOnMainThread(() =>
                     {
                         CookedOrders.Remove(order);
-                    }
-                    UpdateTitles();
-                });
+                        UpdateTitles();
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -226,25 +230,69 @@ namespace restaurant.ViewModels
 
             try
             {
-                await _firebaseClient
-                    .Child($"kitchen/{_userId}/menu/orders/list/{orderId}")
-                    .DeleteAsync();
-
-                MainThread.BeginInvokeOnMainThread(() =>
+                var order = CanceledWithFeeOrders.FirstOrDefault(o => o.id == orderId);
+                if (order != null)
                 {
-                    var order = CanceledWithFeeOrders.FirstOrDefault(o => o.id == orderId);
-                    if (order != null)
+                    double totalPrice = CalculateOrderPrice(order);
+                    double cancellationFee = Math.Round(totalPrice * 0.2, 2);
+
+                    await UpdateMonthlyProfit(cancellationFee);
+
+                    await _firebaseClient
+                        .Child($"kitchen/{_userId}/menu/orders/list/{orderId}")
+                        .DeleteAsync();
+
+                    MainThread.BeginInvokeOnMainThread(() =>
                     {
                         CanceledWithFeeOrders.Remove(order);
-                    }
-                    UpdateTitles();
-                });
+                        UpdateTitles();
+                    });
 
-                await Application.Current.MainPage.DisplayAlert("Success", "Canceled order deleted", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Success", "Canceled order deleted", "OK");
+                }
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", $"Failed to delete canceled order: {ex.Message}", "OK");
+            }
+        }
+
+        private double CalculateOrderPrice(OrderItemWaiter order)
+        {
+            double totalPrice = 0;
+
+            if (!string.IsNullOrEmpty(order.price))
+            {
+                var priceParts = order.price.Split(' ');
+                foreach (var part in priceParts)
+                {
+                    if (double.TryParse(part, out double price))
+                    {
+                        totalPrice += price;
+                    }
+                }
+            }
+
+            return totalPrice;
+        }
+
+        private async Task UpdateMonthlyProfit(double amount)
+        {
+            try
+            {
+                string currentMonthYear = DateTime.Now.ToString("MM-yyyy");
+
+                var profitRef = _firebaseClient
+                    .Child($"users/{_userId}/profit/{currentMonthYear}");
+
+                var currentProfit = await profitRef.OnceSingleAsync<double?>();
+
+                double newProfit = (currentProfit ?? 0) + amount;
+                await profitRef.PutAsync(newProfit);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to update profit: {ex.Message}", "OK");
             }
         }
 

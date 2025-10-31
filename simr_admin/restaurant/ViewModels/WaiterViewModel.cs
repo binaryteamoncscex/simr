@@ -47,7 +47,7 @@ namespace restaurant.ViewModels
             if (string.IsNullOrEmpty(uid))
                 return;
 
-            var firebase = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            var firebase = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
             var userEntry = await firebase.Child("users").Child(uid).OnceSingleAsync<User>();
             if (userEntry == null || string.IsNullOrEmpty(userEntry.Owner)) return;
 

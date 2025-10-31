@@ -33,16 +33,14 @@ namespace restaurant.ViewModels
         {
             _key = key;
             _userUid = Preferences.Get("uid", string.Empty);
-            _firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            _firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
             _original = menuItem;
-
             Name = menuItem.name;
             Photo = menuItem.photo ?? string.Empty;
             Price = menuItem.price ?? string.Empty;
             _initialCategory = menuItem.category ?? string.Empty;
             Allergens = menuItem.allergens ?? string.Empty;
             NutritionalInfo = menuItem.nutritional ?? string.Empty;
-
             SaveCommand = new AsyncRelayCommand(SaveAsync);
         }
 
@@ -50,7 +48,6 @@ namespace restaurant.ViewModels
         {
             await LoadCategories();
             await LoadIngredients();
-
             if (!string.IsNullOrEmpty(_initialCategory) && Categories.Contains(_initialCategory))
                 SelectedCategory = _initialCategory;
         }
@@ -60,9 +57,7 @@ namespace restaurant.ViewModels
             var data = await _firebaseClient
                 .Child($"kitchen/{_userUid}/menu/categories")
                 .OnceSingleAsync<Dictionary<string, string>>();
-
             Categories.Clear();
-
             if (data != null)
             {
                 foreach (var entry in data)
@@ -72,25 +67,22 @@ namespace restaurant.ViewModels
 
         private async Task LoadIngredients()
         {
-            var list = await _firebaseClient
+            var data = await _firebaseClient
                 .Child($"kitchen/{_userUid}/ingredients/list")
                 .OnceSingleAsync<List<Ingredient>>();
 
-            if (list == null)
+            if (data == null)
                 return;
 
             IngredientsList.Clear();
+            var ingredientNames = _original.ingredients?.Split(' ') ?? new string[0];
+            var quantities = _original.quantities?.Split(' ') ?? new string[0];
 
-            var ingredientNames = _original.ingredients?.Split(' ') ?? [];
-            var quantities = _original.quantities?.Split(' ') ?? [];
-
-            foreach (var ingr in list)
+            foreach (var ingr in data)
             {
                 if (ingr == null) continue;
-
                 ingr.IsSelected = false;
                 ingr.EnteredQuantity = "";
-
                 if (ingredientNames.Contains(ingr.name))
                 {
                     ingr.IsSelected = true;
@@ -98,7 +90,6 @@ namespace restaurant.ViewModels
                     if (idx < quantities.Length)
                         ingr.EnteredQuantity = quantities[idx];
                 }
-
                 IngredientsList.Add(ingr);
             }
         }
@@ -106,7 +97,6 @@ namespace restaurant.ViewModels
         private async Task SaveAsync()
         {
             var selectedIngredients = IngredientsList.Where(i => i.IsSelected).ToList();
-
             if (string.IsNullOrWhiteSpace(Photo) ||
                 string.IsNullOrWhiteSpace(Price) ||
                 selectedIngredients.Count == 0 ||
@@ -129,10 +119,8 @@ namespace restaurant.ViewModels
 
             if (!string.IsNullOrWhiteSpace(SelectedCategory))
                 updatedFields["category"] = SelectedCategory;
-
             if (!string.IsNullOrWhiteSpace(Allergens))
                 updatedFields["allergens"] = Allergens;
-
             if (!string.IsNullOrWhiteSpace(NutritionalInfo))
                 updatedFields["nutritional"] = NutritionalInfo;
 

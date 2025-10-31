@@ -50,7 +50,7 @@ namespace restaurant.ViewModels
 
         public ClockingEmplViewModel()
         {
-            _firebase = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            _firebase = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
             _uid = Preferences.Get("uid", "");
             ToggleClockingCommand = new Command(async () => await ToggleClocking());
             LoadEmployeeData();

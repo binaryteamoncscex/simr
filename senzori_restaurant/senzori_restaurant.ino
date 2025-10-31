@@ -4,8 +4,8 @@
 #include <Firebase_ESP_Client.h>
 #include <DHT.h>
 
-#define FIREBASE_HOST "restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app"
-#define FIREBASE_AUTH "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k"
+#define FIREBASE_HOST "restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app"
+#define FIREBASE_AUTH "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w"
 #define DHTPIN D2
 #define DHTTYPE DHT11
 const int fanRelay = D3;
@@ -28,7 +28,7 @@ const char* htmlForm = R"rawliteral(
 <html><body>
 <h2>Configurare ESP32</h2>
 <form action="/save" method="GET">
-WiFi SSID:<br><input type="text" name="ssid"><br>
+WiFi SSID:<br><input type="text" name="/ssid"><br>
 WiFi Parolă:<br><input type="password" name="pass"><br>
 Email SIMR:<br><input type="text" name="email"><br>
 Parolă SIMR:<br><input type="password" name="fpass"><br>
@@ -211,7 +211,6 @@ void loop() {
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/5/quantity", sensor5);
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/6/quantity", sensor6);
     Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/7/quantity", sensor7);
-    Firebase.RTDB.setInt(&fbdo, "/kitchen/" + userID + "/ingredients/list/8/quantity", sensor8);
 
     Firebase.RTDB.setFloat(&fbdo, "/users/" + userID + "/DHT/temp", temp);
     Firebase.RTDB.setFloat(&fbdo, "/users/" + userID + "/DHT/umd", humidity);

@@ -9,7 +9,7 @@ namespace restaurant.ViewModels
 {
     internal class ForgotViewModel : INotifyPropertyChanged
     {
-        public string webApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
+        public string webApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
         private string email;
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,7 +42,7 @@ namespace restaurant.ViewModels
             var authConfig = new FirebaseAuthConfig
             {
                 ApiKey = webApiKey,
-                AuthDomain = "restaurant-3e115.firebaseapp.com",
+                AuthDomain = "restaurant-ad63f.firebaseapp.com",
                 Providers = new FirebaseAuthProvider[]
                 {
                     new EmailProvider()

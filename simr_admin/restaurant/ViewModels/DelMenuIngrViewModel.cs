@@ -9,11 +9,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 namespace restaurant.ViewModels
 {
     public partial class DelMenuIngrViewModel : ObservableObject
     {
-        private const string FirebaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string FirebaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private readonly FirebaseClient _firebaseClient = new FirebaseClient(FirebaseUrl);
         private readonly string _userUid = Preferences.Get("uid", string.Empty);
 
@@ -27,7 +28,6 @@ namespace restaurant.ViewModels
         public IAsyncRelayCommand RefreshCommand { get; }
         public ICommand AddMenuIngr { get; }
         public IAsyncRelayCommand<IngredientEntry> EditIngredientCommand { get; }
-
 
         public DelMenuIngrViewModel(INavigation navigation)
         {
@@ -48,38 +48,35 @@ namespace restaurant.ViewModels
             try
             {
                 IsRefreshing = true;
-                var firebaseItems = await _firebaseClient
+                var raw = await _firebaseClient
                     .Child($"kitchen/{_userUid}/ingredients/list")
-                    .OnceSingleAsync<dynamic>();
+                    .OnceSingleAsync<JToken>();
 
                 Ingredients.Clear();
 
-                if (firebaseItems == null)
+                if (raw == null || !raw.HasValues)
                     return;
 
-                var token = JToken.FromObject(firebaseItems);
-
-                if (token.Type == JTokenType.Object)
+                if (raw is JArray arr)
                 {
-                    foreach (var prop in ((JObject)token).Properties())
+                    for (int i = 0; i < arr.Count; i++)
                     {
-                        var ingr = prop.Value.ToObject<Ingredient>();
-                        if (ingr != null)
+                        var token = arr[i];
+                        if (token != null && token.Type == JTokenType.Object)
                         {
-                            Ingredients.Add(new IngredientEntry { Key = prop.Name, Value = ingr });
+                            var ingr = token.ToObject<Ingredient>();
+                            if (ingr != null && !string.IsNullOrWhiteSpace(ingr.name))
+                                Ingredients.Add(new IngredientEntry { Key = i.ToString(), Value = ingr });
                         }
                     }
                 }
-                else if (token.Type == JTokenType.Array)
+                else if (raw is JObject obj)
                 {
-                    var array = (JArray)token;
-                    for (int i = 0; i < array.Count; i++)
+                    foreach (var prop in obj.Properties())
                     {
-                        var ingr = array[i].ToObject<Ingredient>();
-                        if (ingr != null)
-                        {
-                            Ingredients.Add(new IngredientEntry { Key = $"index_{i}", Value = ingr });
-                        }
+                        var ingr = prop.Value.ToObject<Ingredient>();
+                        if (ingr != null && !string.IsNullOrWhiteSpace(ingr.name))
+                            Ingredients.Add(new IngredientEntry { Key = prop.Name, Value = ingr });
                     }
                 }
             }
@@ -88,11 +85,13 @@ namespace restaurant.ViewModels
                 IsRefreshing = false;
             }
         }
+
         private async Task EditIngredientAsync(IngredientEntry entry, INavigation navigation)
         {
             if (entry == null || entry.Value == null) return;
-            await navigation.PushAsync(new EditMenuIngr(entry.Key.Substring("index_".Length), entry.Value));
+            await navigation.PushAsync(new EditMenuIngr(entry.Key, entry.Value));
         }
+
         private async Task DeleteIngredientAsync(string key)
         {
             if (string.IsNullOrWhiteSpace(_userUid) || string.IsNullOrWhiteSpace(key))
@@ -101,44 +100,29 @@ namespace restaurant.ViewModels
             bool confirm = await App.Current.MainPage.DisplayAlert("Confirm", "Delete ingredient?", "Yes", "No");
             if (!confirm) return;
 
-            var firebaseItems = await _firebaseClient
-                .Child($"kitchen/{_userUid}/ingredients/list")
-                .OnceSingleAsync<dynamic>();
-
-            if (firebaseItems == null)
-                return;
-
-            var token = JToken.FromObject(firebaseItems);
-
-            if (token.Type == JTokenType.Object)
+            try
             {
                 await _firebaseClient
-                    .Child($"kitchen/{_userUid}/ingredients/list/{key}")
+                    .Child($"kitchen/{_userUid}/ingredients/list")
+                    .Child(key)
                     .DeleteAsync();
+
+                await LoadIngredientsAsync();
+                await App.Current.MainPage.DisplayAlert("Success", "Ingredient deleted.", "OK");
             }
-            else if (token.Type == JTokenType.Array)
+            catch (Exception ex)
             {
-                var array = (JArray)token;
-                if (key.StartsWith("index_") && int.TryParse(key.Replace("index_", ""), out int idx))
-                {
-                    if (idx >= 0 && idx < array.Count)
-                        array.RemoveAt(idx);
-
-                    await _firebaseClient
-                        .Child($"kitchen/{_userUid}/ingredients/list")
-                        .PutAsync(array.ToObject<List<Ingredient>>());
-                }
+                await App.Current.MainPage.DisplayAlert("Error", $"Failed to delete ingredient: {ex.Message}", "OK");
             }
-
-            await LoadIngredientsAsync();
-            await App.Current.MainPage.DisplayAlert("Success", "Ingredient deleted.", "OK");
         }
     }
+
     public class IngredientEntry
     {
         public string Key { get; set; }
         public Ingredient Value { get; set; }
     }
+
     public class Ingredient : INotifyPropertyChanged
     {
         public string name { get; set; }
@@ -150,6 +134,7 @@ namespace restaurant.ViewModels
         public double replacement { get; set; }
         public string date { get; set; }
         public int days { get; set; }
+
         private bool _isSelected;
         public bool IsSelected
         {
@@ -165,6 +150,7 @@ namespace restaurant.ViewModels
                 }
             }
         }
+
         private string _enteredQuantity;
         public string EnteredQuantity
         {
@@ -178,6 +164,7 @@ namespace restaurant.ViewModels
                 }
             }
         }
+
         public int DaysLeft
         {
             get
@@ -187,9 +174,10 @@ namespace restaurant.ViewModels
                     var expirationDate = loadedDate.AddDays(days);
                     return Math.Max(0, (expirationDate - DateTime.Today).Days);
                 }
-                return -1;
+                return 0;
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propName = null)
         {

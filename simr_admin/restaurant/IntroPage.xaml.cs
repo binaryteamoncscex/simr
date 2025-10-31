@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Storage;
+using restaurant.ViewModels;
 using System;
 
 namespace restaurant;
@@ -9,20 +10,21 @@ public partial class IntroPage : ContentPage
 {
     private readonly bool _isFirstLaunch;
     private readonly bool _rememberMe;
-
+    private readonly IntroViewModel viewModel;
+    private static INavigation navigation;
     public IntroPage(bool isFirstLaunch, bool rememberMe)
     {
         InitializeComponent();
         _isFirstLaunch = isFirstLaunch;
         _rememberMe = rememberMe;
+        navigation = Navigation;
+        viewModel = new IntroViewModel(navigation);
+        BindingContext = viewModel;
         Loaded += OnPageLoaded;
     }
 
     private void OnPageLoaded(object sender, EventArgs e)
     {
-        var viewModel = new ViewModels.IntroViewModel(Navigation);
-        BindingContext = viewModel;
-
         if (!_isFirstLaunch && !_rememberMe)
         {
             if (DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.MacCatalyst)

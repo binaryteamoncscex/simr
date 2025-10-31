@@ -1,4 +1,4 @@
-// src/main/java/com/example/apptable/PentruAplicatiaInSine/RecommendationsScreen.kt
+
 package com.example.apptable.PentruAplicatiaInSine
 
 import androidx.compose.foundation.background
@@ -70,13 +70,7 @@ fun RecommendationsScreen(navController: NavController) {
                 )
 
 
-                // Aici va veni logica și UI-ul pentru recomandările Gemini AI
-                // De exemplu:
-                // TextField pentru input (ex: "Ce poftă ai?", "Ce ingrediente îți plac?")
-                // Buton pentru a genera recomandări
-                // Zona de afișare a rezultatelor (text, imagini etc.)
 
-                // Placeholder pentru secțiunea de recomandări
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

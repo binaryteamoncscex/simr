@@ -1,15 +1,22 @@
 ﻿using Android.App;
 using Android.Runtime;
+using Firebase;
+using Microsoft.Maui;
 
-namespace restaurant;
-
-[Application]
-public class MainApplication : MauiApplication
+namespace restaurant
 {
-    public MainApplication(IntPtr handle, JniHandleOwnership ownership)
-        : base(handle, ownership)
+    [Application]
+    public class MainApplication : MauiApplication
     {
-    }
+        public MainApplication(IntPtr handle, JniHandleOwnership ownerShip)
+            : base(handle, ownerShip) { }
 
-    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            FirebaseApp.InitializeApp(this);
+        }
+
+        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+    }
 }

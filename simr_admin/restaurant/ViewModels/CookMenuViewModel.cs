@@ -12,7 +12,7 @@ namespace restaurant.ViewModels
 {
     public class CookMenuViewModel : INotifyPropertyChanged
     {
-        private string DatabaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private string DatabaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private FirebaseClient firebase;
         private string _userId;
 

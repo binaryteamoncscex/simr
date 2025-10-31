@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "559807750530",
+    "firebase_url": "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "restaurant-ad63f",
+    "storage_bucket": "restaurant-ad63f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559807750530:android:f144f148843325d7cd6f9b",
+        "android_client_info": {
+          "package_name": "com.simr.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9K2jA0IjAhBrxr6mFTtOMKkZtuo1zzmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,9 +23,10 @@ namespace restaurant.ViewModels
             public int replacement { get; set; }
             public string provider { get; set; }
             public int used { get; set; }
+            public string date { get; set; }
         }
 
-        private const string FirebaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string FirebaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private FirebaseClient _firebaseClient = new FirebaseClient(FirebaseUrl);
         private string _userUid = Preferences.Get("uid", string.Empty);
 
@@ -37,7 +38,6 @@ namespace restaurant.ViewModels
         private string _price;
         private string _days;
         private string _selectedProvider;
-
         public string Name
         {
             get => _name;
@@ -152,7 +152,8 @@ namespace restaurant.ViewModels
                     days = daysValue,
                     replacement = replacementValue,
                     provider = SelectedProvider,
-                    used = 0
+                    used = 0,
+                    date = DateTime.Now.ToString("dd/MM/yyyy")
                 };
 
                 var countRef = _firebaseClient.Child($"kitchen/{_userUid}/ingredients/count");

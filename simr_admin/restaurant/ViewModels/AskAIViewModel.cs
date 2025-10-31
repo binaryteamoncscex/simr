@@ -14,7 +14,7 @@ namespace restaurant.ViewModels
         private string _aiResponse;
         private bool _isBusy;
 
-        private const string GeminiApiKey = "AIzaSyBSRT31STcLVVr6CAOaUOlGmfp3PuRrHJ8";
+        private const string GeminiApiKey = "AIzaSyCebfJp90RH9a_GHlG0rNpBQ7EY5vk52wc";
         private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=";
 
         public AskAIViewModel(string statistics)

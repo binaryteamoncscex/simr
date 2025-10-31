@@ -14,7 +14,7 @@ namespace restaurant.ViewModels
     public class MyAccountViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+        FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
 
         public ObservableCollection<string> Timezones { get; }
         public ObservableCollection<string> DriveThruOptions { get; }

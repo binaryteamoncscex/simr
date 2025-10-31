@@ -80,13 +80,13 @@ fun PreComandaScreen(navController: NavController, tableId: String) {
     val auth = FirebaseAuth.getInstance()
     val userId = auth.currentUser?.uid
     val database = Firebase.database
-    val coroutineScope = rememberCoroutineScope() // Adaugă coroutineScope aici
+    val coroutineScope = rememberCoroutineScope()
 
     val menuRef = userId?.let { database.getReference("kitchen").child(it).child("menu").child("list") }
     val orderRef = userId?.let { database.getReference("kitchen").child(it).child("menu").child("orders").child("list") }
     val userCurrencyRef = userId?.let { database.getReference("users").child(it).child("currency") }
 
-    // Calea pentru FidelityCard - presupunem că NU mai are "DHT" conform modificării tale recente
+
     val fidelityCardListRef = userId?.let { database.getReference("users").child(it).child("FidelityCard").child("list") }
 
     val menuItems = remember { mutableStateListOf<MenuItem>() }
@@ -129,7 +129,7 @@ fun PreComandaScreen(navController: NavController, tableId: String) {
                 }
             }
 
-            menuRef.addValueEventListener(listener) // Corrected line
+            menuRef.addValueEventListener(listener)
 
             onDispose {
                 menuRef.removeEventListener(listener)
@@ -382,28 +382,28 @@ fun PreComandaScreen(navController: NavController, tableId: String) {
                 Button(
                     onClick = {
                         if (userId == null) {
-                            // Moved to Main Dispatcher
+
                             coroutineScope.launch(Dispatchers.Main) {
                                 Toast.makeText(context, "User not authenticated.", Toast.LENGTH_SHORT).show()
                             }
                             return@Button
                         }
                         if (fidelityCardNumber.isBlank()) {
-                            // Moved to Main Dispatcher
+
                             coroutineScope.launch(Dispatchers.Main) {
                                 Toast.makeText(context, "Please enter a fidelity card number.", Toast.LENGTH_SHORT).show()
                             }
                             return@Button
                         }
 
-                        coroutineScope.launch { // Folosește coroutineScope pentru a apela funcția suspend
+                        coroutineScope.launch {
                             verifyAndIncrementFidelityCard(
                                 userId = userId,
                                 fidelityCardNumber = fidelityCardNumber,
                                 database = database,
                                 context = context
                             ) { success ->
-                                // This callback already runs on the Main thread because of the launch above
+
                                 if (success) {
                                     Toast.makeText(context, "Fidelity card applied!", Toast.LENGTH_SHORT).show()
                                 } else {
@@ -437,19 +437,16 @@ fun PreComandaScreen(navController: NavController, tableId: String) {
     }
 }
 
-// Funcție pentru a verifica dacă 'uses' este multiplu de 5 și a genera un cod de discount
-// Această funcție este apelată după ce "uses" a fost incrementat în Firebase.
-// !! IMPORTANT: Asigură-te că valoarea "procent" de sub FidelityCard/list/{cardCode}
-// există și este un număr (e.g., 5, 10, 15), nu un string sau altceva.
+
 suspend fun checkAndAwardDiscount(
     userId: String,
     cardCode: String,
-    currentUsesAfterIncrement: Int, // Primim valoarea deja incrementată
+    currentUsesAfterIncrement: Int,
     database: FirebaseDatabase,
     context: Context
-) = withContext(Dispatchers.IO) { // Rulează operațiunile de rețea pe un thread de I/O
-    // Calea corectă către nodul cardului de fidelitate.
-    // Acum, sub "list", avem un obiect cu "email" și "uses".
+) = withContext(Dispatchers.IO) {
+
+
     val fidelityCardRef = database.getReference("users")
         .child(userId)
         .child("FidelityCard")

@@ -48,44 +48,80 @@ fun MeniuScreen(navController: NavController, tableId: String) {
         menuRef?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 menuItems.clear()
-                snapshot.children.forEach { itemSnapshot ->
-                    val id = itemSnapshot.key ?: return@forEach
 
-                    // MODIFICĂRI AICI pentru a preveni "Cannot infer type"
-                    // Citim ca Any, apoi castăm/convertim în siguranță
-                    val isAvailable = itemSnapshot.child("menuAvailability").getValue(Any::class.java).let {
-                        when (it) {
-                            is Boolean -> it
-                            is Long -> it != 0L // Considerăm 0 ca false, orice altceva true
-                            is String -> it.toBooleanStrictOrNull() ?: (it == "true") // Convertim string "true"/"false"
-                            else -> true // Valoare implicită dacă tipul nu e recunoscut sau e null
-                        }
-                    }
-
-                    val category = itemSnapshot.child("category").getValue(String::class.java) ?: "Other" // Acest tip ar trebui să fie de obicei String
-
-                    // Asigură-te că citești doar elementele disponibile dacă asta e logica dorită
-                    if (isAvailable) {
-                        menuItems.add(
-                            MenuItem(
-                                id = id,
-                                name = itemSnapshot.child("name").getValue(String::class.java) ?: "Unknown",
-                                photo = itemSnapshot.child("photo").getValue(String::class.java) ?: "",
-                                price = itemSnapshot.child("price").getValue(String::class.java) ?: "0.0",
-                                ingredients = itemSnapshot.child("ingredients").getValue(String::class.java) ?: "",
-                                quantities = itemSnapshot.child("quantities").getValue(String::class.java) ?: "",
-                                isAvailable = true, // Deja filtrat de isAvailable de mai sus
-                                category = category,
-                                nutritional = itemSnapshot.child("nutritional").getValue(String::class.java)
-                                    ?: "No nutritional information available",
-                                allergens = itemSnapshot.child("allergens").getValue(String::class.java)
-                                    ?: "No allergens declared"
-                            )
-                        )
-                    }
+                // 1. Preluăm toate ingredientele și stocurile într-o mapă
+                val ingredientsRef = userId?.let {
+                    database.getReference("kitchen").child(it).child("ingredients").child("list")
                 }
-                menuItems.sortBy { it.category }
+
+                ingredientsRef?.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(ingredientsSnap: DataSnapshot) {
+                        val stockMap = mutableMapOf<String, Double>()
+                        ingredientsSnap.children.forEach { ingrSnap ->
+                            val ingrObj = ingrSnap.getValue(object : GenericTypeIndicator<Map<String, Any>>() {})
+                            val name = ingrObj?.get("name") as? String
+                            val qty = (ingrObj?.get("quantity") as? Number)?.toDouble() ?: 0.0
+                            if (name != null) {
+                                stockMap[name] = qty
+                            }
+                        }
+
+                        // 2. Iterăm prin meniuri și verificăm disponibilitatea
+                        snapshot.children.forEach { itemSnapshot ->
+                            val id = itemSnapshot.key ?: return@forEach
+
+                            val category = itemSnapshot.child("category").getValue(String::class.java) ?: "Other"
+                            val name = itemSnapshot.child("name").getValue(String::class.java) ?: "Unknown"
+                            val photo = itemSnapshot.child("photo").getValue(String::class.java) ?: ""
+                            val price = itemSnapshot.child("price").getValue(String::class.java) ?: "0.0"
+                            val ingredientsStr = itemSnapshot.child("ingredients").getValue(String::class.java) ?: ""
+                            val quantitiesStr = itemSnapshot.child("quantities").getValue(String::class.java) ?: ""
+                            val nutritional = itemSnapshot.child("nutritional").getValue(String::class.java)
+                                ?: "No nutritional information available"
+                            val allergens = itemSnapshot.child("allergens").getValue(String::class.java)
+                                ?: "No allergens declared"
+
+                            val ingredientNames = ingredientsStr.split(" ").filter { it.isNotBlank() }
+                            val neededQuantities = quantitiesStr.split(" ").mapNotNull { it.toDoubleOrNull() }
+
+                            var isAvailable = true
+                            if (ingredientNames.size == neededQuantities.size) {
+                                ingredientNames.forEachIndexed { index, ingrName ->
+                                    val stock = stockMap[ingrName] ?: 0.0
+                                    if (stock < neededQuantities[index]) {
+                                        isAvailable = false
+                                    }
+                                }
+                            } else {
+                                isAvailable = false
+                            }
+
+                            if (isAvailable) {
+                                menuItems.add(
+                                    MenuItem(
+                                        id = id,
+                                        name = name,
+                                        photo = photo,
+                                        price = price,
+                                        ingredients = ingredientsStr,
+                                        quantities = quantitiesStr,
+                                        isAvailable = true,
+                                        category = category,
+                                        nutritional = nutritional,
+                                        allergens = allergens
+                                    )
+                                )
+                            }
+                        }
+                        menuItems.sortBy { it.category }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("Firebase", "Failed to read ingredients", error.toException())
+                    }
+                })
             }
+
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("Firebase", "Failed to read menu", error.toException())

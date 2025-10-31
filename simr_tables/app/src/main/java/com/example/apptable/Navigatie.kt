@@ -47,7 +47,6 @@ class Navigatie : ComponentActivity() {
                 composable("redeem_code") {
                     RedeemCodeScreen(navController = navController)
                 }
-                // MODIFICARE AICI: Adaugă ruta pentru FidelityCardScreen
                 composable("fidelity_screen") {
                     FidelityCardScreen(navController = navController)
                 }

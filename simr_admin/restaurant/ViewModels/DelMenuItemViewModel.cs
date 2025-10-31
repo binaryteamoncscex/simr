@@ -14,7 +14,7 @@ namespace restaurant.ViewModels
 {
     public partial class DelMenuItemViewModel : ObservableObject
     {
-        private const string FirebaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string FirebaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private readonly FirebaseClient _firebaseClient = new FirebaseClient(FirebaseUrl);
         private string _userUid = Preferences.Get("uid", string.Empty);
         private readonly INavigation _navigation;
@@ -50,7 +50,6 @@ namespace restaurant.ViewModels
 
             if (firebaseData == null)
             {
-                await App.Current.MainPage.DisplayAlert("Info", "No menu items available!", "OK");
                 return;
             }
 

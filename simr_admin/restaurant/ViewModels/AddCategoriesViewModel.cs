@@ -27,7 +27,7 @@ namespace restaurant.ViewModels
 
         public AddCategoriesViewModel()
         {
-            firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
             AddCategoryCommand = new Command(async () => await AddCategory());
         }
 

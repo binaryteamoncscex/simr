@@ -34,7 +34,7 @@ namespace restaurant.ViewModels
             ProviderName = name;
             ProviderEmail = email;
             uid = Preferences.Get("uid", null);
-            firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
             SaveCommand = new Command(async () => await SaveChanges());
             Navigation = navigation;
         }

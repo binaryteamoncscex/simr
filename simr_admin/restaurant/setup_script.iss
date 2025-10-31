@@ -23,7 +23,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ChangesAssociations=yes
 OutputDir=D:\Scoala\24-25\Info\CEX GL\Robotica\installers
 OutputBaseFilename=SIMR Admin
-SetupIconFile=D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net9.0-windows10.0.19041.0\win10-x64\appicon.ico
+SetupIconFile=D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net8.0-windows10.0.19041.0\win10-x64\appicon.ico
 SolidCompression=yes
 WizardStyle=modern
 DisableWelcomePage=no
@@ -43,8 +43,8 @@ english.LoadingComponents=Loading components...
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net9.0-windows10.0.19041.0\win10-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net9.0-windows10.0.19041.0\win10-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net8.0-windows10.0.19041.0\win10-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\bin\Release\net8.0-windows10.0.19041.0\win10-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue

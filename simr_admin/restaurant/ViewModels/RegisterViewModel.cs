@@ -11,13 +11,13 @@ namespace restaurant.ViewModels
 {
     internal class RegisterViewModel : INotifyPropertyChanged
     {
-        public string webApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
+        public string webApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
         private INavigation _navigation;
         private string email;
         private string password;
         private string name;
 
-        private FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+        private FirebaseClient firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Email
@@ -70,7 +70,7 @@ namespace restaurant.ViewModels
                 var authConfig = new FirebaseAuthConfig
                 {
                     ApiKey = webApiKey,
-                    AuthDomain = "restaurant-3e115.firebaseapp.com",
+                    AuthDomain = "restaurant-ad63f.firebaseapp.com",
                     Providers = new FirebaseAuthProvider[]
                     {
                         new EmailProvider()

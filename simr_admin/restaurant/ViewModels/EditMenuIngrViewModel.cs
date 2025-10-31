@@ -29,7 +29,7 @@ namespace restaurant.ViewModels
         {
             _key = key;
             _userUid = Preferences.Get("uid", string.Empty);
-            _firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+            _firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
 
             Name = ingredient.name;
             Unit = ingredient.unit;

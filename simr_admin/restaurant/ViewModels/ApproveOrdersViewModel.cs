@@ -18,8 +18,8 @@ namespace restaurant.ViewModels
     {
         private readonly FirebaseClient _firebaseClient;
         private readonly string _userId;
-        private readonly string _databaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
-        private const string SendGridApiKey = "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";
+        private readonly string _databaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
+        private const string SendGridApiKey = "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";
         private const string SenderEmail = "no-reply@management-restaurant.eu";
         private const string SenderName = "SIMR Orders";
 
@@ -33,7 +33,6 @@ namespace restaurant.ViewModels
             _firebaseClient = new FirebaseClient(_databaseUrl);
             ApproveOrderCommand = new Command<string>(async id => await UpdateOrderStatus(id, "approved"));
             DisapproveOrderCommand = new Command<string>(async id => await UpdateOrderStatus(id, "disapproved"));
-
             _ = InitAsync();
         }
 
@@ -61,13 +60,15 @@ namespace restaurant.ViewModels
                     .Child($"kitchen/{_userId}/ingredients/list")
                     .OnceSingleAsync<List<Ingredient>>();
 
-                var ingDict = new Dictionary<string, Ingredient>();
-                for (int i = 0; i < ingredientList.Count; i++)
+                if (ingredientList == null || ingredientList.Count <= 1)
                 {
-                    var ingredient = ingredientList[i];
-                    if (ingredient != null)
-                        ingDict[i.ToString()] = ingredient;
+                    return false;
                 }
+
+                var ingredientDict = ingredientList
+                    .Select((x, i) => new { x, i })
+                    .Where(e => e.x != null)
+                    .ToDictionary(e => e.i.ToString(), e => e.x);
 
                 var orderSnapshots = await _firebaseClient
                     .Child($"kitchen/{_userId}/ingredients/orders")
@@ -95,7 +96,7 @@ namespace restaurant.ViewModels
                     {
                         var key = ids[i].Trim();
                         var qty = (i < quants.Length ? quants[i].Trim() : "?");
-                        if (ingDict.TryGetValue(key, out var ingr))
+                        if (ingredientDict.TryGetValue(key, out var ingr))
                             formatted.Add($"{qty} {ingr.unit} x {ingr.name}");
                         else
                             formatted.Add($"{qty} ? x Unknown({key})");
@@ -113,7 +114,6 @@ namespace restaurant.ViewModels
                 return true;
             }
         }
-
         private async Task UpdateOrderStatus(string orderId, string newStatus)
         {
             await _firebaseClient
@@ -128,6 +128,7 @@ namespace restaurant.ViewModels
                 if (string.Equals(newStatus, "approved", StringComparison.OrdinalIgnoreCase))
                 {
                     await UpdateUsedIngredients(order);
+                    await UpdateMonthlyExpenses(order);
                     await SendEmailNotification(order);
                 }
 
@@ -143,6 +144,53 @@ namespace restaurant.ViewModels
             }
         }
 
+        private async Task UpdateMonthlyExpenses(OrderItem order)
+        {
+            try
+            {
+                string currentMonthYear = DateTime.Now.ToString("MM-yyyy");
+
+                double totalOrderPrice = await CalculateOrderPrice(order);
+
+                var expensesRef = _firebaseClient
+                    .Child($"users/{_userId}/expenses/{currentMonthYear}");
+
+                var currentExpenses = await expensesRef.OnceSingleAsync<double?>();
+
+                double newExpenses = (currentExpenses ?? 0) + totalOrderPrice;
+                await expensesRef.PutAsync(newExpenses);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to update expenses: {ex.Message}", "OK");
+            }
+        }
+
+        private async Task<double> CalculateOrderPrice(OrderItem order)
+        {
+            double totalPrice = 0;
+
+            var ids = order.Ingredient?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+            var quants = order.Quantity?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+
+            for (int i = 0; i < ids.Length; i++)
+            {
+                string ingrId = ids[i].Trim();
+                if (i >= quants.Length) continue;
+                if (!double.TryParse(quants[i].Trim(), out double qty)) continue;
+
+                var ingredient = await _firebaseClient
+                    .Child($"kitchen/{_userId}/ingredients/list/{ingrId}")
+                    .OnceSingleAsync<Ingredient>();
+
+                if (ingredient != null)
+                {
+                    totalPrice += qty * ingredient.price;
+                }
+            }
+
+            return totalPrice;
+        }
         private async Task UpdateUsedIngredients(OrderItem order)
         {
             var ids = order.Ingredient?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
@@ -252,6 +300,19 @@ namespace restaurant.ViewModels
             public string Price { get; set; }
             public string Status { get; set; }
             public string FormattedIngredients { get; set; }
+        }
+
+        public class Ingredient
+        {
+            public int days { get; set; }
+            public string name { get; set; }
+            public double price { get; set; }
+            public string provider { get; set; }
+            public double quantity { get; set; }
+            public double quarepl { get; set; }
+            public double replacement { get; set; }
+            public string unit { get; set; }
+            public double used { get; set; }
         }
     }
 }

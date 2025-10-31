@@ -29,7 +29,7 @@ namespace restaurant.ViewModels
         public ObservableCollection<EmployeeModel> Employees { get; set; } = new();
 
         private string currentUid = Preferences.Get("uid", "");
-        private FirebaseClient firebase = new("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+        private FirebaseClient firebase = new("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
 
         public ICommand DownloadExcelCommand { get; }
 
@@ -57,7 +57,7 @@ namespace restaurant.ViewModels
                 {
                     string name = u.ContainsKey("Name") ? u["Name"]?.ToString() ?? "" : "";
                     string type = u.ContainsKey("Type") ? u["Type"]?.ToString() ?? "" : "";
-                    string role = type == "cook" ? "Cook" : type == "waiter" ? "Waiter" : "Unknown";
+                    string role = type == "Cook" ? "Cook" : type == "Waiter" ? "Waiter" : "Unknown";
 
                     bool atWork = u.ContainsKey("at_work") && bool.TryParse(u["at_work"]?.ToString(), out var b) && b;
                     string status = atWork ? "Active" : "Inactive";
@@ -106,8 +106,6 @@ namespace restaurant.ViewModels
                 sheet.Cell(1, 5).Value = "Norm";
                 sheet.Cell(1, 6).Value = "Wage/h";
                 sheet.Cell(1, 7).Value = "Wage/mo";
-
-                // Data
                 for (int i = 0; i < Employees.Count; i++)
                 {
                     var emp = Employees[i];

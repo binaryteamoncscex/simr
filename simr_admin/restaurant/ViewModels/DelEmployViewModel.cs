@@ -12,8 +12,8 @@ namespace restaurant.ViewModels
 {
     internal class DelEmployViewModel : INotifyPropertyChanged
     {
-        private const string WebApiKey = "AIzaSyDzUE_U7yqtyJQu3ikQfw5rbYHC_Dk-m9k";
-        private readonly FirebaseClient _firebaseClient = new FirebaseClient("https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/");
+        private const string WebApiKey = "AIzaSyA531Jgr1ur5VjbloyRdAm6rKMtzk6VQ9w";
+        private readonly FirebaseClient _firebaseClient = new FirebaseClient("https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/");
         private readonly FirebaseAuthClient _authClient;
 
         private string _email;
@@ -48,7 +48,7 @@ namespace restaurant.ViewModels
             var authConfig = new FirebaseAuthConfig
             {
                 ApiKey = WebApiKey,
-                AuthDomain = "restaurant-3e115.firebaseapp.com",
+                AuthDomain = "restaurant-ad63f.firebaseapp.com",
                 Providers = new FirebaseAuthProvider[] { new EmailProvider() }
             };
             _authClient = new FirebaseAuthClient(authConfig);
@@ -59,16 +59,13 @@ namespace restaurant.ViewModels
         {
             try
             {
-                var currentUser = _authClient.User;
-                if (currentUser == null)
+                string ownerEmail = Preferences.Get("SavedUsername", string.Empty);
+                string ownerPassword = Preferences.Get("SavedPassword", string.Empty);
+                if(string.IsNullOrEmpty(ownerEmail))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "No authenticated owner found.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Owner email not found. Please re-login.", "OK");
                     return;
                 }
-
-                string ownerEmail = currentUser.Info.Email;
-                string ownerPassword = Preferences.Get("SavedPassword", string.Empty);
-
                 if (string.IsNullOrEmpty(ownerPassword))
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Owner password not found. Please re-login.", "OK");

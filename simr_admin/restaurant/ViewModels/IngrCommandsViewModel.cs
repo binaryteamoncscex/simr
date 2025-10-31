@@ -8,7 +8,6 @@ using Microsoft.Maui.Controls;
 using static restaurant.ViewModels.ApproveOrdersViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json.Linq;
 
 namespace restaurant.ViewModels
 {
@@ -16,7 +15,7 @@ namespace restaurant.ViewModels
     {
         private readonly FirebaseClient _firebaseClient;
         private readonly string _userId;
-        private readonly string _databaseUrl = "https://restaurant-3e115-default-rtdb.europe-west1.firebasedatabase.app/";
+        private readonly string _databaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
         private bool _navigated = false;
 
         public ObservableCollection<OrderItem> Orders { get; set; } = new();
@@ -40,18 +39,22 @@ namespace restaurant.ViewModels
             {
                 IsRefreshing = true;
 
+                var currency = await _firebaseClient
+                    .Child($"users/{_userId}/currency")
+                    .OnceSingleAsync<string>() ?? "RON";
+
                 var ingredientList = await _firebaseClient
                     .Child($"kitchen/{_userId}/ingredients/list")
                     .OnceSingleAsync<List<Ingredient>>();
 
-                var ingDict = new Dictionary<string, Ingredient>();
-
-                for (int i = 0; i < ingredientList.Count; i++)
+                var ingredientDict = new Dictionary<string, Ingredient>();
+                if (ingredientList != null)
                 {
-                    var ingredient = ingredientList[i];
-                    if (ingredient != null)
+                    for (int i = 0; i < ingredientList.Count; i++)
                     {
-                        ingDict[i.ToString()] = ingredient;
+                        var ingr = ingredientList[i];
+                        if (ingr != null)
+                            ingredientDict[i.ToString()] = ingr;
                     }
                 }
 
@@ -82,13 +85,16 @@ namespace restaurant.ViewModels
                         var key = ids[i].Trim();
                         var qty = (i < quants.Length ? quants[i].Trim() : "?");
 
-                        if (ingDict.TryGetValue(key, out var ingr))
+                        if (ingredientDict.TryGetValue(key, out var ingr))
                             formatted.Add($"{qty} {ingr.unit} x {ingr.name}");
                         else
                             formatted.Add($"{qty} ? x Unknown({key})");
                     }
 
                     order.FormattedIngredients = string.Join("\n", formatted);
+                    if (!string.IsNullOrEmpty(order.Price))
+                        order.Price = $"{order.Price} {currency}";
+
                     Orders.Add(order);
                 }
 
@@ -108,7 +114,6 @@ namespace restaurant.ViewModels
                 IsRefreshing = false;
             }
         }
-
         public async Task UpdateOrderStatus(OrderItem order, string newStatus)
         {
             try
@@ -120,21 +125,41 @@ namespace restaurant.ViewModels
                 var todayDate = DateTime.Today.ToString("dd/MM/yyyy");
 
                 var ids = order.Ingredient?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+                var quants = order.Quantity?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
 
-                foreach (var ingredientId in ids)
+                for (int i = 0; i < ids.Length; i++)
                 {
-                    var trimmedIngredientId = ingredientId.Trim();
-                    await _firebaseClient
-                        .Child($"kitchen/{_userId}/ingredients/list/{trimmedIngredientId}/date")
-                        .PutAsync($"\"{todayDate}\"");
+                    var ingredientId = ids[i].Trim();
+                    var quantityToAdd = (i < quants.Length) ? quants[i].Trim() : "0";
+
+                    var ingredient = await _firebaseClient
+                        .Child($"kitchen/{_userId}/ingredients/list/{ingredientId}")
+                        .OnceSingleAsync<Ingredient>();
+
+                    if (ingredient != null)
+                    {
+                        if (int.TryParse(ingredient.quantity.ToString(), out int currentQty) &&
+                            int.TryParse(quantityToAdd, out int addQty))
+                        {
+                            int newQuantity = currentQty + addQty;
+
+                            await _firebaseClient
+                                .Child($"kitchen/{_userId}/ingredients/list/{ingredientId}")
+                                .PatchAsync(new
+                                {
+                                    quantity = newQuantity,
+                                    date = todayDate
+                                });
+                        }
+                    }
                 }
 
-                await Application.Current.MainPage.DisplayAlert("Success", "Order delivered and ingredients updated.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Success", "Order delivered and ingredients stock updated.", "OK");
                 await LoadOrdersAsync();
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to update status or ingredient dates: {ex.Message}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to update status or ingredient stock: {ex.Message}", "OK");
             }
         }
     }
