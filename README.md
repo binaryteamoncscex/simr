@@ -1,138 +1,169 @@
-# Documentație tehnică - Sistem Inteligent de Management al Restaurantului (SIMR)
+# Technical Documentation – Intelligent Restaurant Management System (SIMR)
 
-## Descrierea problemei
+## **Problem Description**
 
-În industria HoReCa, procesele de gestionare a comenzilor, ingredientelor, personalului și interacțiunii cu clienții sunt în continuare efectuate în mare parte manual, ceea ce duce la:
+In the HoReCa industry, processes related to order management, ingredients, staff, and customer interaction are still mostly done manually, leading to:
 
-- Întârzieri în procesarea comenzilor și livrării acestora.
-- Erori umane în calcularea stocurilor și rețetelor.
-- Lipsa transparenței în monitorizarea consumului și profitabilității.
-- Costuri suplimentare datorate risipelor alimentare și aprovizionării haotice.
-- Experiență deficitară pentru client din cauza timpilor mari de așteptare și lipsei digitalizării.
+* Delays in processing and delivering orders
+* Human errors in stock calculation and recipes
+* Lack of transparency in monitoring consumption and profitability
+* Additional costs due to food waste and chaotic supply management
+* Poor customer experience caused by long waiting times and lack of digitalization
 
-Aceste probleme afectează profitabilitatea, satisfacția clientului și calitatea serviciilor.
+These issues affect profitability, customer satisfaction, and overall service quality.
 
-## Soluția propusă
+---
 
-SIMR este o platformă hibridă software-hardware care optimizează automatizat fluxurile dintr-un restaurant:
+## **Proposed Solution**
 
-- Digitalizează complet procesele de gestiune a stocurilor, comenzilor și personalului.
-- Utilizează IoT și senzori pentru monitorizarea în timp real a condițiilor de depozitare.
-- Integrează AI pentru recomandări de marketing și analize predictive.
-- Include modul drive-thru automatizat cu interfață pentru client.
-- Comunicarea și stocarea datelor se realizează în cloud (Firebase), garantând scalabilitatea și actualizarea în timp real.
+**SIMR** is a hybrid software-hardware platform that automates and optimizes restaurant workflows:
 
-## Public țintă
+* Fully digitalizes stock, order, and staff management
+* Uses IoT and sensors for real-time monitoring of storage conditions
+* Integrates AI for marketing recommendations and predictive analytics
+* Includes an automated drive-thru system with a client interface
+* Cloud-based communication and storage (Firebase) for scalability and real-time updates
 
-- Restaurante mici și medii ce doresc digitalizare rapidă și cu cost redus.
-- Lanțuri de restaurante care au nevoie de control centralizat asupra tuturor locațiilor.
-- Manageri și bucătari care doresc să optimizeze costurile și timpii de lucru.
-- Clienți orientați către experiențe digitale și rapide (comandă la masă sau drive-thru).
+---
 
-## Analiza pieței și diferențiatori
+## **Target Audience**
 
-Există soluții pe piață (Glovo, Tazz, Square POS), însă acestea acoperă doar parțial nevoile unui restaurant.  
-SIMR este unic prin:
+* Small and medium-sized restaurants needing fast, low-cost digitalization
+* Restaurant chains requiring centralized control across locations
+* Managers and chefs seeking to optimize costs and workflow
+* Customers wanting fast, digitalized ordering (table or drive-thru)
 
-- Gestiune complet automatizată a ingredientelor și meniurilor.
-- Drive-thru fizic integrat cu hardware și software.
-- Predicție AI pentru aprovizionare inteligentă.
-- Comenzi automate către furnizori în funcție de stocuri.
-- Integrare IoT pentru siguranța alimentelor (temperatură, umiditate, greutate).
+---
 
-## Funcționalități detaliate
+## **Market Analysis & Differentiators**
 
-### Aplicația Admin (MAUI – Windows & Android)
+Current solutions (Glovo, Tazz, Square POS) cover only limited aspects of restaurant operations.
+**SIMR stands out through:**
 
-- Gestiune ingrediente: adăugare, modificare, ștergere, cu urmărirea cantităților și unităților de măsură.
-- Alertare stocuri critice: notificări când ingredientele scad sub un prag definit.
-- Vizualizare meniuri și rețete: afișare compoziție produse, cantități necesare.
-- Statistici, rapoarte vizuale și analize AI:
-  - Previziune consum ingrediente → Reduce risipa alimentară.
-  - Analiză popularitate produse → Optimizează meniul.
-  - Sugestii aprovizionare → Comenzi automate către furnizori.
-  - Raport profitabilitate per produs → Ajută la decizii de business.
-- Control personal: creare conturi angajați, pontaj, roluri (chelner, bucătar, manager).
-- Predicție și recomandări AI: aprovizionare optimă pentru reducerea pierderilor.
+* Fully automated ingredient and menu management
+* Hardware–software–integrated physical drive-thru
+* AI-based smart restocking predictions
+* Automatic supplier ordering based on stock
+* IoT for food safety (temperature, humidity, weight)
 
-### Aplicația Client (Kotlin – Android)
+---
 
-- Acces meniu în timp real sincronizat cu stocurile.
-- Plasare comandă rapidă cu opțiuni de personalizare.
-- Alegere între servire la masă sau drive-thru.
-- Notificări despre statusul comenzii (pregătire, livrare).
-- Sistem de fidelitate al clienților cu carduri, respectiv coduri de reducere primite prin email / Happy Hour
+## **Detailed Functionalities**
 
-### Sistem IoT – Monitorizare și Automatizare
+### **Admin App (MAUI – Windows & Android)**
 
-#### Arduino Nano ESP32:
+* Ingredient management: add, edit, delete, track quantities and units
+* Critical stock alerts
+* Menu and recipe viewer: ingredient composition and required amounts
+* Statistics, visual reports, and AI analytics
 
-- Senzori presiune pentru măsurarea greutății ingredientelor.
-- DHT11 pentru control temperatură/umiditate în depozit.
-- Ventilatoare automate în funcție de valori critice.
-- Comunicare real-time cu Firebase pentru actualizarea aplicațiilor.
+  * Ingredient consumption forecasting
+  * Product popularity analysis
+  * Smart supply suggestions
+  * Profitability per product
+* Employee management: roles, accounts, time tracking
+* AI-based restocking recommendations
 
-#### Arduino UNO + Raspberry Pi 5:
+---
 
-- Senzor de mișcare pentru detectarea vehiculului la drive-thru.
-- Semafor LED pentru semnalizarea traficului la fereastra de drive-thru.
-- Afișaj LED cu mesaje dinamice pentru clienții care așteaptă.
-- Touchscreen interactiv cu aplicația client pentru plasarea comenzilor.
+### **Client App (Kotlin – Android)**
 
-## Securitate implementată
+* Real-time menu synced with stock levels
+* Fast order placement with customization options
+* Table service or drive-thru choice
+* Real-time order status notifications
+* Customer loyalty system (cards, coupons, Happy Hour discounts)
 
-- Autentificare Firebase (email + parolă) cu roluri configurate.
-- Reguli Firebase stricte pentru citire/scriere doar pe UID-ul proprietarului.
-- Validare input în aplicații
-- Criptare conexiuni între aplicații și Firebase.
+---
 
+## **IoT System – Monitoring & Automation**
 
-## Tehnologii utilizate
+### **Arduino Nano ESP32**
 
-| Componentă      | Tehnologie                                    |
-|------------------|----------------------------------------------|
-| Admin App        | .NET MAUI + CommunityToolkit.Mvvm          |
-| Client App       | Kotlin + Jetpack Compose                   |
-| Backend          | Firebase Realtime DB + Firebase Auth       |
-| AI               | Gemini AI                                  |
-| Email            | SendGrid / Java Mail                                 |
-| Statistici       | Microcharts + LiveCharts           |
-| Senzori          | Arduino Nano ESP32 + DHT11 + senzor presiune + modul Peltier + senzor gaz metan|
-| Drive-thru       | Arduino UNO cu senzor de mișcare, semafor LED și Display LED + Raspberry Pi 5 + HDMI Display|
+* Pressure sensors → ingredient weight
+* DHT11 → temperature & humidity
+* Automatic fans triggered by critical conditions
+* Real-time Firebase communication
 
-## Roadmap
-1. **Faza 1:** Realizarea unui studiu de piață.
-2. **Faza 2:** Dezvoltarea aplicației de management
-3. **Faza 3:** Dezvoltarea aplicației pentru clienți
-4. **Faza 4:** Implementarea sistemului hardware
+### **Arduino UNO + Raspberry Pi 5**
 
-## Opinia autorilor
-Considerăm că SIMR aduce o contribuție semnificativă în domeniul gestionării eficiente a resurselor într-un restaurant. Prin integrarea tehnologiilor moderne, oferim o soluție care nu doar că reduce risipa alimentară, dar îmbunătățește și experiența clienților și eficiența operațională a personalului. 
+* Motion sensor → detect vehicles at drive-thru
+* LED traffic light at the drive-thru window
+* LED display with dynamic messages
+* Touchscreen interface for placing client orders
 
-## Resurse externe
+---
 
-- Firebase SDK
-- Gemini AI SDK
-- SendGrid API
-- Java Mail
-- Arduino libraries pentru DHT11 și Firebase ESP32
-- MAUI CommunityToolkit
+## **Security Implemented**
 
-## Anexa 1 - Ghid de instalare și utilizare a aplicațiilor
+* Firebase Auth (email + password) with role management
+* Strict Firebase rules: read/write only on the owner’s UID
+* Input validation in all applications
+* Encrypted communication with Firebase
 
-- **SIMR Admin**: [https://bit.ly/simr2025-infoedu-ghid-admin](https://bit.ly/simr2025-infoedu-ghid-admin)
-- **SIMR Tables**: [https://bit.ly/simr2025-infoedu-ghid-tables](https://bit.ly/simr2025-infoedu-ghid-tables)
+---
 
-## Anexa 2 - Arhitectura sistemului
+## **Technologies Used**
 
-![Arhitectura Sistemului](anexe_documentatie/anexa2.png)
+| Component  | Technology                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| Admin App  | .NET MAUI + CommunityToolkit.Mvvm                                                             |
+| Client App | Kotlin + Jetpack Compose                                                                      |
+| Backend    | Firebase Realtime Database + Firebase Auth                                                    |
+| AI         | Gemini AI                                                                                     |
+| Email      | SendGrid / Java Mail                                                                          |
+| Statistics | Microcharts + LiveCharts                                                                      |
+| Sensors    | Arduino Nano ESP32 + DHT11 + pressure sensor + Peltier module + methane sensor                |
+| Drive-thru | Arduino UNO + motion sensor + LED traffic light + LED Display + Raspberry Pi 5 + HDMI Display |
 
-## Anexa 3 - Schema machetei
+---
 
-![Schema machetei 1](anexe_documentatie/anexa3-1.png)  
-![Schema machetei 2](anexe_documentatie/anexa3-2.png)
+## **Roadmap**
 
-## Anexa 4 - Firebase Realtime Database Security Rules
+1. **Phase 1:** Market research
+2. **Phase 2:** Management app development
+3. **Phase 3:** Client app development
+4. **Phase 4:** Hardware system integration
+
+---
+
+## **Authors’ Opinion**
+
+We believe SIMR significantly contributes to efficient resource management in restaurants. By integrating modern technologies, it reduces food waste, enhances customer experience, and increases operational efficiency.
+
+---
+
+## **External Resources**
+
+* Firebase SDK
+* Gemini AI SDK
+* SendGrid API
+* Java Mail
+* Arduino libraries (DHT11, Firebase ESP32)
+* MAUI CommunityToolkit
+
+---
+
+## **Annex 1 – Application Installation & User Guides**
+
+* **SIMR Admin:** [https://bit.ly/simr2025-infoedu-ghid-admin](https://bit.ly/simr2025-infoedu-ghid-admin)
+* **SIMR Tables:** [https://bit.ly/simr2025-infoedu-ghid-tables](https://bit.ly/simr2025-infoedu-ghid-tables)
+
+---
+
+## **Annex 2 – System Architecture**
+
+![System Architecture](anexe_documentatie/anexa2.png)
+
+---
+
+## **Annex 3 – Physical Mockup Diagram**
+
+![Mockup](anexe_documentatie/anexa3.png)
+
+---
+
+## **Annex 4 – Firebase Realtime Database Security Rules**
 
 ```json
 {
@@ -155,14 +186,22 @@ Considerăm că SIMR aduce o contribuție semnificativă în domeniul gestionăr
 }
 ```
 
-## Anexa 5 - Schema Arduino Nano ESP32
+---
 
-![Schema Arduino Nano ESP32](anexe_documentatie/anexa5.png)
+## **Annex 5 – Arduino Nano ESP32 Diagram**
 
-## Anexa 6 - Schema Arduino UNO
+![Arduino Nano ESP32](anexe_documentatie/anexa5.png)
 
-![Schema Arduino UNO](anexe_documentatie/anexa6.png)
+---
 
-## Anexa 7 - Schema Raspberry PI 5
+## **Annex 6 – Arduino UNO Diagram**
 
-![Schema Raspberry PI 5](anexe_documentatie/anexa7.png)
+![Arduino UNO](anexe_documentatie/anexa6.png)
+
+---
+
+## **Annex 7 – Raspberry Pi 5 Diagram**
+
+![Raspberry Pi 5](anexe_documentatie/anexa7.png)
+
+---

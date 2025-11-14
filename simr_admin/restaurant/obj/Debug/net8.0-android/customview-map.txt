@@ -1,9 +1,9 @@
-@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\layout\fragment_backstack.xml
-@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\layout\navigationlayout.xml
 {urn:oasis:names:tc:xliff:document:1.2}g;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 {urn:oasis:names:tc:xliff:document:1.2}g;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
-adaptive-icon;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
+@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\layout\fragment_backstack.xml
+@string/appbar_scrolling_view_behavior;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\layout\navigationlayout.xml
 adaptive-icon;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+adaptive-icon;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\185\jl\res\anim\enterfromleft.xml
 alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\185\jl\res\anim\exittoleft.xml
 alpha;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\anim\nav_default_enter_anim.xml
@@ -19,8 +19,8 @@ attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0
 attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\values\attr.xml
 attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\191\jl\res\values\attrs.xml
 attr;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
-background;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 background;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+background;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 bitmap;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_normal.xml
 bitmap;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_disabled.xml
 bitmap;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light_normal.xml
@@ -42,7 +42,6 @@ declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj
 declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\values\attr.xml
 declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\191\jl\res\values\attrs.xml
 declare-styleable;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-af\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-am\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-ar\values.xml
@@ -59,14 +58,14 @@ eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-de\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-el\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-en-rGB\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es-rUS\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-et\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-eu\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fa\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fi\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr-rCA\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gl\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gu\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-hi\values.xml
@@ -123,7 +122,7 @@ eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rHK\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rTW\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zu\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-af\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-am\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-ar\values.xml
@@ -140,14 +139,14 @@ eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-de\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-el\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-en-rGB\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es-rUS\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-et\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-eu\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fa\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fi\values.xml
-eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr-rCA\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gl\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gu\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-hi\values.xml
@@ -204,31 +203,32 @@ eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rHK\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rTW\values.xml
 eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zu\values.xml
+eat-comment;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
 enum;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 external-cache-path;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\188\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
 external-path;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\188\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
-foreground;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 foreground;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+foreground;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 integer;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\184\jl\res\values\styles.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\drawable\maui_splash.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\values\styles.xml
-item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_focused.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_normal.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_disabled.xml
-item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light_focused.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light_normal.xml
-item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_dark.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_dark_focused.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_dark_normal.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_dark.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_disabled.xml
-item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light_focused.xml
 item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light_normal.xml
-layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\drawable\maui_splash.xml
+item;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light.xml
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\drawable\maui_splash_image.xml
+layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\drawable\maui_splash.xml
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_focused.xml
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_normal.xml
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_disabled.xml
@@ -240,8 +240,8 @@ layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light_focused.xml
 layer-list;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_light_normal.xml
 microsoft.maui.controls.platform.compatibility.ShellFlyoutLayout;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\185\jl\res\layout\flyoutcontent.xml
-monochrome;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 monochrome;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+monochrome;obj\Debug\net8.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 padding;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_disabled.xml
 padding;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_disabled.xml
 paths;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\188\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
@@ -255,7 +255,6 @@ resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\n
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\187\jl\res\values\styles.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\191\jl\res\values\attrs.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\203\jl\res\values\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-af\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-am\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-ar\values.xml
@@ -272,14 +271,14 @@ resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\n
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-de\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-el\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-en-rGB\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es-rUS\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-et\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-eu\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fa\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fi\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr-rCA\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gl\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gu\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-hi\values.xml
@@ -336,7 +335,7 @@ resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\n
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rHK\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rTW\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zu\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-af\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-am\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-ar\values.xml
@@ -353,14 +352,14 @@ resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\n
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-de\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-el\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-en-rGB\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es-rUS\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-et\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-eu\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fa\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fi\values.xml
-resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr-rCA\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gl\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gu\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-hi\values.xml
@@ -417,6 +416,7 @@ resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\n
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rHK\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rTW\values.xml
 resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zu\values.xml
+resources;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
 resources;obj\Debug\net8.0-android\res\values\colors.xml
 selector;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark.xml
 selector;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light.xml
@@ -446,7 +446,6 @@ string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\185\jl\res\values\strings.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\186\jl\res\values\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\203\jl\res\values\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-af\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-am\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-ar\values.xml
@@ -463,14 +462,14 @@ string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-de\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-el\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-en-rGB\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es-rUS\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-es\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-et\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-eu\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fa\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fi\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr-rCA\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-fr\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gl\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-gu\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-hi\values.xml
@@ -527,7 +526,7 @@ string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rHK\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zh-rTW\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values-zu\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\values\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-af\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-am\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-ar\values.xml
@@ -544,14 +543,14 @@ string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-de\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-el\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-en-rGB\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es-rUS\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-es\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-et\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-eu\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fa\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fi\values.xml
-string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr-rCA\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-fr\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gl\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-gu\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-hi\values.xml
@@ -608,6 +607,7 @@ string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rHK\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zh-rTW\values.xml
 string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values-zu\values.xml
+string;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\210\jl\res\values\values.xml
 stroke;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_dark_focused.xml
 stroke;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_icon_light_focused.xml
 stroke;D:\Scoala\24-25\Info\CEX GL\Robotica\simr_admin\restaurant\obj\Debug\net8.0-android\lp\209\jl\res\drawable\common_google_signin_btn_text_dark_focused.xml

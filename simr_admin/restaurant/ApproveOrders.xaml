@@ -60,7 +60,7 @@
                                             <Label Text="Price:"
                                                    FontSize="16"
                                                    TextColor="Gray" />
-                                            <Label Text="{Binding Price} "
+                                            <Label Text="{Binding Price}"
                                                    FontSize="16"
                                                    TextColor="Black" />
                                         </HorizontalStackLayout>
@@ -96,7 +96,7 @@
                                         <Label Text="Price:"
                                                FontSize="16"
                                                TextColor="Gray" />
-                                        <Label Text="{Binding Price} "
+                                        <Label Text="{Binding Price}"
                                                FontSize="16"
                                                TextColor="Black" />
                                     </HorizontalStackLayout>
