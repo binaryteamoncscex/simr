@@ -166,7 +166,8 @@
                                    TextColor="Black"/>
                             <Grid>
                                 <CollectionView ItemsSource="{Binding AccountingTable}"
-                                                ItemsLayout="VerticalList">
+                                                ItemsLayout="VerticalList"
+                                                IsVisible="{Binding IsAccountingTableAvailable}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid ColumnDefinitions="*,*,*,*" 

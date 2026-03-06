@@ -3,6 +3,7 @@ using Firebase.Database.Query;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using Newtonsoft.Json;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -19,8 +20,8 @@ namespace restaurant.ViewModels
         private readonly FirebaseClient _firebaseClient;
         private readonly string _userId;
         private readonly string _databaseUrl = "https://restaurant-ad63f-default-rtdb.europe-west1.firebasedatabase.app/";
-        private const string SendGridApiKey = "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";
-        private const string SenderEmail = "no-reply@management-restaurant.eu";
+        private static string SendGridApiKey = string.Empty;
+        private const string SenderEmail = "binaryteam.galati@gmail.com";
         private const string SenderName = "SIMR Orders";
 
         public ObservableCollection<OrderItem> Orders { get; } = new();
@@ -33,6 +34,12 @@ namespace restaurant.ViewModels
             _firebaseClient = new FirebaseClient(_databaseUrl);
             ApproveOrderCommand = new Command<string>(async id => await UpdateOrderStatus(id, "approved"));
             DisapproveOrderCommand = new Command<string>(async id => await UpdateOrderStatus(id, "disapproved"));
+            using var stream = FileSystem.OpenAppPackageFileAsync("appsettings.json").GetAwaiter().GetResult();
+            using var reader = new StreamReader(stream);
+            var json = reader.ReadToEnd();
+            var config = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            string apiKey = config["SendGridApiKey"];
+            SendGridApiKey = apiKey;
             _ = InitAsync();
         }
 

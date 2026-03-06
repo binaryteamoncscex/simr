@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
 
 namespace restaurant.ViewModels
 {
@@ -14,13 +16,19 @@ namespace restaurant.ViewModels
         private string _aiResponse;
         private bool _isBusy;
 
-        private const string GeminiApiKey = "AIzaSyCebfJp90RH9a_GHlG0rNpBQ7EY5vk52wc";
-        private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=";
+        private static string GeminiApiKey = string.Empty;
+        private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=";
 
         public AskAIViewModel(string statistics)
         {
             _statistics = statistics;
             AskCommand = new Command(async () => await ExecuteAskCommand());
+            using var stream = FileSystem.OpenAppPackageFileAsync("appsettings.json").GetAwaiter().GetResult();
+            using var reader = new StreamReader(stream);
+            var json = reader.ReadToEnd();
+            var config = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            string apiKey = config["GeminiApiKey"];
+            GeminiApiKey = apiKey;
         }
 
         public string UserPrompt
@@ -49,7 +57,6 @@ namespace restaurant.ViewModels
             {
                 return;
             }
-
             IsBusy = true;
             AiResponse = "Thinking...";
 

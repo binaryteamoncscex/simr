@@ -1,0 +1,476 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-03-05T19:02:30.3886812Z",
+  "analysisEndTime": "2026-03-05T19:02:38.779373Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 1,
+      "issues": 5,
+      "incidents": 13,
+      "effort": 13
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 2,
+        "Optional": 0,
+        "Potential": 11,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 2,
+        "Project": 1,
+        "Api": 10
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "restaurant\\restaurant.csproj",
+      "startingProject": true,
+      "issues": 5,
+      "storyPoints": 13,
+      "properties": {
+        "appName": "restaurant",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0-android33.0",
+          "net8.0-windows10.0.19041.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 95,
+        "numberOfCodeFiles": 95,
+        "linesTotal": 15066,
+        "linesOfCode": 15066,
+        "totalApiScanned": 18641,
+        "minLinesOfCodeToChange": 10,
+        "maxLinesOfCodeToChange": 10
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "2bd3a1e3-ff02-4184-9f40-8491861f3dd7",
+          "ruleId": "NuGet.0001",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microcharts.Maui, 1.0.1\n\nRecommendation:\n\nNo supported version found",
+              "protected": "Microcharts.Maui, 1.0.1\n\nRecommendation:\n\nNo supported version found"
+            },
+            "kind": "File",
+            "path": "restaurant\\restaurant.csproj",
+            "snippet": "Microcharts.Maui, 1.0.1\n\nRecommendation:\n\nNo supported version found",
+            "protectedSnippet": "Microcharts.Maui, 1.0.1\n\nRecommendation:\n\nNo supported version found",
+            "label": "Microcharts.Maui 1.0.1",
+            "properties": {
+              "PackageId": "Microcharts.Maui",
+              "PackageVersion": "1.0.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "15c6f771-089d-4dbe-80b0-7dfa70540e8e",
+          "ruleId": "NuGet.0002",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Logging.Debug, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.3",
+              "protected": "Microsoft.Extensions.Logging.Debug, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.3"
+            },
+            "kind": "File",
+            "path": "restaurant\\restaurant.csproj",
+            "snippet": "Microsoft.Extensions.Logging.Debug, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.3",
+            "protectedSnippet": "Microsoft.Extensions.Logging.Debug, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.3",
+            "label": "Microsoft.Extensions.Logging.Debug 8.0.0",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Logging.Debug",
+              "PackageVersion": "8.0.0",
+              "PackageNewVersion": "10.0.3",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "860ec352-7a2c-4d7e-9444-c0c90080f5f7",
+          "ruleId": "Project.0002",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0-android33.0;net8.0-windows10.0.19041.0\nRecommended target framework: net8.0-android33.0;net8.0-windows10.0.19041.0;net10.0-windows",
+              "protected": "Current target framework: net8.0-android33.0;net8.0-windows10.0.19041.0\nRecommended target framework: net8.0-android33.0;net8.0-windows10.0.19041.0;net10.0-windows"
+            },
+            "kind": "File",
+            "path": "restaurant\\restaurant.csproj",
+            "snippet": "Current target framework: net8.0-android33.0;net8.0-windows10.0.19041.0\nRecommended target framework: net8.0-android33.0;net8.0-windows10.0.19041.0;net10.0-windows",
+            "protectedSnippet": "Current target framework: net8.0-android33.0;net8.0-windows10.0.19041.0\nRecommended target framework: net8.0-android33.0;net8.0-windows10.0.19041.0;net10.0-windows",
+            "properties": {
+              "CurrentTargetFramework": "net8.0-android33.0;net8.0-windows10.0.19041.0",
+              "RecommendedTargetFramework": "net8.0-android33.0;net8.0-windows10.0.19041.0;net10.0-windows"
+            }
+          }
+        },
+        {
+          "incidentId": "5c79296e-6547-4fc5-89ca-f0b10c4566ac",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\CookOrdersViewModel.cs",
+            "snippet": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 43,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "027694ca-7038-4094-bff7-6eeb21daa827",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\CookOrdersViewModel.cs",
+            "snippet": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 43,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "7d8eb26f-b7bb-46ef-89b3-78e4fd9ec984",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "AiResponse = $\u0022Error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}\u0022;",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\AskAIViewModel.cs",
+            "snippet": "AiResponse = $\u0022Error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}\u0022;",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 88,
+            "column": 24
+          }
+        },
+        {
+          "incidentId": "4d527e62-2439-445b-b53a-c2387f8d90c6",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var responseString = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\AskAIViewModel.cs",
+            "snippet": "var responseString = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 79,
+            "column": 24
+          }
+        },
+        {
+          "incidentId": "2e006a1f-777c-4e61-b6d1-bcd1af4941e5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "string json = await dhtResponse.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\CheckInvenViewModel.cs",
+            "snippet": "string json = await dhtResponse.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 158,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "521fac82-3efa-4756-a86d-6d5ea77112af",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "string tuJson = await tempUnitResponse.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\CheckInvenViewModel.cs",
+            "snippet": "string tuJson = await tempUnitResponse.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 146,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "a937b1f6-d7a4-4c2c-9358-f4d47f8c22c3",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "string jsonResponse = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\CheckInvenViewModel.cs",
+            "snippet": "string jsonResponse = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 95,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "f3399805-9ac7-4fc4-bf9c-181881408f7a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var responseString = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\AddMenuItemViewModel.cs",
+            "snippet": "var responseString = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 231,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "dc69f36f-22cd-49cf-9390-e31de0e882ac",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\WaiterOrdersViewModel.cs",
+            "snippet": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 66,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "51cc0589-7afd-44be-8b85-3ebf9b9f96c0",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "restaurant\\restaurant.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "restaurant\\ViewModels\\WaiterOrdersViewModel.cs",
+            "snippet": "_refreshTimer.Interval = TimeSpan.FromSeconds(10);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 66,
+            "column": 12
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0001": {
+      "id": "NuGet.0001",
+      "isFeature": false,
+      "description": "NuGet package is incompatible with selected target framework.\n\nPackage needs to be upgraded to a version supporting selected project target framework. If there no new package versions supporting new target framework, different package needs to be used and all code needs to be upgraded to new API.",
+      "label": "NuGet package is incompatible",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262529",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    }
+  }
+}

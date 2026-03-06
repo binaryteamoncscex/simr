@@ -2,5 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/simr_admin/.vs/
 /installers
-/simr_admin/.vs/restaurant/FileContentIndex/2c79e675-b642-4b31-be82-500d457c576a.vsidx
+/simr_admin/restaurant/appsettings.json
+/simr_admin/restaurant/bin
+/simr_admin/restaurant/obj
